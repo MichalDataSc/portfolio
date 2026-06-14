@@ -1,32 +1,249 @@
 ---
-pagetitle: "Michał Adamczyk — Data Science"
-page-layout: full
+pagetitle: "Michał Adamczyk — Advanced Analytics, AI & Consulting"
+page-layout: custom
 toc: false
-listing:
-  id: latest-posts
-  contents: posts
-  type: grid
-  max-items: 3
-  sort: "date desc"
-  fields: [image, date, title, description, categories, reading-time]
+include-in-header:
+  text: |
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <style>
+      :root{
+        --bg:#070b16; --bg2:#0c1326;
+        --ink:#eaf1ff; --muted:#9fb0cf;
+        --accent:#38bdf8; --accent2:#6366f1;
+      }
+      /* --- strip Quarto chrome on the landing page only --- */
+      .navbar, #quarto-header, .nav-footer, footer.footer, #quarto-back-to-top,
+      #quarto-announcement, #title-block-header { display:none !important; }
+      .page-columns{ display:block !important; }
+      .quarto-container, #quarto-content, .content,
+      #quarto-content > main, #quarto-document-content, main.content, body main{
+        max-width:none !important; padding:0 !important; margin:0 !important; width:100% !important;
+      }
+      *{ box-sizing:border-box; margin:0; padding:0; }
+      html,body{ height:100%; }
+      body{
+        font-family:"Inter",system-ui,sans-serif !important;
+        background:radial-gradient(1200px 700px at 72% -10%, #15224a 0%, var(--bg2) 40%, var(--bg) 100%) !important;
+        color:var(--ink) !important; overflow-x:hidden; min-height:100vh; padding-top:0 !important;
+      }
+
+      #net{position:fixed;inset:0;z-index:0;display:block}
+      .glow{position:fixed;z-index:0;border-radius:50%;filter:blur(90px);pointer-events:none}
+      .glow.a{width:520px;height:520px;background:var(--accent);top:-160px;right:-120px;opacity:.16}
+      .glow.b{width:480px;height:480px;background:var(--accent2);bottom:-180px;left:-120px;opacity:.16}
+
+      .topnav{position:relative;z-index:3;display:flex;justify-content:space-between;align-items:center;
+          padding:24px clamp(20px,6vw,72px);}
+      .brand{font-family:"Space Grotesk";font-weight:600;letter-spacing:-.01em;font-size:1.05rem;
+          color:var(--ink);text-decoration:none}
+      .brand .dot{color:var(--accent)}
+      .navlinks{display:flex;gap:26px;align-items:center}
+      .navlinks a{color:var(--muted);text-decoration:none;font-size:.92rem;font-weight:500;transition:color .2s}
+      .navlinks a:hover{color:var(--ink)}
+      .navlinks a.gh{font-size:1.2rem;display:inline-flex;align-items:center}
+
+      .wrap{position:relative;z-index:2;min-height:calc(100vh - 84px);
+            display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,4vw,64px);align-items:center;
+            padding:20px clamp(20px,6vw,72px) 60px; max-width:1240px;margin:0 auto}
+
+      /* single availability call-to-action (green = available now) */
+      .avail{display:inline-flex;align-items:center;gap:11px;text-decoration:none;
+        font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+        color:var(--accent);margin-bottom:24px;transition:color .2s}
+      .avail:hover{color:#9fe3ff}
+      .avail .ping{width:9px;height:9px;border-radius:50%;background:#34d399;flex:0 0 auto;
+        box-shadow:0 0 0 0 rgba(52,211,153,.6);animation:ping 1.9s infinite}
+      @keyframes ping{0%{box-shadow:0 0 0 0 rgba(52,211,153,.5)}70%{box-shadow:0 0 0 9px rgba(52,211,153,0)}100%{box-shadow:0 0 0 0 rgba(52,211,153,0)}}
+
+      h1{font-family:"Space Grotesk";font-weight:700;letter-spacing:-.03em;
+         font-size:clamp(2.4rem,5.6vw,4.8rem);line-height:.99;margin-bottom:24px}
+      h1 .grad{background:linear-gradient(100deg,var(--accent),var(--accent2));
+         -webkit-background-clip:text;background-clip:text;color:transparent}
+      .lead{max-width:540px;font-size:clamp(1.02rem,1.6vw,1.2rem);line-height:1.6;color:var(--muted);margin-bottom:34px}
+      .cta{display:flex;gap:14px;flex-wrap:wrap}
+      .btn{font:inherit;font-weight:600;font-size:.96rem;padding:13px 22px;border-radius:12px;
+           text-decoration:none;display:inline-flex;align-items:center;gap:9px;transition:.2s;border:1px solid transparent}
+      .btn.primary{background:linear-gradient(100deg,var(--accent),var(--accent2));color:#06101f;
+           box-shadow:0 10px 30px -8px rgba(56,189,248,.55)}
+      .btn.primary:hover{transform:translateY(-2px);box-shadow:0 16px 40px -8px rgba(56,189,248,.7)}
+      .btn.ghost{border-color:rgba(159,176,207,.3);color:var(--ink)}
+      .btn.ghost:hover{border-color:var(--accent);background:rgba(56,189,248,.08)}
+
+      .stats{display:flex;gap:36px;margin-top:46px;flex-wrap:wrap}
+      .stat .n{font-family:"Space Grotesk";font-weight:700;font-size:1.7rem;
+         background:linear-gradient(100deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+      .stat .l{font-size:.8rem;color:var(--muted);letter-spacing:.03em;margin-top:3px}
+
+      /* forecast panel */
+      .panel{background:rgba(12,19,38,.55);border:1px solid rgba(159,176,207,.16);border-radius:18px;
+             padding:20px 20px 14px;backdrop-filter:blur(10px);
+             box-shadow:0 30px 70px -34px rgba(0,0,0,.8), inset 0 1px 0 rgba(255,255,255,.04)}
+      .panel .cap{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
+      .panel .cap b{font-family:"JetBrains Mono";font-size:.72rem;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;font-weight:500}
+      .panel .cap .tag{font-family:"JetBrains Mono";font-size:.72rem;color:var(--accent);background:rgba(56,189,248,.12);padding:3px 9px;border-radius:6px}
+      .panel svg{display:block;width:100%;height:auto}
+      .axis{stroke:rgba(159,176,207,.25);stroke-width:1}
+      .gridln{stroke:rgba(159,176,207,.08);stroke-width:1}
+      #nowdot{filter:drop-shadow(0 0 5px rgba(56,189,248,.95));animation:pdot 1.6s ease-in-out infinite}
+      @keyframes pdot{0%,100%{r:3.6}50%{r:6}}
+      .legend{display:flex;gap:18px;margin-top:8px;font-family:"JetBrains Mono";font-size:.68rem;color:var(--muted)}
+      .legend i{font-style:normal;display:inline-flex;align-items:center;gap:6px}
+      .sw{width:14px;height:0;border-top:2px solid var(--accent)}
+      .sw.dash{border-top:2px dashed #c7d2fe}
+      .sw.band{height:10px;border:0;background:rgba(56,189,248,.18);border-radius:2px}
+
+      @media (prefers-reduced-motion: reduce){
+        .avail .ping,#nowdot{animation:none}
+      }
+      @media(max-width:900px){.wrap{grid-template-columns:1fr;gap:36px}.panel{order:2}.stats{margin-top:30px}}
+    </style>
 ---
 
-::: {.hero}
-# Michał Adamczyk
+```{=html}
+<canvas id="net"></canvas>
+<div class="glow a"></div><div class="glow b"></div>
 
-::: {.lead}
-Senior data scientist with 10 years building ML and analytics systems in
-production. I write here about applied machine learning, the numbers behind
-the tech industry, and the occasional deep dive into the theory I find
-beautiful.
-:::
+<nav class="topnav">
+  <a class="brand" href="index.html">Michał Adamczyk<span class="dot">.</span></a>
+  <div class="navlinks">
+    <a href="portfolio.html">Portfolio</a>
+    <a href="blog.html">Writing</a>
+    <a href="about.html">About</a>
+    <a class="gh" href="https://github.com/MichalDataSc/portfolio" target="_blank" rel="noopener" aria-label="GitHub"><i class="bi bi-github"></i></a>
+  </div>
+</nav>
 
-[Read the writing →](blog.qmd){.btn .btn-primary}
-&nbsp;
-[About me →](about.qmd){.btn .btn-outline-secondary}
-:::
+<section class="wrap">
+  <div>
+    <a class="avail" href="about.html"><span class="ping"></span>Available for advanced analytics, AI &amp; consulting</a>
+    <h1>Turning data into<br><span class="grad">decisions &amp; profit.</span></h1>
+    <p class="lead">Senior data scientist and ex-BCG consultant with close to a decade
+       building advanced analytics and AI systems in production — and the strategy
+       thinking to know which problems are worth solving.</p>
+    <div class="cta">
+      <a class="btn primary" href="blog.html">Read the writing →</a>
+      <a class="btn ghost" href="portfolio.html">Project portfolio</a>
+      <a class="btn ghost" href="about.html">About me</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="n">~10 yrs</div><div class="l">Analytics, AI &amp; consulting</div></div>
+      <div class="stat"><div class="n">ex-BCG</div><div class="l">Strategy pedigree</div></div>
+      <div class="stat"><div class="n">Kaggle</div><div class="l">Competition Expert</div></div>
+    </div>
+  </div>
 
-## Latest writing
+  <div class="panel">
+    <div class="cap"><b>fig. forecast — demand</b><span class="tag">90% interval</span></div>
+    <svg viewBox="0 0 460 290" id="chart" aria-hidden="true">
+      <g id="grid"></g>
+      <line class="axis" x1="48" y1="20" x2="48" y2="250"/>
+      <line class="axis" x1="48" y1="250" x2="446" y2="250"/>
+      <polygon id="fan" fill="#38bdf8" opacity="0"></polygon>
+      <line id="now" x1="252" y1="20" x2="252" y2="250" stroke="rgba(199,210,254,.5)" stroke-width="1" stroke-dasharray="3 4" opacity="0"/>
+      <path id="hist" fill="none" stroke="#38bdf8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+      <path id="s1" class="samp" fill="none" stroke="rgba(199,210,254,.45)" stroke-width="1.2"/>
+      <path id="s2" class="samp" fill="none" stroke="rgba(199,210,254,.45)" stroke-width="1.2"/>
+      <path id="s3" class="samp" fill="none" stroke="rgba(199,210,254,.45)" stroke-width="1.2"/>
+      <path id="fc" fill="none" stroke="#c7d2fe" stroke-width="2.4" stroke-dasharray="6 6" stroke-linecap="round"/>
+      <circle id="nowdot" r="4.5" fill="#9fe3ff"/>
+    </svg>
+    <div class="legend">
+      <i><span class="sw"></span>history</i>
+      <i><span class="sw dash"></span>forecast</i>
+      <i><span class="sw band"></span>90% interval</i>
+    </div>
+  </div>
+</section>
 
-::: {#latest-posts}
-:::
+<script>
+(() => {
+/* ---------- background neural network ---------- */
+const c=document.getElementById('net'),x=c.getContext('2d');
+let w,h,dpr,nodes=[],mouse={x:-999,y:-999};
+function size(){dpr=Math.min(devicePixelRatio||1,2);w=c.width=innerWidth*dpr;h=c.height=innerHeight*dpr;
+  c.style.width=innerWidth+'px';c.style.height=innerHeight+'px';build();}
+function build(){const n=Math.round(innerWidth*innerHeight/15000);nodes=[];
+  for(let i=0;i<n;i++)nodes.push({x:Math.random()*w,y:Math.random()*h,
+    vx:(Math.random()-.5)*.25*dpr,vy:(Math.random()-.5)*.25*dpr,r:(Math.random()*1.5+.6)*dpr});}
+addEventListener('resize',size);
+addEventListener('mousemove',e=>{mouse.x=e.clientX*dpr;mouse.y=e.clientY*dpr});
+addEventListener('mouseout',()=>{mouse.x=mouse.y=-999});
+const LINK=130;
+function draw(){
+  x.clearRect(0,0,w,h);
+  for(const p of nodes){p.x+=p.vx;p.y+=p.vy;
+    if(p.x<0||p.x>w)p.vx*=-1; if(p.y<0||p.y>h)p.vy*=-1;
+    const dm=Math.hypot(p.x-mouse.x,p.y-mouse.y);
+    if(dm<160*dpr){const f=(160*dpr-dm)/(160*dpr);p.x+=(p.x-mouse.x)/dm*f*1.2;p.y+=(p.y-mouse.y)/dm*f*1.2;}
+  }
+  const L=LINK*dpr;
+  for(let i=0;i<nodes.length;i++)for(let j=i+1;j<nodes.length;j++){
+    const a=nodes[i],b=nodes[j],d=Math.hypot(a.x-b.x,a.y-b.y);
+    if(d<L){const o=(1-d/L)*.45;x.strokeStyle='rgba(99,160,248,'+o+')';x.lineWidth=dpr*.6;
+      x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke();}
+  }
+  for(const p of nodes){const dm=Math.hypot(p.x-mouse.x,p.y-mouse.y),lit=dm<160*dpr;
+    x.beginPath();x.arc(p.x,p.y,p.r*(lit?1.7:1),0,7);
+    x.fillStyle=lit?'#9fe3ff':'rgba(140,180,240,.8)';x.fill();}
+  requestAnimationFrame(draw);
+}
+size();draw();
+
+/* ---------- streaming forecast: a longer, advancing story ---------- */
+const X0=48,X1=446,Y0=250,Y1=24,XM=252;
+const grid=document.getElementById('grid');
+for(let i=1;i<5;i++){const yy=Y0-(Y0-Y1)*i/5;grid.insertAdjacentHTML('beforeend',
+  `<line class="gridln" x1="48" y1="${yy}" x2="446" y2="${yy}"/>`);}
+
+const W=33, H=31, P=(X1-X0)/(W+H);
+const SYr=(Y0-Y1), midY=(Y0+Y1)/2;
+const amp=1.0, freq=0.20, phase=Math.random()*6.28;
+const base=s=>amp*Math.sin(s*freq+phase);
+const yOf=v=>Math.max(Y1+3,Math.min(Y0-3, midY - v*(SYr/5.2)));
+const dstr=pts=>pts.map((p,k)=>(k?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+
+let vals=[], prevAr=0;
+function ensure(n){while(vals.length<n){const i=vals.length;prevAr=prevAr*0.7+(Math.random()-.5)*0.9;vals.push(base(i)+prevAr);}}
+
+const histEl=document.getElementById('hist'), fcEl=document.getElementById('fc'),
+      fanEl=document.getElementById('fan'), nowEl=document.getElementById('now'),
+      dot=document.getElementById('nowdot');
+const sampEls=['s1','s2','s3'].map(id=>document.getElementById(id));
+[histEl,fcEl,...sampEls].forEach(e=>{e.style.strokeDasharray='none';e.style.strokeDashoffset='0';});
+nowEl.setAttribute('opacity','1');
+
+let t=W+1, lastStep=-1, samples=[];
+const xOf=s=>X0+(s-(t-W))*P;
+function makeSamples(t0,v0){
+  return [0,1,2].map(()=>{const arr=[];let ar=0;
+    for(let k=0;k<=H;k++){ar=ar*0.6+(Math.random()-.5)*0.8;
+      arr.push([t0+k, v0+(base(t0+k)-base(t0))+ar*Math.max(0.15,k/H)]);}return arr;});
+}
+function frame(){
+  t+=0.012;
+  ensure(Math.floor(t)+H+3);
+  const f=Math.floor(t), frac=t-f;
+  const hp=[]; const s0=Math.ceil(t-W);
+  for(let s=s0;s<=f;s++) hp.push([xOf(s), yOf(vals[s])]);
+  const curV=vals[f]+(vals[f+1]-vals[f])*frac;
+  hp.push([XM, yOf(curV)]);
+  histEl.setAttribute('d',dstr(hp));
+  const fp=[[XM,yOf(curV)]];
+  for(let k=1;k<=H;k++) fp.push([xOf(t+k), yOf(curV+(base(t+k)-base(t)))]);
+  fcEl.setAttribute('d',dstr(fp));
+  const up=[],lo=[];
+  for(let k=0;k<=H;k++){const sp=6+58*Math.sqrt(k/H),vy=fp[k][1];
+    up.push([fp[k][0],Math.max(Y1+2,vy-sp)]); lo.push([fp[k][0],Math.min(Y0-2,vy+sp)]);}
+  fanEl.setAttribute('points',up.concat(lo.reverse()).map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' '));
+  fanEl.setAttribute('opacity','0.16');
+  if(f!==lastStep){lastStep=f; samples=makeSamples(t,curV);}
+  sampEls.forEach((el,i)=>el.setAttribute('d',dstr((samples[i]||[]).map(pt=>[xOf(pt[0]),yOf(pt[1])]))));
+  dot.setAttribute('cx',XM); dot.setAttribute('cy',yOf(curV));
+  requestAnimationFrame(frame);
+}
+frame();
+})();
+</script>
+```
