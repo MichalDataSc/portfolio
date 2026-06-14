@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Home-page design concepts</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Inter,system-ui,sans-serif;background:#0c1326;color:#eaf1ff;padding:48px clamp(20px,6vw,80px)}
+  h1{font-size:2rem;font-weight:700;letter-spacing:-.02em;margin-bottom:8px}
+  p.sub{color:#9fb0cf;margin-bottom:36px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
+  a.card{display:block;text-decoration:none;color:inherit;border:1px solid rgba(159,176,207,.2);
+    border-radius:16px;overflow:hidden;background:#0f1729;transition:.2s}
+  a.card:hover{transform:translateY(-4px);border-color:#38bdf8;box-shadow:0 20px 50px -20px rgba(56,189,248,.4)}
+  .thumb{height:150px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.1rem}
+  .t-a{background:radial-gradient(600px 300px at 70% -20%,#15224a,#070b16)}
+  .t-b{background:#fbfbf9;color:#14181f}
+  .t-c{background:linear-gradient(120deg,#6366f1,#06b6d4 60%,#22d3ee)}
+  .meta{padding:18px}
+  .meta b{font-size:1.05rem}
+  .meta span{display:block;color:#9fb0cf;font-size:.9rem;margin-top:6px}
+  .key{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:#38bdf8;margin-top:12px}
+</style>
+</head>
+<body>
+  <h1>Home-page design concepts</h1>
+  <p class="sub">Three directions for the landing page — open each full-screen, then tell me which to build into the site (or mix elements).</p>
+  <div class="grid">
+    <a class="card" href="v3a-forecast-story.html" style="border-color:#38bdf8">
+      <div class="thumb t-a" style="color:#38bdf8;height:170px">📈 &nbsp; v3a — streaming forecast</div>
+      <div class="meta"><b>v3a · Streaming forecast</b>
+        <span>Same as v2 in every way — but the panel now tells a longer story: history scrolls, new actuals keep arriving on the "now" line, and the forecast + fan re-compute as time advances.</span>
+        <div class="key">option 1 · advancing story</div></div>
+    </a>
+    <a class="card" href="v3b-graddescent.html" style="border-color:#6366f1">
+      <div class="thumb t-c" style="height:170px">📉 &nbsp; v3b — gradient descent</div>
+      <div class="meta"><b>v3b · Gradient descent</b>
+        <span>Same as v2 in every way — but the panel runs gradient descent down a loss surface: a zig-zag path over contour level-sets toward the minimum, with a live loss counter ticking down.</span>
+        <div class="key">option 2 · optimization</div></div>
+    </a>
+    <a class="card" href="v2-combined.html" style="grid-column:1/-1">
+      <div class="thumb t-a" style="color:#38bdf8;height:150px">★ &nbsp; v2 — combined (the base both options share)</div>
+      <div class="meta"><b>v2 · Combined (reference)</b>
+        <span>The shared base: Concept A (motto, colours, cursor-reactive network) + the branded pill. v3a and v3b differ from this only in the right-hand panel's animation.</span>
+        <div class="key">reference base</div></div>
+    </a>
+    <a class="card" href="a-neural.html">
+      <div class="thumb t-a" style="color:#38bdf8">◍ &nbsp; network</div>
+      <div class="meta"><b>A · Neural Constellation</b>
+        <span>Dark, sophisticated. Animated connected-node network reacting to the cursor. Reads as neural nets / data relationships.</span>
+        <div class="key">dark · animated · AI-lab</div></div>
+    </a>
+    <a class="card" href="b-editorial.html">
+      <div class="thumb t-b">／ regression</div>
+      <div class="meta"><b>B · Editorial Quant</b>
+        <span>Light, restrained, Swiss-editorial. A self-drawing regression-through-scatter chart. Reads as rigorous and smart.</span>
+        <div class="key">light · typographic · quant</div></div>
+    </a>
+    <a class="card" href="c-aurora.html">
+      <div class="thumb t-c">✦ &nbsp; aurora</div>
+      <div class="meta"><b>C · Aurora AI</b>
+        <span>Modern gradient-mesh with a glassmorphic card and drifting embedding-space field. Reads as cutting-edge AI product.</span>
+        <div class="key">gradient · glass · modern</div></div>
+    </a>
+  </div>
+</body>
+</html>

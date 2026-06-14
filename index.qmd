@@ -1,0 +1,32 @@
+---
+pagetitle: "Michał Adamczyk — Data Science"
+page-layout: full
+toc: false
+listing:
+  id: latest-posts
+  contents: posts
+  type: grid
+  max-items: 3
+  sort: "date desc"
+  fields: [image, date, title, description, categories, reading-time]
+---
+
+::: {.hero}
+# Michał Adamczyk
+
+::: {.lead}
+Senior data scientist with 10 years building ML and analytics systems in
+production. I write here about applied machine learning, the numbers behind
+the tech industry, and the occasional deep dive into the theory I find
+beautiful.
+:::
+
+[Read the writing →](blog.qmd){.btn .btn-primary}
+&nbsp;
+[About me →](about.qmd){.btn .btn-outline-secondary}
+:::
+
+## Latest writing
+
+::: {#latest-posts}
+:::

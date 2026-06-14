@@ -1,0 +1,560 @@
+---
+title: "The Anatomy of Amazon: A Retailer That Earns Like a Cloud Company"
+description: >
+  Amazon sells $717B of goods and services a year, but most of its profit comes
+  from a segment that is barely a sixth of its revenue. A data-driven look at
+  where Amazon's money comes from, where it goes, and how that has shifted.
+date: 2026-05-31
+categories: [Equity analysis, Data visualization, Python]
+image: thumbnail.png
+jupyter: python3
+---
+
+> **Summary.** Amazon looks like the world's biggest store, but
+> it is run, financially, like a cloud-computing company with a very large
+> logistics hobby. In 2025, **AWS was ~18% of revenue and ~57% of operating
+> profit.**
+
+Amazon is the rare company that is simultaneously a low-margin retailer, a
+high-margin software business, and a fast-growing advertising platform — all
+consolidated into a single income statement. That combination makes its headline
+numbers genuinely misleading: total revenue growth says almost nothing about why
+Amazon is profitable, because the profit lives somewhere very specific. The
+segment mix tells the real story.
+
+What follows decomposes that story — where the revenue comes from, where the
+costs go, how the picture has shifted since 2021, and whether the reported
+profits actually turn into cash. The segment and cost figures are taken from
+Amazon's FY2025 Form 10-K and Q1 2026 results; the stock prices are pulled live
+from Yahoo Finance.
+
+```{python}
+#| label: setup
+#| include: false
+
+import pandas as pd
+import plotly.express as px
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+import matplotlib.pyplot as plt
+
+# A consistent palette for the three segments, reused across every chart.
+SEG_COLORS = {
+    "North America": "#2c6e9b",
+    "International": "#6aa9c9",
+    "AWS": "#e8833a",
+}
+
+# --- Reportable-segment data, US$ millions (Amazon FY2021–FY2025 10-K) ---
+years = [2021, 2022, 2023, 2024, 2025]
+
+sales = pd.DataFrame({
+    "year": years,
+    "North America": [279833, 315880, 352828, 387497, 426305],
+    "International":  [127787, 118007, 131200, 142906, 161894],
+    "AWS":           [ 62202,  80096,  90757, 107556, 128725],
+})
+
+op_income = pd.DataFrame({
+    "year": years,
+    "North America": [ 7271, -2847, 14877, 24967, 29619],
+    "International":  [ -924, -7746, -2656,  3792,  4750],
+    "AWS":           [18532, 22841, 24631, 39834, 45606],
+})
+
+sales_long = sales.melt("year", var_name="segment", value_name="sales")
+oi_long = op_income.melt("year", var_name="segment", value_name="op_income")
+
+# --- Consolidated operating expense lines, FY2025 10-K (US$ millions) ---
+# Note: "Net sales" is a *relative* (+) step so the running total builds up from
+# zero; Plotly waterfall "total" bars draw to the cumulative sum, not their own
+# value, so only the final "Operating income" is marked as a total.
+cost_items = [
+    ("Net sales",                     716924, "relative"),
+    ("Cost of sales",                -356414, "relative"),
+    ("Fulfillment",                  -109074, "relative"),
+    ("Technology & infrastructure",  -108521, "relative"),
+    ("Sales & marketing",             -47129, "relative"),
+    ("General & administrative",      -11172, "relative"),
+    ("Other operating, net",           -4639, "relative"),
+    ("Operating income",              79975, "total"),
+]
+
+# --- Cash-flow data, US$ billions (Amazon FY2022–FY2025 10-K) ---
+cash = pd.DataFrame({
+    "year":       [2022, 2023, 2024, 2025],
+    "net_income": [ -2.7, 30.4, 59.2,  77.7],
+    "ocf":        [ 46.8, 84.9, 115.9, 139.5],   # operating cash flow
+    "capex":      [-63.6, -52.7, -83.0, -131.8],  # purchases of property & equipment
+    "fcf":        [-16.9, 32.2, 32.9,   7.7],     # free cash flow = OCF + capex
+    "d_and_a":    [ 41.9, 48.7, 52.8,  65.8],     # depreciation & amortization (non-cash)
+    "sbc":        [ 19.6, 24.0, 22.0,  19.5],     # stock-based compensation (non-cash)
+})
+
+# --- Per-share metrics, split-adjusted for the 2022 20:1 split (Amazon 10-K, diluted) ---
+pershare = pd.DataFrame({
+    "year":           [2021, 2022, 2023, 2024, 2025],
+    "revenue":        [469.822, 513.983, 574.785, 637.959, 716.924],  # US$B
+    "diluted_eps":    [   3.24,   -0.27,    2.90,    5.53,    7.17],   # US$ per share
+    "diluted_shares": [  10.30,   10.19,   10.49,   10.72,   10.83],   # billions
+    "yearend_price":  [ 166.72,   84.00,  151.94,  219.39,  230.82],   # US$, split-adjusted close
+})
+pershare["rev_per_share"] = pershare["revenue"] / pershare["diluted_shares"]  # $B / B shares = $/share
+
+# Sanity checks: segment totals must reconcile to the reported consolidated figures.
+assert sales.set_index("year").loc[2025].sum() == 716924      # $716.9B net sales
+assert op_income.set_index("year").loc[2025].sum() == 79975   # $80.0B operating income
+```
+
+## 1. The headline contradiction
+
+The single chart that frames everything: for fiscal 2025, each segment's share of
+**revenue** sits next to its share of **operating profit**.
+
+```{python}
+#| label: fig-mix
+#| fig-cap: "Revenue mix vs. operating-profit mix, FY2025. AWS punches far above its revenue weight."
+#| code-summary: "Show code — revenue vs. profit mix"
+
+latest = sales[sales.year == 2025].melt("year", var_name="segment", value_name="sales")
+latest = latest.merge(
+    op_income[op_income.year == 2025].melt("year", var_name="segment", value_name="oi"),
+    on=["year", "segment"],
+)
+
+fig, axes = plt.subplots(1, 2, figsize=(8.5, 4.2))
+for ax, col, title in [
+    (axes[0], "sales", "Share of REVENUE"),
+    (axes[1], "oi", "Share of OPERATING PROFIT"),
+]:
+    ax.pie(
+        latest[col],
+        labels=latest["segment"],
+        autopct=lambda p: f"{p:.0f}%",
+        colors=[SEG_COLORS[s] for s in latest["segment"]],
+        startangle=90,
+        wedgeprops=dict(width=0.42, edgecolor="white"),
+        pctdistance=0.78,
+    )
+    ax.set_title(title, fontsize=11, fontweight="bold")
+
+fig.suptitle("Amazon FY2025: where the sales are vs. where the profit is",
+             fontsize=13, fontweight="bold")
+plt.tight_layout()
+plt.show()
+```
+
+::: {.takeaway}
+**AWS is ~18% of sales but ~57% of operating profit.** North America does the
+opposite: ~59% of sales, ~37% of profit. The retail machine generates the
+*volume*; the cloud generates the *margin*.
+:::
+
+## 2. Where the money goes
+
+The cleanest way to show a company's cost structure is a **waterfall** from net
+sales down to operating income — each step is a category of spend that Amazon
+discloses on the face of its income statement.
+
+```{python}
+#| label: fig-waterfall
+#| fig-cap: "From $716.9B of net sales to $80.0B of operating income, FY2025 (US$ billions)."
+#| code-summary: "Show code — cost waterfall"
+
+labels   = [i[0] for i in cost_items]
+values   = [i[1] / 1000 for i in cost_items]   # -> billions
+measures = [i[2] for i in cost_items]
+
+fig = go.Figure(go.Waterfall(
+    orientation="v",
+    measure=measures,
+    x=labels,
+    y=values,
+    text=[f"${v:,.0f}B" for v in values],
+    textposition="outside",
+    connector={"line": {"color": "rgb(160,160,160)"}},
+    increasing={"marker": {"color": "#2c6e9b"}},
+    decreasing={"marker": {"color": "#d1604a"}},
+    totals={"marker": {"color": "#3a3a3a"}},
+))
+fig.update_layout(
+    title="What happens to every dollar of Amazon revenue (FY2025)",
+    yaxis_title="US$ billions",
+    template="plotly_white",
+    margin=dict(t=60, b=40),
+    height=460,
+)
+fig.show()
+```
+
+A couple of things jump out. **Cost of sales** (≈50% of revenue) is the physical
+reality of being a retailer — the goods themselves and shipping. But notice
+**technology & infrastructure**: at ~$109B it has nearly caught up with
+**fulfillment** (~$109B) and is the fastest-growing line, reflecting the capex
+and depreciation behind AWS and the current AI build-out.
+
+## 3. The trend: how the mix shifted, 2021–2025
+
+A single year is a snapshot. The interesting story is the *trajectory*.
+
+```{python}
+#| label: fig-revtrend
+#| fig-cap: "Segment revenue, 2021–2025 (US$ billions). Hover for exact values; click legend to isolate a segment."
+#| code-summary: "Show code — revenue trend"
+
+df = sales_long.copy()
+df["sales_b"] = df["sales"] / 1000
+fig = px.area(
+    df, x="year", y="sales_b", color="segment",
+    color_discrete_map=SEG_COLORS,
+    labels={"sales_b": "Net sales (US$B)", "year": ""},
+    title="Amazon net sales by segment, 2021–2025",
+)
+fig.update_layout(template="plotly_white", hovermode="x unified", height=440)
+fig.update_xaxes(tickvals=years)
+fig.show()
+```
+
+Revenue growth is broad-based — every segment is bigger. But revenue is the
+boring part. Operating income is where the real regime change lives:
+
+```{python}
+#| label: fig-oitrend
+#| fig-cap: "Segment operating income, 2021–2025 (US$ billions). 2022 was a near-death experience for the retail segments."
+#| code-summary: "Show code — operating income trend"
+
+df = oi_long.copy()
+df["oi_b"] = df["op_income"] / 1000
+fig = px.bar(
+    df, x="year", y="oi_b", color="segment", barmode="group",
+    color_discrete_map=SEG_COLORS,
+    labels={"oi_b": "Operating income (US$B)", "year": ""},
+    title="Amazon operating income by segment, 2021–2025",
+)
+fig.add_hline(y=0, line_color="black", line_width=1)
+fig.update_layout(template="plotly_white", hovermode="x unified", height=440)
+fig.update_xaxes(tickvals=years)
+fig.show()
+```
+
+::: {.takeaway}
+**2022 was brutal for retail.** North America (−$2.8B) and International
+(−$7.7B) both lost money as Amazon over-built capacity during the pandemic
+boom and then ate the fixed costs. AWS profit ($22.8B) is the only reason the
+company stayed comfortably profitable that year. By 2025 retail had recovered,
+but AWS still earns more than the other two segments *combined*.
+:::
+
+To make the margin story explicit, here are segment **operating margins** —
+operating income as a percentage of that segment's own sales:
+
+```{python}
+#| label: fig-margin
+#| fig-cap: "Segment operating margin, 2021–2025. AWS operates on a different plane entirely."
+#| code-summary: "Show code — operating margin lines"
+
+margin = (op_income.set_index("year") / sales.set_index("year") * 100).reset_index()
+margin_long = margin.melt("year", var_name="segment", value_name="margin")
+fig = px.line(
+    margin_long, x="year", y="margin", color="segment", markers=True,
+    color_discrete_map=SEG_COLORS,
+    labels={"margin": "Operating margin (%)", "year": ""},
+    title="Operating margin by segment, 2021–2025",
+)
+fig.add_hline(y=0, line_color="gray", line_width=1, line_dash="dot")
+fig.update_layout(template="plotly_white", hovermode="x unified", height=440)
+fig.update_xaxes(tickvals=years)
+fig.show()
+```
+
+AWS runs at a **~35% operating margin** — software economics. North America has
+clawed its way to ~7%, and International to ~3%. These are *structurally*
+different businesses stapled together.
+
+## 4. What the market did with all this
+
+```{python}
+#| label: fig-stock
+#| fig-cap: "Amazon (AMZN) daily close, last 5 years. Pulled live via yfinance at render time."
+#| code-summary: "Show code — live stock price"
+
+import yfinance as yf
+
+px_hist = yf.Ticker("AMZN").history(period="5y", auto_adjust=True)
+last_close = px_hist["Close"].iloc[-1]
+last_date = px_hist.index[-1].date()
+
+fig = go.Figure(go.Scatter(
+    x=px_hist.index, y=px_hist["Close"],
+    mode="lines", line=dict(color="#e8833a", width=1.6),
+    name="AMZN close",
+))
+fig.update_layout(
+    title=f"Amazon (AMZN) closing price — last close ${last_close:,.2f} on {last_date}",
+    yaxis_title="Price (US$, split-adjusted)",
+    template="plotly_white", height=440, margin=dict(t=60),
+)
+fig.show()
+```
+
+The daily chart is noise on top of signal, though. To see what actually drives
+the price over years rather than days, the right lens is **per-share metrics** —
+because an investor doesn't own "Amazon," they own a *share* of it.
+
+### Revenue per share vs. earnings per share
+
+Two KPIs matter to a shareholder: how much **revenue** and how much **profit**
+the business generates *per share they hold*. (The "per share" part isn't
+cosmetic — share count drifts up over time as stock-based compensation dilutes
+existing holders, a quiet headwind to per-share growth. Amazon's diluted share
+count rose ~5% over this window.)
+
+```{python}
+#| label: fig-pershare
+#| fig-cap: "Revenue per share vs. diluted EPS, 2021–2025 (split-adjusted). Revenue per share climbs steadily; earnings per share is far more volatile."
+
+fig = make_subplots(specs=[[{"secondary_y": True}]])
+fig.add_bar(
+    x=pershare.year, y=pershare.rev_per_share,
+    name="Revenue per share", marker_color="#6aa9c9",
+    text=[f"${v:,.0f}" for v in pershare.rev_per_share], textposition="outside",
+    secondary_y=False,
+)
+fig.add_trace(go.Scatter(
+    x=pershare.year, y=pershare.diluted_eps,
+    name="Diluted EPS", mode="lines+markers+text", line=dict(color="#e8833a", width=3),
+    text=[f"${v:,.2f}" for v in pershare.diluted_eps], textposition="top center",
+), secondary_y=True)
+fig.add_hline(y=0, line_color="gray", line_width=1, line_dash="dot", secondary_y=True)
+fig.update_yaxes(title_text="Revenue per share (US$)", secondary_y=False)
+fig.update_yaxes(title_text="Diluted EPS (US$)", secondary_y=True)
+fig.update_layout(
+    title="Amazon per-share KPIs, 2021–2025",
+    template="plotly_white", hovermode="x unified", height=450, margin=dict(t=60),
+)
+fig.update_xaxes(tickvals=pershare.year.tolist())
+fig.show()
+```
+
+The contrast is the whole point. **Revenue per share rose ~45%** over the period
+(≈$46 → $66) in an almost straight line. **Earnings per share went on a
+rollercoaster:** positive in 2021, *negative* in 2022 as the retail segments lost
+money, then more than doubling to $7.17 by 2025 — a **+121%** gain versus 2021.
+Same company, same years: the top line was placid while the bottom line lurched.
+
+### Which KPI does the share price follow?
+
+Overlaying year-end price on those KPIs answers the question directly.
+
+```{python}
+#| label: fig-kpi-price
+#| fig-cap: "Per-share KPIs and share price, indexed to 100 at year-end 2021. Price tracks the earnings path, not the smooth revenue line."
+
+idx = pershare.copy()
+base = idx.iloc[0]
+for col, label in [("rev_per_share", "Revenue per share"),
+                   ("diluted_eps", "Diluted EPS"),
+                   ("yearend_price", "Year-end share price")]:
+    idx[label] = idx[col] / base[col] * 100
+
+plot = idx.melt("year",
+                value_vars=["Revenue per share", "Diluted EPS", "Year-end share price"],
+                var_name="metric", value_name="index")
+fig = px.line(
+    plot, x="year", y="index", color="metric", markers=True,
+    color_discrete_map={
+        "Revenue per share": "#6aa9c9",
+        "Diluted EPS": "#e8833a",
+        "Year-end share price": "#2c6e9b",
+    },
+    labels={"index": "Indexed to 100 (year-end 2021)", "year": ""},
+    title="Price vs. fundamentals, rebased to 100 at year-end 2021",
+)
+fig.add_hline(y=100, line_color="gray", line_width=1, line_dash="dot")
+fig.update_traces(line=dict(width=3))
+fig.update_layout(template="plotly_white", hovermode="x unified", height=460, margin=dict(t=60))
+fig.update_xaxes(tickvals=pershare.year.tolist())
+fig.show()
+```
+
+::: {.takeaway}
+**The price follows earnings, not revenue.** In 2022 the stock nearly *halved*
+even though revenue per share kept rising — because EPS went negative. As profit
+recovered through 2023–2025, the price re-rated alongside it. Revenue growth is
+necessary, but the market pays for *profit*.
+:::
+
+There's a second, subtler signal in that chart. Over the full window the share
+price rose **+38%**, while EPS rose **+121%**. Price went *up*, yet it rose far
+less than earnings did — which means the **valuation multiple compressed**:
+Amazon's price-to-earnings ratio fell from roughly **51× (end-2021)** to about
+**32× (end-2025)**. The market rewarded the profit growth, but grew steadily less
+willing to pay a premium *multiple* for each dollar of it — the classic signature
+of a hyper-growth company maturing into a merely-very-good one. Combined with the
+segment analysis, the pattern is consistent: Amazon is re-rated on **profitability
+and its durability**, far more than on headline sales.
+
+## 5. Do the profits actually turn into cash?
+
+There's an old auditor's saying: **"Profit is an opinion; cash is a fact."**
+Everything above — revenue, operating income, margins — comes from *accrual*
+accounting, which records sales when they're *earned* and costs when they're
+*incurred*, not when money actually changes hands. That's the right way to
+measure economic activity, but it opens a gap between the profit a company
+*reports* and the cash it *collects*. A healthy skeptic always asks: do the
+earnings show up as real money?
+
+There are three distinct things people worry about behind "great results on
+paper, but where's the cash?" — and each has a different diagnostic:
+
+| The worry | What it actually means | The tell-tale sign |
+|---|---|---|
+| **Fictional revenue** | Booking sales that won't convert to cash (channel-stuffing, round-tripping, bill-and-hold). Outright aggressive or fraudulent recognition. | Operating cash flow runs *persistently below* net income; **receivables grow faster than sales**. |
+| **Delayed payments** | Customers paying late (bad → receivables balloon) — or the company stretching its *own* suppliers (good → it's free financing). | Rising days-sales-outstanding is the danger; rising days-payable is a *benefit*. |
+| **Non-cash earnings** | Profit propped up by accounting estimates (e.g. low depreciation) or depressed by non-cash charges (stock comp, write-downs). | Net income and cash flow drift apart for "paper" reasons like **useful-life assumptions**. |
+
+The way to settle the question is to walk from net income down to **free cash
+flow** — the cash left after running *and* maintaining and expanding the
+business. Here is that bridge for Amazon in FY2025.
+
+```{python}
+#| label: fig-cashbridge
+#| fig-cap: "From net income to free cash flow, FY2025 (US$ billions). The non-cash add-backs make operating cash flow far exceed reported profit — but capex swallows almost all of it."
+#| code-summary: "Show code — cash bridge waterfall"
+
+r = cash[cash.year == 2025].iloc[0]
+wc_other = r.ocf - (r.net_income + r.d_and_a + r.sbc)   # working capital & other, by reconciliation
+
+steps = [
+    ("Net income",              r.net_income, "total"),
+    ("+ Depreciation & amort.", r.d_and_a,    "relative"),
+    ("+ Stock-based comp.",     r.sbc,        "relative"),
+    ("Working capital & other", wc_other,     "relative"),
+    ("Operating cash flow",     r.ocf,        "total"),
+    ("− Capital expenditure",   r.capex,      "relative"),
+    ("Free cash flow",          r.fcf,        "total"),
+]
+fig = go.Figure(go.Waterfall(
+    orientation="v",
+    measure=[s[2] for s in steps],
+    x=[s[0] for s in steps],
+    y=[s[1] for s in steps],
+    text=[f"${s[1]:,.1f}B" for s in steps],
+    textposition="outside",
+    connector={"line": {"color": "rgb(160,160,160)"}},
+    increasing={"marker": {"color": "#2c6e9b"}},
+    decreasing={"marker": {"color": "#d1604a"}},
+    totals={"marker": {"color": "#3a3a3a"}},
+))
+fig.update_layout(
+    title="Amazon FY2025: net income → operating cash flow → free cash flow",
+    yaxis_title="US$ billions", template="plotly_white",
+    margin=dict(t=60, b=40), height=470,
+)
+fig.show()
+```
+
+Read the bridge left to right and the answer falls out:
+
+- **The operating cash is real — emphatically so.** Operating cash flow
+  ($139.5B) is *nearly double* reported net income ($77.7B). That is the
+  *opposite* of the fictional-revenue signature, where cash lags profit. Most of
+  the gap is **depreciation & amortization** ($65.8B): a genuine expense on the
+  income statement, but one where no cash leaves the building this year — so it's
+  added back. Stock-based comp ($19.5B) works the same way (it dilutes
+  shareholders rather than spending cash).
+- **"Delayed payments" actually works in Amazon's favour.** Amazon runs on
+  **negative working capital**: customers pay instantly (card on file), while
+  Amazon pays its suppliers weeks later. So its own slow payments are a source of
+  cash — suppliers and customers effectively finance the business. The dangerous
+  version (Amazon's *own* customers stalling, receivables ballooning faster than
+  sales) simply isn't visible in the numbers.
+
+So the popular "they have no cash!" worry, in the fraud sense, does not apply to
+Amazon. But there *is* a real catch — it's just a different one:
+
+```{python}
+#| label: fig-cashtrend
+#| fig-cap: "Operating cash flow vs. capex vs. free cash flow, 2022–2025 (US$ billions). The AI build-out has eaten almost all the free cash flow."
+#| code-summary: "Show code — cash-flow trend"
+
+fig = go.Figure()
+fig.add_bar(x=cash.year, y=cash.ocf, name="Operating cash flow", marker_color="#2c6e9b")
+fig.add_bar(x=cash.year, y=-cash.capex, name="Capex (reinvested)", marker_color="#e8833a")
+fig.add_trace(go.Scatter(
+    x=cash.year, y=cash.fcf, name="Free cash flow",
+    mode="lines+markers+text", line=dict(color="#d1604a", width=3),
+    text=[f"${v:,.1f}B" for v in cash.fcf], textposition="top center",
+))
+fig.add_hline(y=0, line_color="black", line_width=1)
+fig.update_layout(
+    title="Amazon: operating cash flow vs. capex vs. free cash flow",
+    yaxis_title="US$ billions", barmode="group",
+    template="plotly_white", hovermode="x unified", height=450, margin=dict(t=60),
+)
+fig.update_xaxes(tickvals=cash.year.tolist())
+fig.show()
+```
+
+::: {.takeaway}
+**The cash is real, but almost none of it is *free*.** In 2025 Amazon turned
+$139.5B of operating cash flow into just **$7.7B of free cash flow** — because it
+plowed **$131.8B into capex**, overwhelmingly AI data centres and chips. So the
+honest version of the concern isn't "the profits are fake." It's that the profits
+are real, but the company is reinvesting nearly all of its cash, so there's little
+left over — and the whole thesis now rests on those AI investments earning a
+return.
+:::
+
+### The accounting subtlety worth knowing about
+
+This is where **depreciation and amortization timing** becomes an earnings-quality
+issue, and it's the part most people miss. When Amazon spends $132B on servers,
+the *cash* leaves immediately (it hits free cash flow right away), but the
+*income statement* only feels it gradually — spread out as depreciation over the
+asset's "useful life," typically 5–6 years. The mechanical consequence: in a year
+of heavy investment, **reported operating income looks far healthier than free
+cash flow**, because most of this year's spending hasn't yet shown up as
+depreciation. As today's capex ages, that depreciation load climbs and becomes a
+growing drag on *future* operating income.
+
+And "useful life" is an *estimate* — a management judgement that directly moves
+reported profit:
+
+- In **2024**, Amazon *extended* the assumed life of servers from 5 to 6 years,
+  which **lowered** annual depreciation and **boosted** reported income.
+- In **2025**, it *reversed course* (6 → 5 years), citing the faster pace of AI
+  hardware obsolescence — **reducing** 2025 operating income by roughly **$0.7B**.
+- Over the same period **Meta went the other way**, extending server life to ~5.5
+  years and cutting its depreciation expense by ~$2.9B.
+
+Same physical hardware, opposite accounting calls — and each one changes reported
+profit by billions. None of this is fraud; it's the legitimate latitude in
+accounting estimates. But it's exactly why a careful analyst treats reported
+earnings as a *starting point* and always reconciles them to cash.
+
+::: {.takeaway}
+**Verdict on the "no real cash" worry:** for Amazon it's largely a myth in the
+fraud sense — operating cash flow exceeds profit, and its working-capital float
+generates cash rather than hiding a hole. The legitimate concerns are
+(1) **capital intensity** — free cash flow is thin because nearly everything is
+being reinvested in AI, and (2) **depreciation timing** — today's strong
+operating income partly reflects spending that hasn't hit the income statement
+yet. The question isn't "is the cash real?" It's "**will the AI capex earn its
+keep?**"
+:::
+
+---
+
+### Data & sources {.unnumbered}
+
+- **Segment revenue & operating income (2021–2025):** Amazon.com, Inc. Form 10-K
+  (FY2025) and prior annual filings, via SEC EDGAR.
+- **Consolidated cost lines & cash-flow statement (FY2025):** Amazon FY2025 Form
+  10-K.
+- **Q1 2026 results:** Amazon Q1 2026 earnings release (reported Apr 29, 2026).
+- **Stock prices:** Yahoo Finance via the `yfinance` Python package, pulled at
+  render time.
+
+*All figures are as reported by Amazon. This article is for educational and
+illustrative purposes and is not investment advice.*

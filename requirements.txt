@@ -1,0 +1,13 @@
+# Python dependencies for rendering the site's analyses.
+# Install into a venv:  python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt
+yfinance>=1.4
+plotly>=6.0
+pandas>=2.2
+numpy>=1.26
+tabulate>=0.9          # pandas .to_markdown() for rendered tables
+matplotlib>=3.8
+kaleido>=0.2        # static export of Plotly figures (PNG/SVG)
+nbformat>=5.10
+nbclient>=0.10
+ipykernel>=6.29
+jupyter

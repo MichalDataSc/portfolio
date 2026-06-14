@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Concept C — Aurora AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0b1020; --muted:#3c4664;
+    --c1:#6366f1; --c2:#06b6d4; --c3:#ec4899; --c4:#22d3ee;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:"Inter",system-ui,sans-serif;color:var(--ink);overflow-x:hidden;
+       background:#f4f5fb;position:relative;min-height:100vh}
+
+  /* animated aurora mesh */
+  .mesh{position:fixed;inset:-20%;z-index:0;filter:blur(70px) saturate(1.2);opacity:.85}
+  .blob{position:absolute;border-radius:50%;mix-blend-mode:multiply;animation:float 18s ease-in-out infinite}
+  .b1{width:46vw;height:46vw;background:var(--c1);top:-6%;left:-4%;animation-delay:0s}
+  .b2{width:42vw;height:42vw;background:var(--c2);top:8%;right:-6%;animation-delay:-4s}
+  .b3{width:40vw;height:40vw;background:var(--c3);bottom:-10%;left:18%;animation-delay:-9s;opacity:.8}
+  .b4{width:34vw;height:34vw;background:var(--c4);bottom:4%;right:14%;animation-delay:-13s}
+  @keyframes float{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(6%,8%) scale(1.12)}66%{transform:translate(-5%,4%) scale(.94)}}
+  #field{position:fixed;inset:0;z-index:1;pointer-events:none}
+
+  nav{position:relative;z-index:3;display:flex;justify-content:space-between;align-items:center;
+      padding:24px clamp(20px,6vw,72px)}
+  .brand{font-family:"Sora";font-weight:700;letter-spacing:-.02em;font-size:1.1rem}
+  .navlinks{display:flex;gap:12px}
+  .navlinks a{color:#1c2235;text-decoration:none;font-size:.9rem;font-weight:500;padding:8px 14px;border-radius:10px;transition:.2s}
+  .navlinks a:hover{background:rgba(255,255,255,.55)}
+
+  .wrap{position:relative;z-index:2;min-height:calc(100vh - 84px);display:flex;align-items:center;justify-content:center;
+        padding:40px clamp(20px,6vw,72px) 70px}
+  .card{max-width:780px;text-align:center;
+    background:rgba(255,255,255,.55);backdrop-filter:blur(22px) saturate(1.3);
+    border:1px solid rgba(255,255,255,.7);border-radius:28px;
+    padding:clamp(36px,6vw,68px) clamp(26px,5vw,64px);
+    box-shadow:0 30px 80px -30px rgba(40,30,90,.45)}
+  .pill{display:inline-flex;align-items:center;gap:9px;font-size:.78rem;font-weight:600;letter-spacing:.04em;
+    color:#4338ca;background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.22);
+    padding:7px 15px;border-radius:999px;margin-bottom:26px}
+  .pill .ping{width:8px;height:8px;border-radius:50%;background:#6366f1;box-shadow:0 0 0 0 rgba(99,102,241,.6);animation:ping 1.8s infinite}
+  @keyframes ping{0%{box-shadow:0 0 0 0 rgba(99,102,241,.5)}70%{box-shadow:0 0 0 9px rgba(99,102,241,0)}100%{box-shadow:0 0 0 0 rgba(99,102,241,0)}}
+  h1{font-family:"Sora";font-weight:700;letter-spacing:-.03em;font-size:clamp(2.5rem,6.5vw,4.8rem);line-height:1.02;margin-bottom:22px}
+  h1 .grad{background:linear-gradient(100deg,var(--c1),var(--c2) 60%,var(--c4));
+     -webkit-background-clip:text;background-clip:text;color:transparent}
+  .lead{font-size:clamp(1.05rem,1.8vw,1.25rem);line-height:1.6;color:var(--muted);max-width:38rem;margin:0 auto 36px}
+  .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{font:inherit;font-weight:600;font-size:.98rem;padding:14px 26px;border-radius:14px;text-decoration:none;transition:.2s;display:inline-flex;gap:8px;align-items:center}
+  .btn.primary{background:linear-gradient(100deg,var(--c1),var(--c2));color:#fff;box-shadow:0 14px 34px -10px rgba(99,102,241,.6)}
+  .btn.primary:hover{transform:translateY(-2px);box-shadow:0 20px 44px -10px rgba(99,102,241,.75)}
+  .btn.ghost{background:rgba(255,255,255,.6);border:1px solid rgba(20,16,50,.12);color:#1c2235}
+  .btn.ghost:hover{background:#fff}
+  .badge{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:5;
+     font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#3c4664;
+     background:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.8);padding:6px 14px;border-radius:999px;backdrop-filter:blur(8px)}
+</style>
+</head>
+<body>
+<div class="mesh"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="blob b4"></div></div>
+<canvas id="field"></canvas>
+
+<nav>
+  <div class="brand">Michał Adamczyk</div>
+  <div class="navlinks"><a>Portfolio</a><a>Writing</a><a>About</a></div>
+</nav>
+
+<main class="wrap">
+  <div class="card">
+    <span class="pill"><span class="ping"></span>Open to consulting &amp; advisory</span>
+    <h1>Data science that<br><span class="grad">moves the number.</span></h1>
+    <p class="lead">Senior data scientist and ex-BCG consultant — close to a decade
+       turning data into decisions and profit, from boardroom strategy to
+       production machine learning.</p>
+    <div class="cta">
+      <a class="btn primary" href="#">Read the writing →</a>
+      <a class="btn ghost" href="#">Project portfolio</a>
+      <a class="btn ghost" href="#">About me</a>
+    </div>
+  </div>
+</main>
+<div class="badge">Concept C · Aurora AI</div>
+
+<script>
+// drifting "embedding space" dots
+const c=document.getElementById('field'),x=c.getContext('2d');
+let w,h,dpr,P=[];
+function size(){dpr=Math.min(devicePixelRatio||1,2);w=c.width=innerWidth*dpr;h=c.height=innerHeight*dpr;
+  c.style.width=innerWidth+'px';c.style.height=innerHeight+'px';
+  const n=Math.round(innerWidth/14);P=[];
+  for(let i=0;i<n;i++)P.push({x:Math.random()*w,y:Math.random()*h,
+    vx:(Math.random()-.5)*.18*dpr,vy:(Math.random()-.5)*.18*dpr,r:(Math.random()*1.8+.8)*dpr,
+    hue:[99,6,236,34][i%4]});}
+addEventListener('resize',size);
+function draw(){x.clearRect(0,0,w,h);
+  for(const p of P){p.x+=p.vx;p.y+=p.vy;
+    if(p.x<0||p.x>w)p.vx*=-1;if(p.y<0||p.y>h)p.vy*=-1;
+    x.beginPath();x.arc(p.x,p.y,p.r,0,7);
+    x.fillStyle='rgba(60,55,120,.35)';x.fill();}
+  requestAnimationFrame(draw);}
+size();draw();
+</script>
+</body>
+</html>

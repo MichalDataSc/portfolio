@@ -1,0 +1,90 @@
+---
+title: "Project Portfolio"
+subtitle: "Selected engagements — anonymized — across financial services, manufacturing, AdTech, retail and FMCG."
+toc: false
+---
+
+A decade of work sits behind these. From boardroom strategy at **BCG** to
+production machine learning, the through-line is the same: frame the business
+question sharply, solve it rigorously, and ship something that moves the number.
+
+::: {.engagements}
+
+:::: {.engagement}
+::: {.engagement-icon}
+<i class="bi bi-bank2"></i>
+:::
+::: {.engagement-body}
+[Financial services · Strategy (BCG)]{.tag}
+[Strategy for a leading Polish bank and a major European insurer]{.headline}
+
+As part of BCG, I worked hands-on with client data, ran research and client
+interviews, and built the analyses and presentations behind strategic
+recommendations delivered to senior stakeholders.
+:::
+::::
+
+:::: {.engagement}
+::: {.engagement-icon}
+<i class="bi bi-cup-straw"></i>
+:::
+::: {.engagement-body}
+[Manufacturing · Advanced analytics (BCG)]{.tag}
+[Efficiency optimization for one of the world's largest brewers]{.headline}
+
+I brought machine learning and advanced analytics into an operational
+optimization engagement for a global brewer — translating messy production data
+into measurable efficiency gains. Yes: I once optimized a brewery.
+:::
+::::
+
+:::: {.engagement}
+::: {.engagement-icon}
+<i class="bi bi-broadcast"></i>
+:::
+::: {.engagement-body}
+[AdTech · ML & experimentation]{.tag}
+[Real-time bidding systems for leading AdTech companies]{.headline}
+
+I advised and built for AdTech leaders: machine-learning models that buy mobile
+display inventory in real time, paired with disciplined A/B testing and
+reinforcement-learning approaches. The brief was always the same — solutions
+that move profit, measurably.
+:::
+::::
+
+:::: {.engagement}
+::: {.engagement-icon}
+<i class="bi bi-megaphone"></i>
+:::
+::: {.engagement-body}
+[Retail · Causal inference]{.tag}
+[Marketing measurement & optimization for a top global retailer]{.headline}
+
+I designed a framework to measure marketing-campaign effectiveness and optimize
+spend across channels — grounded in causal inference and proper experimentation
+rather than last-click guesswork, so the client could trust where the next
+dollar should go.
+:::
+::::
+
+:::: {.engagement}
+::: {.engagement-icon}
+<i class="bi bi-graph-up-arrow"></i>
+:::
+::: {.engagement-body}
+[FMCG / Product · Analytics]{.tag}
+[Forecasting, audits & decision support across product and FMCG teams]{.headline}
+
+Demand forecasting, data audits and quality assurance, A/B-test design, and
+data-driven recommendations delivered straight to product and C-level
+stakeholders — plus training corporate teams in applied AI.
+:::
+::::
+
+:::
+
+------------------------------------------------------------------------
+
+**Have a problem that needs this mix of strategy and data science?**
+[Get in touch](mailto:michal.adamczyk@rtbhouse.com) or read more [about me](about.qmd).

@@ -1,0 +1,6 @@
+# Defaults applied to every post in posts/
+title-block-banner: true
+author: "Michał Adamczyk"
+toc: true
+toc-depth: 3
+freeze: auto

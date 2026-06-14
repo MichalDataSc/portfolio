@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Concept B — Editorial Quant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fbfbf9; --panel:#ffffff; --ink:#14181f; --muted:#5a6573;
+    --line:#e7e8e3; --accent:#2c6e9b; --accent-soft:#eaf2f8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Inter",system-ui,sans-serif;background:var(--bg);color:var(--ink);
+       -webkit-font-smoothing:antialiased}
+  .frame{max-width:1240px;margin:0 auto;padding:0 clamp(20px,5vw,64px)}
+
+  nav{display:flex;justify-content:space-between;align-items:center;padding:26px 0;border-bottom:1px solid var(--line)}
+  .brand{font-family:"Newsreader";font-size:1.25rem;font-weight:600;letter-spacing:-.01em}
+  .navlinks{display:flex;gap:30px}
+  .navlinks a{color:var(--muted);text-decoration:none;font-size:.9rem;font-weight:500;transition:.2s}
+  .navlinks a:hover{color:var(--accent)}
+
+  .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(30px,5vw,70px);
+        align-items:center;padding:clamp(50px,9vw,110px) 0}
+  .eyebrow{font-family:"JetBrains Mono";font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;
+           color:var(--accent);margin-bottom:26px}
+  h1{font-family:"Newsreader";font-weight:500;letter-spacing:-.02em;
+     font-size:clamp(2.7rem,6vw,4.6rem);line-height:1.02;margin-bottom:26px}
+  h1 em{font-style:italic;color:var(--accent)}
+  .lead{max-width:30rem;font-size:clamp(1.02rem,1.6vw,1.18rem);line-height:1.65;color:var(--muted);margin-bottom:34px}
+  .cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .btn{font:inherit;font-weight:600;font-size:.95rem;padding:13px 22px;border-radius:10px;text-decoration:none;transition:.2s;display:inline-flex;gap:8px;align-items:center}
+  .btn.primary{background:var(--accent);color:#fff}
+  .btn.primary:hover{background:#235a80;transform:translateY(-1px)}
+  .btn.link{color:var(--ink);border-bottom:1px solid transparent;border-radius:0;padding:13px 4px}
+  .btn.link:hover{border-color:var(--accent);color:var(--accent)}
+
+  /* chart panel */
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;
+         padding:22px 22px 16px;box-shadow:0 24px 50px -30px rgba(20,24,31,.25)}
+  .panel .cap{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+  .panel .cap b{font-family:"JetBrains Mono";font-size:.72rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;font-weight:500}
+  .panel .cap .r2{font-family:"JetBrains Mono";font-size:.74rem;color:var(--accent);background:var(--accent-soft);padding:3px 9px;border-radius:6px}
+  svg{display:block;width:100%;height:auto}
+  .axis{stroke:var(--line);stroke-width:1}
+  .gridln{stroke:#f0f1ec;stroke-width:1}
+  .pt{fill:var(--accent);opacity:0;animation:pop .5s forwards}
+  @keyframes pop{to{opacity:.72}}
+  .fit{fill:none;stroke:#14181f;stroke-width:2.5;stroke-linecap:round;
+       stroke-dasharray:600;stroke-dashoffset:600;animation:draw 1.6s .4s cubic-bezier(.7,0,.2,1) forwards}
+  .band{fill:var(--accent);opacity:0;animation:band 1s 1.4s forwards}
+  @keyframes band{to{opacity:.07}}
+  @keyframes draw{to{stroke-dashoffset:0}}
+
+  .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:30px;padding-top:28px;border-top:1px solid var(--line)}
+  .tags span{font-family:"JetBrains Mono";font-size:.74rem;color:var(--muted);border:1px solid var(--line);padding:5px 11px;border-radius:999px}
+  .badge{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);font-family:"JetBrains Mono";
+     font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:#fff;border:1px solid var(--line);padding:6px 14px;border-radius:999px}
+  @media(max-width:880px){.hero{grid-template-columns:1fr;gap:40px}.panel{order:2}}
+</style>
+</head>
+<body>
+<div class="frame">
+  <nav>
+    <div class="brand">Michał Adamczyk</div>
+    <div class="navlinks"><a>Portfolio</a><a>Writing</a><a>About</a></div>
+  </nav>
+
+  <section class="hero">
+    <div>
+      <div class="eyebrow">// senior data scientist · ex-BCG</div>
+      <h1>The numbers behind the <em>decisions</em>.</h1>
+      <p class="lead">Close to a decade turning data into decisions — and profit.
+        I build ML and analytics systems in production, and write here about
+        applied machine learning, causal inference, and the theory I find beautiful.</p>
+      <div class="cta">
+        <a class="btn primary" href="#">Read the writing →</a>
+        <a class="btn link" href="#">Project portfolio</a>
+        <a class="btn link" href="#">About me</a>
+      </div>
+      <div class="tags">
+        <span>causal inference</span><span>experimentation</span><span>forecasting</span>
+        <span>real-time bidding</span><span>Python · PySpark</span>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="cap"><b>fig. regression — signal vs. spend</b><span class="r2">R² = 0.91</span></div>
+      <svg viewBox="0 0 460 300" id="chart" aria-hidden="true">
+        <!-- grid -->
+        <g id="grid"></g>
+        <!-- axes -->
+        <line class="axis" x1="44" y1="14" x2="44" y2="256"/>
+        <line class="axis" x1="44" y1="256" x2="446" y2="256"/>
+        <!-- confidence band + fit + points injected -->
+        <polygon class="band" id="band"></polygon>
+        <line class="fit" id="fit" x1="0" y1="0" x2="0" y2="0"/>
+        <g id="pts"></g>
+      </svg>
+    </div>
+  </section>
+</div>
+<div class="badge">Concept B · Editorial Quant</div>
+
+<script>
+const X0=44,X1=446,Y0=256,Y1=14;
+const grid=document.getElementById('grid');
+for(let i=1;i<5;i++){const y=Y0-(Y0-Y1)*i/5;
+  grid.innerHTML+=`<line class="gridln" x1="${X0}" y1="${y}" x2="${X1}" y2="${y}"/>`;}
+for(let i=1;i<6;i++){const xx=X0+(X1-X0)*i/6;
+  grid.innerHTML+=`<line class="gridln" x1="${xx}" y1="${Y1}" x2="${xx}" y2="${Y0}"/>`;}
+// data: y = a*x+b + noise
+const a=.62,b=40,N=34,pts=[];
+for(let i=0;i<N;i++){const px=Math.random();
+  const x=X0+px*(X1-X0-16)+8;
+  const base=Y0-(px*(Y0-Y1)*a + b);
+  const y=base+(Math.random()-.5)*54;
+  pts.push([x,Math.max(Y1+4,Math.min(Y0-4,y))]);}
+const g=document.getElementById('pts');
+pts.forEach((p,i)=>{const c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+  c.setAttribute('class','pt');c.setAttribute('cx',p[0]);c.setAttribute('cy',p[1]);c.setAttribute('r',4.2);
+  c.style.animationDelay=(i*22)+'ms';g.appendChild(c);});
+// fit line endpoints
+const fy0=Y0-b, fy1=Y0-((X1-X0-16)*a+b);
+const fit=document.getElementById('fit');
+fit.setAttribute('x1',X0);fit.setAttribute('y1',fy0);
+fit.setAttribute('x2',X1-8);fit.setAttribute('y2',fy1);
+// confidence band polygon
+const band=document.getElementById('band');
+band.setAttribute('points',`${X0},${fy0-22} ${X1-8},${fy1-22} ${X1-8},${fy1+22} ${X0},${fy0+22}`);
+</script>
+</body>
+</html>

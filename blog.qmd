@@ -1,0 +1,13 @@
+---
+title: "Writing"
+subtitle: "Essays and analyses on data, machine learning, and the industry."
+listing:
+  contents: posts
+  type: default
+  sort: "date desc"
+  categories: true
+  feed: true
+  fields: [image, date, title, description, categories, reading-time]
+page-layout: full
+toc: false
+---

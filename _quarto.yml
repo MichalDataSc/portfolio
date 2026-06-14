@@ -1,0 +1,41 @@
+project:
+  type: website
+  output-dir: _site
+  resources:
+    - CNAME       # custom domain marker, copied into _site on every publish
+
+website:
+  title: "Michał Adamczyk"
+  description: "Data science portfolio & writing — applied ML, analytics, and the numbers behind the industry."
+  site-url: "https://adamczyk.ai"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: portfolio.qmd
+        text: Portfolio
+      - href: blog.qmd
+        text: Writing
+      - href: about.qmd
+        text: About
+    right:
+      - icon: github
+        href: https://github.com/MichalDataSc/portfolio
+  page-footer:
+    center: "© 2026 Michał Adamczyk"
+
+format:
+  html:
+    theme:
+      light: cosmo
+      dark: darkly
+    css: styles.css
+    toc: true
+    fig-responsive: true
+    smooth-scroll: true
+
+execute:
+  freeze: auto                # cache cell outputs; only re-run when the .qmd changes
+  echo: false                 # never show source code on the rendered site
+  warning: false
+  message: false
