@@ -1,0 +1,131 @@
+/* ---- Site-wide tweaks ---- */
+
+:root {
+  --site-accent: #2c6e9b;
+}
+
+/* Tighter, more editorial reading column */
+.page-columns {
+  --mermaid-font-family: inherit;
+}
+
+#quarto-content main {
+  max-width: 50rem;
+}
+
+/* Landing hero */
+.hero {
+  padding: 2.5rem 0 1.5rem;
+}
+.hero h1 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.hero .lead {
+  font-size: 1.2rem;
+  color: var(--bs-secondary-color);
+  max-width: 38rem;
+}
+
+/* Blog listing cards */
+.quarto-listing-category .listing-category {
+  font-size: 0.8rem;
+}
+
+/* Figures: a little breathing room */
+figure.quarto-float-fig {
+  margin: 1.75rem 0;
+}
+
+/* Pull-quote / key-takeaway callout reuse */
+.takeaway {
+  border-left: 3px solid var(--site-accent);
+  padding: 0.25rem 1rem;
+  background: rgba(44, 110, 155, 0.06);
+  margin: 1.5rem 0;
+}
+
+/* ---- About page ---- */
+
+/* Capability pillars */
+.pillar h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.35rem;
+}
+.pillar p {
+  color: var(--bs-secondary-color);
+  font-size: 0.95rem;
+}
+
+/* Selected-engagement cards */
+.engagements {
+  display: grid;
+  gap: 1rem;
+  margin: 1.5rem 0 2rem;
+}
+.engagement {
+  display: flex;
+  gap: 1.1rem;
+  align-items: flex-start;
+  border: 1px solid var(--bs-border-color, rgba(0, 0, 0, 0.1));
+  border-left: 3px solid var(--site-accent);
+  border-radius: 6px;
+  padding: 1rem 1.3rem;
+  background: rgba(44, 110, 155, 0.03);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.engagement:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(44, 110, 155, 0.12);
+}
+.engagement-icon {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  margin-top: 0.1rem;
+  border-radius: 50%;
+  background: rgba(44, 110, 155, 0.1);
+  color: var(--site-accent);
+  font-size: 1.5rem;
+  line-height: 1;
+}
+.engagement-body {
+  flex: 1 1 auto;
+}
+.engagement .tag {
+  display: block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  color: var(--site-accent);
+  margin-bottom: 0.15rem;
+}
+.engagement .headline {
+  font-weight: 600;
+  font-size: 1.02rem;
+}
+.engagement p {
+  margin: 0.25rem 0 0;
+  color: var(--bs-body-color);
+}
+
+/* Compact skills/tags row */
+.capabilities {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0 1.5rem;
+}
+.capabilities li {
+  font-size: 0.85rem;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(44, 110, 155, 0.08);
+  color: var(--site-accent);
+}

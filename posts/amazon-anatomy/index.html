@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Michał Adamczyk">
+<meta name="dcterms.date" content="2026-05-31">
+<meta name="description" content="Amazon sells $717B of goods and services a year, but most of its profit comes from a segment that is barely a sixth of its revenue. A data-driven look at where Amazon’s money comes from, where it goes, and how that has shifted.">
+
+<title>The Anatomy of Amazon: A Retailer That Earns Like a Cloud Company – Michał Adamczyk</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-158031087360bce0ff56dc785ce39e06.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-5685cd926c25366c96d9f1407e584118.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-158031087360bce0ff56dc785ce39e06.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+<script>
+window.PlotlyConfig = {MathJaxConfig: 'local'};
+if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}
+</script>
+<script type="module">import "https://cdn.plot.ly/plotly-3.5.0.min"</script>
+
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Michał Adamczyk</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../portfolio.html"> 
+<span class="menu-text">Portfolio</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog.html"> 
+<span class="menu-text">Writing</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/MichalDataSc/portfolio"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">The Anatomy of Amazon: A Retailer That Earns Like a Cloud Company</h1>
+                  <div>
+        <div class="description">
+          <p>Amazon sells $717B of goods and services a year, but most of its profit comes from a segment that is barely a sixth of its revenue. A data-driven look at where Amazon’s money comes from, where it goes, and how that has shifted.</p>
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">Equity analysis</div>
+                <div class="quarto-category">Data visualization</div>
+                <div class="quarto-category">Python</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Michał Adamczyk </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">May 31, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-headline-contradiction" id="toc-the-headline-contradiction" class="nav-link active" data-scroll-target="#the-headline-contradiction">1. The headline contradiction</a></li>
+  <li><a href="#where-the-money-goes" id="toc-where-the-money-goes" class="nav-link" data-scroll-target="#where-the-money-goes">2. Where the money goes</a></li>
+  <li><a href="#the-trend-how-the-mix-shifted-20212025" id="toc-the-trend-how-the-mix-shifted-20212025" class="nav-link" data-scroll-target="#the-trend-how-the-mix-shifted-20212025">3. The trend: how the mix shifted, 2021–2025</a></li>
+  <li><a href="#what-the-market-did-with-all-this" id="toc-what-the-market-did-with-all-this" class="nav-link" data-scroll-target="#what-the-market-did-with-all-this">4. What the market did with all this</a>
+  <ul class="collapse">
+  <li><a href="#revenue-per-share-vs.-earnings-per-share" id="toc-revenue-per-share-vs.-earnings-per-share" class="nav-link" data-scroll-target="#revenue-per-share-vs.-earnings-per-share">Revenue per share vs.&nbsp;earnings per share</a></li>
+  <li><a href="#which-kpi-does-the-share-price-follow" id="toc-which-kpi-does-the-share-price-follow" class="nav-link" data-scroll-target="#which-kpi-does-the-share-price-follow">Which KPI does the share price follow?</a></li>
+  </ul></li>
+  <li><a href="#do-the-profits-actually-turn-into-cash" id="toc-do-the-profits-actually-turn-into-cash" class="nav-link" data-scroll-target="#do-the-profits-actually-turn-into-cash">5. Do the profits actually turn into cash?</a>
+  <ul class="collapse">
+  <li><a href="#the-accounting-subtlety-worth-knowing-about" id="toc-the-accounting-subtlety-worth-knowing-about" class="nav-link" data-scroll-target="#the-accounting-subtlety-worth-knowing-about">The accounting subtlety worth knowing about</a></li>
+  <li><a href="#data-sources" id="toc-data-sources" class="nav-link" data-scroll-target="#data-sources">Data &amp; sources</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+
+<blockquote class="blockquote">
+<p><strong>Summary.</strong> Amazon looks like the world’s biggest store, but it is run, financially, like a cloud-computing company with a very large logistics hobby. In 2025, <strong>AWS was ~18% of revenue and ~57% of operating profit.</strong></p>
+</blockquote>
+<p>Amazon is the rare company that is simultaneously a low-margin retailer, a high-margin software business, and a fast-growing advertising platform — all consolidated into a single income statement. That combination makes its headline numbers genuinely misleading: total revenue growth says almost nothing about why Amazon is profitable, because the profit lives somewhere very specific. The segment mix tells the real story.</p>
+<p>What follows decomposes that story — where the revenue comes from, where the costs go, how the picture has shifted since 2021, and whether the reported profits actually turn into cash. The segment and cost figures are taken from Amazon’s FY2025 Form 10-K and Q1 2026 results; the stock prices are pulled live from Yahoo Finance.</p>
+<section id="the-headline-contradiction" class="level2">
+<h2 class="anchored" data-anchor-id="the-headline-contradiction">1. The headline contradiction</h2>
+<p>The single chart that frames everything: for fiscal 2025, each segment’s share of <strong>revenue</strong> sits next to its share of <strong>operating profit</strong>.</p>
+<div id="cell-fig-mix" class="cell" data-execution_count="2">
+<div class="cell-output cell-output-display">
+<div id="fig-mix" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mix-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-mix-output-1.png" width="807" height="372" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mix-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Revenue mix vs.&nbsp;operating-profit mix, FY2025. AWS punches far above its revenue weight.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="takeaway">
+<p><strong>AWS is ~18% of sales but ~57% of operating profit.</strong> North America does the opposite: ~59% of sales, ~37% of profit. The retail machine generates the <em>volume</em>; the cloud generates the <em>margin</em>.</p>
+</div>
+</section>
+<section id="where-the-money-goes" class="level2">
+<h2 class="anchored" data-anchor-id="where-the-money-goes">2. Where the money goes</h2>
+<p>The cleanest way to show a company’s cost structure is a <strong>waterfall</strong> from net sales down to operating income — each step is a category of spend that Amazon discloses on the face of its income statement.</p>
+<div id="cell-fig-waterfall" class="cell" data-execution_count="3">
+<div id="fig-waterfall" class="cell-output cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-waterfall-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script>if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.5.0.min.js" integrity="sha256-fHbNLP+GlIXN+efbQec78UkemUz3NJp7UmfGxC1tNxs=" crossorigin="anonymous"></script>                <div id="e2006b3e-25eb-4d72-a410-ffc4c61298c1" class="plotly-graph-div" style="height:460px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("e2006b3e-25eb-4d72-a410-ffc4c61298c1")) {                    Plotly.newPlot(                        "e2006b3e-25eb-4d72-a410-ffc4c61298c1",                        [{"connector":{"line":{"color":"rgb(160,160,160)"}},"decreasing":{"marker":{"color":"#d1604a"}},"increasing":{"marker":{"color":"#2c6e9b"}},"measure":["relative","relative","relative","relative","relative","relative","relative","total"],"orientation":"v","text":["$717B","$-356B","$-109B","$-109B","$-47B","$-11B","$-5B","$80B"],"textposition":"outside","totals":{"marker":{"color":"#3a3a3a"}},"x":["Net sales","Cost of sales","Fulfillment","Technology & infrastructure","Sales & marketing","General & administrative","Other operating, net","Operating income"],"y":[716.924,-356.414,-109.074,-108.521,-47.129,-11.172,-4.639,79.975],"type":"waterfall"}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scattermap":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermap"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"#C8D4E3"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30},"paper_bgcolor":"white","plot_bgcolor":"white","polar":{"angularaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""},"bgcolor":"white","radialaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"yaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"zaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"baxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"bgcolor":"white","caxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2}}},"margin":{"t":60,"b":40},"title":{"text":"What happens to every dollar of Amazon revenue (FY2025)"},"yaxis":{"title":{"text":"US$ billions"}},"height":460},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('e2006b3e-25eb-4d72-a410-ffc4c61298c1');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };            </script>        </div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-waterfall-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: From $716.9B of net sales to <span class="math inline">\(80.0B of operating income, FY2025 (US\)</span> billions).
+</figcaption>
+</figure>
+</div>
+</div>
+<p>A couple of things jump out. <strong>Cost of sales</strong> (≈50% of revenue) is the physical reality of being a retailer — the goods themselves and shipping. But notice <strong>technology &amp; infrastructure</strong>: at ~$109B it has nearly caught up with <strong>fulfillment</strong> (~$109B) and is the fastest-growing line, reflecting the capex and depreciation behind AWS and the current AI build-out.</p>
+</section>
+<section id="the-trend-how-the-mix-shifted-20212025" class="level2">
+<h2 class="anchored" data-anchor-id="the-trend-how-the-mix-shifted-20212025">3. The trend: how the mix shifted, 2021–2025</h2>
+<p>A single year is a snapshot. The interesting story is the <em>trajectory</em>.</p>
+<div id="cell-fig-revtrend" class="cell" data-execution_count="4">
+<div id="fig-revtrend" class="cell-output cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-revtrend-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script>if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.5.0.min.js" integrity="sha256-fHbNLP+GlIXN+efbQec78UkemUz3NJp7UmfGxC1tNxs=" crossorigin="anonymous"></script>                <div id="c9a24785-0336-4a56-a74a-13b8c204a883" class="plotly-graph-div" style="height:440px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("c9a24785-0336-4a56-a74a-13b8c204a883")) {                    Plotly.newPlot(                        "c9a24785-0336-4a56-a74a-13b8c204a883",                        [{"fillpattern":{"shape":""},"hovertemplate":"segment=North America\u003cbr\u003e=%{x}\u003cbr\u003eNet sales (US$B)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"North America","line":{"color":"#2c6e9b"},"marker":{"symbol":"circle"},"mode":"lines","name":"North America","orientation":"v","showlegend":true,"stackgroup":"1","x":{"dtype":"i2","bdata":"5QfmB+cH6AfpBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"F9nO91N9cUCuR+F6FL5zQGiR7Xw\u002fDXZAy6FFtvM3eEB7FK5H4aR6QA=="},"yaxis":"y","type":"scatter"},{"fillpattern":{"shape":""},"hovertemplate":"segment=International\u003cbr\u003e=%{x}\u003cbr\u003eNet sales (US$B)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"International","line":{"color":"#6aa9c9"},"marker":{"symbol":"circle"},"mode":"lines","name":"International","orientation":"v","showlegend":true,"stackgroup":"1","x":{"dtype":"i2","bdata":"5QfmB+cH6AfpBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"7nw\u002fNV7yX0CcxCCwcoBdQGZmZmZmZmBAokW28\u002f3cYUD4U+OlmzxkQA=="},"yaxis":"y","type":"scatter"},{"fillpattern":{"shape":""},"hovertemplate":"segment=AWS\u003cbr\u003e=%{x}\u003cbr\u003eNet sales (US$B)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"AWS","line":{"color":"#e8833a"},"marker":{"symbol":"circle"},"mode":"lines","name":"AWS","orientation":"v","showlegend":true,"stackgroup":"1","x":{"dtype":"i2","bdata":"5QfmB+cH6AfpBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"YOXQItsZT0CgGi\u002fdJAZUQJzEILBysFZA3SQGgZXjWkAzMzMzMxdgQA=="},"yaxis":"y","type":"scatter"}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scattermap":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermap"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"#C8D4E3"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30},"paper_bgcolor":"white","plot_bgcolor":"white","polar":{"angularaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""},"bgcolor":"white","radialaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"yaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"zaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"baxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"bgcolor":"white","caxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":""},"tickvals":[2021,2022,2023,2024,2025]},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Net sales (US$B)"}},"legend":{"title":{"text":"segment"},"tracegroupgap":0},"title":{"text":"Amazon net sales by segment, 2021–2025"},"hovermode":"x unified","height":440},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('c9a24785-0336-4a56-a74a-13b8c204a883');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };            </script>        </div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-revtrend-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Segment revenue, 2021–2025 (US$ billions). Hover for exact values; click legend to isolate a segment.
+</figcaption>
+</figure>
+</div>
+</div>
+<p>Revenue growth is broad-based — every segment is bigger. But revenue is the boring part. Operating income is where the real regime change lives:</p>
+<div id="cell-fig-oitrend" class="cell" data-execution_count="5">
+<div id="fig-oitrend" class="cell-output cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-oitrend-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script>if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.5.0.min.js" integrity="sha256-fHbNLP+GlIXN+efbQec78UkemUz3NJp7UmfGxC1tNxs=" crossorigin="anonymous"></script>                <div id="8ca5a254-3ae1-48ad-a358-276faef233f5" class="plotly-graph-div" style="height:440px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("8ca5a254-3ae1-48ad-a358-276faef233f5")) {                    Plotly.newPlot(                        "8ca5a254-3ae1-48ad-a358-276faef233f5",                        [{"alignmentgroup":"True","hovertemplate":"segment=North America\u003cbr\u003e=%{x}\u003cbr\u003eOperating income (US$B)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"North America","marker":{"color":"#2c6e9b","pattern":{"shape":""}},"name":"North America","offsetgroup":"North America","orientation":"v","showlegend":true,"textposition":"auto","x":{"dtype":"i2","bdata":"5QfmB+cH6AfpBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"L90kBoEVHUAtsp3vp8YGwBsv3SQGwS1AZDvfT433OEBYObTIdp49QA=="},"yaxis":"y","type":"bar"},{"alignmentgroup":"True","hovertemplate":"segment=International\u003cbr\u003e=%{x}\u003cbr\u003eOperating income (US$B)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"International","marker":{"color":"#6aa9c9","pattern":{"shape":""}},"name":"International","offsetgroup":"International","orientation":"v","showlegend":true,"textposition":"auto","x":{"dtype":"i2","bdata":"5QfmB+cH6AfpBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"xSCwcmiR7b+WQ4ts5\u002fsewHNoke18PwXAvHSTGARWDkAAAAAAAAATQA=="},"yaxis":"y","type":"bar"},{"alignmentgroup":"True","hovertemplate":"segment=AWS\u003cbr\u003e=%{x}\u003cbr\u003eOperating income (US$B)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"AWS","marker":{"color":"#e8833a","pattern":{"shape":""}},"name":"AWS","offsetgroup":"AWS","orientation":"v","showlegend":true,"textposition":"auto","x":{"dtype":"i2","bdata":"5QfmB+cH6AfpBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"1XjpJjGIMkCe76fGS9c2QKjGSzeJoThAmG4Sg8DqQ0AhsHJokc1GQA=="},"yaxis":"y","type":"bar"}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scattermap":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermap"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"#C8D4E3"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30},"paper_bgcolor":"white","plot_bgcolor":"white","polar":{"angularaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""},"bgcolor":"white","radialaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"yaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"zaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"baxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"bgcolor":"white","caxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":""},"tickvals":[2021,2022,2023,2024,2025]},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Operating income (US$B)"}},"legend":{"title":{"text":"segment"},"tracegroupgap":0},"title":{"text":"Amazon operating income by segment, 2021–2025"},"barmode":"group","shapes":[{"line":{"color":"black","width":1},"type":"line","x0":0,"x1":1,"xref":"x domain","y0":0,"y1":0,"yref":"y"}],"hovermode":"x unified","height":440},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('8ca5a254-3ae1-48ad-a358-276faef233f5');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };            </script>        </div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-oitrend-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Segment operating income, 2021–2025 (US$ billions). 2022 was a near-death experience for the retail segments.
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="takeaway">
+<p><strong>2022 was brutal for retail.</strong> North America (−$2.8B) and International (−$7.7B) both lost money as Amazon over-built capacity during the pandemic boom and then ate the fixed costs. AWS profit ($22.8B) is the only reason the company stayed comfortably profitable that year. By 2025 retail had recovered, but AWS still earns more than the other two segments <em>combined</em>.</p>
+</div>
+<p>To make the margin story explicit, here are segment <strong>operating margins</strong> — operating income as a percentage of that segment’s own sales:</p>
+<div id="cell-fig-margin" class="cell" data-execution_count="6">
+<div id="fig-margin" class="cell-output cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-margin-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script>if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.5.0.min.js" integrity="sha256-fHbNLP+GlIXN+efbQec78UkemUz3NJp7UmfGxC1tNxs=" crossorigin="anonymous"></script>                <div id="524694e6-0215-478e-a0a7-628326518423" class="plotly-graph-div" style="height:440px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("524694e6-0215-478e-a0a7-628326518423")) {                    Plotly.newPlot(                        "524694e6-0215-478e-a0a7-628326518423",                        [{"hovertemplate":"segment=North America\u003cbr\u003e=%{x}\u003cbr\u003eOperating margin (%)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"North America","line":{"color":"#2c6e9b","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines+markers","name":"North America","orientation":"v","showlegend":true,"x":{"dtype":"i2","bdata":"5QfmB+cH6AfpBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"m6DFFmTJBED7jDuLYdfsvyv3bLmy3RBA0Au2PMjFGUD4cec5l8obQA=="},"yaxis":"y","type":"scatter"},{"hovertemplate":"segment=International\u003cbr\u003e=%{x}\u003cbr\u003eOperating margin (%)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"International","line":{"color":"#6aa9c9","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines+markers","name":"International","orientation":"v","showlegend":true,"x":{"dtype":"i2","bdata":"5QfmB+cH6AfpBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"Z3sg\u002fnQj579LET3GjUEawDI4H4PzMQDAyJhcR1o6BUADuGi43ngHQA=="},"yaxis":"y","type":"scatter"},{"hovertemplate":"segment=AWS\u003cbr\u003e=%{x}\u003cbr\u003eOperating margin (%)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"AWS","line":{"color":"#e8833a","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines+markers","name":"AWS","orientation":"v","showlegend":true,"x":{"dtype":"i2","bdata":"5QfmB+cH6AfpBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"e+KptRLLPUCIsK4MXIQ8QNxUTI+2IztAGnbzPI6EQkA2X4n56bZBQA=="},"yaxis":"y","type":"scatter"}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scattermap":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermap"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"#C8D4E3"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30},"paper_bgcolor":"white","plot_bgcolor":"white","polar":{"angularaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""},"bgcolor":"white","radialaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"yaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"zaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"baxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"bgcolor":"white","caxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":""},"tickvals":[2021,2022,2023,2024,2025]},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Operating margin (%)"}},"legend":{"title":{"text":"segment"},"tracegroupgap":0},"title":{"text":"Operating margin by segment, 2021–2025"},"shapes":[{"line":{"color":"gray","dash":"dot","width":1},"type":"line","x0":0,"x1":1,"xref":"x domain","y0":0,"y1":0,"yref":"y"}],"hovermode":"x unified","height":440},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('524694e6-0215-478e-a0a7-628326518423');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };            </script>        </div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-margin-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Segment operating margin, 2021–2025. AWS operates on a different plane entirely.
+</figcaption>
+</figure>
+</div>
+</div>
+<p>AWS runs at a <strong>~35% operating margin</strong> — software economics. North America has clawed its way to ~7%, and International to ~3%. These are <em>structurally</em> different businesses stapled together.</p>
+</section>
+<section id="what-the-market-did-with-all-this" class="level2">
+<h2 class="anchored" data-anchor-id="what-the-market-did-with-all-this">4. What the market did with all this</h2>
+<div id="cell-fig-stock" class="cell" data-execution_count="7">
+<div id="fig-stock" class="cell-output cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-stock-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script>if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.5.0.min.js" integrity="sha256-fHbNLP+GlIXN+efbQec78UkemUz3NJp7UmfGxC1tNxs=" crossorigin="anonymous"></script>                <div id="9c35698f-572c-4aca-bb56-25880541127f" class="plotly-graph-div" style="height:440px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("9c35698f-572c-4aca-bb56-25880541127f")) {                    Plotly.newPlot(                        "9c35698f-572c-4aca-bb56-25880541127f",                        [{"line":{"color":"#e8833a","width":1.6},"mode":"lines","name":"AMZN close","x":["2021-06-07T00:00:00-04:00","2021-06-08T00:00:00-04:00","2021-06-09T00:00:00-04:00","2021-06-10T00:00:00-04:00","2021-06-11T00:00:00-04:00","2021-06-14T00:00:00-04:00","2021-06-15T00:00:00-04:00","2021-06-16T00:00:00-04:00","2021-06-17T00:00:00-04:00","2021-06-18T00:00:00-04:00","2021-06-21T00:00:00-04:00","2021-06-22T00:00:00-04:00","2021-06-23T00:00:00-04:00","2021-06-24T00:00:00-04:00","2021-06-25T00:00:00-04:00","2021-06-28T00:00:00-04:00","2021-06-29T00:00:00-04:00","2021-06-30T00:00:00-04:00","2021-07-01T00:00:00-04:00","2021-07-02T00:00:00-04:00","2021-07-06T00:00:00-04:00","2021-07-07T00:00:00-04:00","2021-07-08T00:00:00-04:00","2021-07-09T00:00:00-04:00","2021-07-12T00:00:00-04:00","2021-07-13T00:00:00-04:00","2021-07-14T00:00:00-04:00","2021-07-15T00:00:00-04:00","2021-07-16T00:00:00-04:00","2021-07-19T00:00:00-04:00","2021-07-20T00:00:00-04:00","2021-07-21T00:00:00-04:00","2021-07-22T00:00:00-04:00","2021-07-23T00:00:00-04:00","2021-07-26T00:00:00-04:00","2021-07-27T00:00:00-04:00","2021-07-28T00:00:00-04:00","2021-07-29T00:00:00-04:00","2021-07-30T00:00:00-04:00","2021-08-02T00:00:00-04:00","2021-08-03T00:00:00-04:00","2021-08-04T00:00:00-04:00","2021-08-05T00:00:00-04:00","2021-08-06T00:00:00-04:00","2021-08-09T00:00:00-04:00","2021-08-10T00:00:00-04:00","2021-08-11T00:00:00-04:00","2021-08-12T00:00:00-04:00","2021-08-13T00:00:00-04:00","2021-08-16T00:00:00-04:00","2021-08-17T00:00:00-04:00","2021-08-18T00:00:00-04:00","2021-08-19T00:00:00-04:00","2021-08-20T00:00:00-04:00","2021-08-23T00:00:00-04:00","2021-08-24T00:00:00-04:00","2021-08-25T00:00:00-04:00","2021-08-26T00:00:00-04:00","2021-08-27T00:00:00-04:00","2021-08-30T00:00:00-04:00","2021-08-31T00:00:00-04:00","2021-09-01T00:00:00-04:00","2021-09-02T00:00:00-04:00","2021-09-03T00:00:00-04:00","2021-09-07T00:00:00-04:00","2021-09-08T00:00:00-04:00","2021-09-09T00:00:00-04:00","2021-09-10T00:00:00-04:00","2021-09-13T00:00:00-04:00","2021-09-14T00:00:00-04:00","2021-09-15T00:00:00-04:00","2021-09-16T00:00:00-04:00","2021-09-17T00:00:00-04:00","2021-09-20T00:00:00-04:00","2021-09-21T00:00:00-04:00","2021-09-22T00:00:00-04:00","2021-09-23T00:00:00-04:00","2021-09-24T00:00:00-04:00","2021-09-27T00:00:00-04:00","2021-09-28T00:00:00-04:00","2021-09-29T00:00:00-04:00","2021-09-30T00:00:00-04:00","2021-10-01T00:00:00-04:00","2021-10-04T00:00:00-04:00","2021-10-05T00:00:00-04:00","2021-10-06T00:00:00-04:00","2021-10-07T00:00:00-04:00","2021-10-08T00:00:00-04:00","2021-10-11T00:00:00-04:00","2021-10-12T00:00:00-04:00","2021-10-13T00:00:00-04:00","2021-10-14T00:00:00-04:00","2021-10-15T00:00:00-04:00","2021-10-18T00:00:00-04:00","2021-10-19T00:00:00-04:00","2021-10-20T00:00:00-04:00","2021-10-21T00:00:00-04:00","2021-10-22T00:00:00-04:00","2021-10-25T00:00:00-04:00","2021-10-26T00:00:00-04:00","2021-10-27T00:00:00-04:00","2021-10-28T00:00:00-04:00","2021-10-29T00:00:00-04:00","2021-11-01T00:00:00-04:00","2021-11-02T00:00:00-04:00","2021-11-03T00:00:00-04:00","2021-11-04T00:00:00-04:00","2021-11-05T00:00:00-04:00","2021-11-08T00:00:00-05:00","2021-11-09T00:00:00-05:00","2021-11-10T00:00:00-05:00","2021-11-11T00:00:00-05:00","2021-11-12T00:00:00-05:00","2021-11-15T00:00:00-05:00","2021-11-16T00:00:00-05:00","2021-11-17T00:00:00-05:00","2021-11-18T00:00:00-05:00","2021-11-19T00:00:00-05:00","2021-11-22T00:00:00-05:00","2021-11-23T00:00:00-05:00","2021-11-24T00:00:00-05:00","2021-11-26T00:00:00-05:00","2021-11-29T00:00:00-05:00","2021-11-30T00:00:00-05:00","2021-12-01T00:00:00-05:00","2021-12-02T00:00:00-05:00","2021-12-03T00:00:00-05:00","2021-12-06T00:00:00-05:00","2021-12-07T00:00:00-05:00","2021-12-08T00:00:00-05:00","2021-12-09T00:00:00-05:00","2021-12-10T00:00:00-05:00","2021-12-13T00:00:00-05:00","2021-12-14T00:00:00-05:00","2021-12-15T00:00:00-05:00","2021-12-16T00:00:00-05:00","2021-12-17T00:00:00-05:00","2021-12-20T00:00:00-05:00","2021-12-21T00:00:00-05:00","2021-12-22T00:00:00-05:00","2021-12-23T00:00:00-05:00","2021-12-27T00:00:00-05:00","2021-12-28T00:00:00-05:00","2021-12-29T00:00:00-05:00","2021-12-30T00:00:00-05:00","2021-12-31T00:00:00-05:00","2022-01-03T00:00:00-05:00","2022-01-04T00:00:00-05:00","2022-01-05T00:00:00-05:00","2022-01-06T00:00:00-05:00","2022-01-07T00:00:00-05:00","2022-01-10T00:00:00-05:00","2022-01-11T00:00:00-05:00","2022-01-12T00:00:00-05:00","2022-01-13T00:00:00-05:00","2022-01-14T00:00:00-05:00","2022-01-18T00:00:00-05:00","2022-01-19T00:00:00-05:00","2022-01-20T00:00:00-05:00","2022-01-21T00:00:00-05:00","2022-01-24T00:00:00-05:00","2022-01-25T00:00:00-05:00","2022-01-26T00:00:00-05:00","2022-01-27T00:00:00-05:00","2022-01-28T00:00:00-05:00","2022-01-31T00:00:00-05:00","2022-02-01T00:00:00-05:00","2022-02-02T00:00:00-05:00","2022-02-03T00:00:00-05:00","2022-02-04T00:00:00-05:00","2022-02-07T00:00:00-05:00","2022-02-08T00:00:00-05:00","2022-02-09T00:00:00-05:00","2022-02-10T00:00:00-05:00","2022-02-11T00:00:00-05:00","2022-02-14T00:00:00-05:00","2022-02-15T00:00:00-05:00","2022-02-16T00:00:00-05:00","2022-02-17T00:00:00-05:00","2022-02-18T00:00:00-05:00","2022-02-22T00:00:00-05:00","2022-02-23T00:00:00-05:00","2022-02-24T00:00:00-05:00","2022-02-25T00:00:00-05:00","2022-02-28T00:00:00-05:00","2022-03-01T00:00:00-05:00","2022-03-02T00:00:00-05:00","2022-03-03T00:00:00-05:00","2022-03-04T00:00:00-05:00","2022-03-07T00:00:00-05:00","2022-03-08T00:00:00-05:00","2022-03-09T00:00:00-05:00","2022-03-10T00:00:00-05:00","2022-03-11T00:00:00-05:00","2022-03-14T00:00:00-04:00","2022-03-15T00:00:00-04:00","2022-03-16T00:00:00-04:00","2022-03-17T00:00:00-04:00","2022-03-18T00:00:00-04:00","2022-03-21T00:00:00-04:00","2022-03-22T00:00:00-04:00","2022-03-23T00:00:00-04:00","2022-03-24T00:00:00-04:00","2022-03-25T00:00:00-04:00","2022-03-28T00:00:00-04:00","2022-03-29T00:00:00-04:00","2022-03-30T00:00:00-04:00","2022-03-31T00:00:00-04:00","2022-04-01T00:00:00-04:00","2022-04-04T00:00:00-04:00","2022-04-05T00:00:00-04:00","2022-04-06T00:00:00-04:00","2022-04-07T00:00:00-04:00","2022-04-08T00:00:00-04:00","2022-04-11T00:00:00-04:00","2022-04-12T00:00:00-04:00","2022-04-13T00:00:00-04:00","2022-04-14T00:00:00-04:00","2022-04-18T00:00:00-04:00","2022-04-19T00:00:00-04:00","2022-04-20T00:00:00-04:00","2022-04-21T00:00:00-04:00","2022-04-22T00:00:00-04:00","2022-04-25T00:00:00-04:00","2022-04-26T00:00:00-04:00","2022-04-27T00:00:00-04:00","2022-04-28T00:00:00-04:00","2022-04-29T00:00:00-04:00","2022-05-02T00:00:00-04:00","2022-05-03T00:00:00-04:00","2022-05-04T00:00:00-04:00","2022-05-05T00:00:00-04:00","2022-05-06T00:00:00-04:00","2022-05-09T00:00:00-04:00","2022-05-10T00:00:00-04:00","2022-05-11T00:00:00-04:00","2022-05-12T00:00:00-04:00","2022-05-13T00:00:00-04:00","2022-05-16T00:00:00-04:00","2022-05-17T00:00:00-04:00","2022-05-18T00:00:00-04:00","2022-05-19T00:00:00-04:00","2022-05-20T00:00:00-04:00","2022-05-23T00:00:00-04:00","2022-05-24T00:00:00-04:00","2022-05-25T00:00:00-04:00","2022-05-26T00:00:00-04:00","2022-05-27T00:00:00-04:00","2022-05-31T00:00:00-04:00","2022-06-01T00:00:00-04:00","2022-06-02T00:00:00-04:00","2022-06-03T00:00:00-04:00","2022-06-06T00:00:00-04:00","2022-06-07T00:00:00-04:00","2022-06-08T00:00:00-04:00","2022-06-09T00:00:00-04:00","2022-06-10T00:00:00-04:00","2022-06-13T00:00:00-04:00","2022-06-14T00:00:00-04:00","2022-06-15T00:00:00-04:00","2022-06-16T00:00:00-04:00","2022-06-17T00:00:00-04:00","2022-06-21T00:00:00-04:00","2022-06-22T00:00:00-04:00","2022-06-23T00:00:00-04:00","2022-06-24T00:00:00-04:00","2022-06-27T00:00:00-04:00","2022-06-28T00:00:00-04:00","2022-06-29T00:00:00-04:00","2022-06-30T00:00:00-04:00","2022-07-01T00:00:00-04:00","2022-07-05T00:00:00-04:00","2022-07-06T00:00:00-04:00","2022-07-07T00:00:00-04:00","2022-07-08T00:00:00-04:00","2022-07-11T00:00:00-04:00","2022-07-12T00:00:00-04:00","2022-07-13T00:00:00-04:00","2022-07-14T00:00:00-04:00","2022-07-15T00:00:00-04:00","2022-07-18T00:00:00-04:00","2022-07-19T00:00:00-04:00","2022-07-20T00:00:00-04:00","2022-07-21T00:00:00-04:00","2022-07-22T00:00:00-04:00","2022-07-25T00:00:00-04:00","2022-07-26T00:00:00-04:00","2022-07-27T00:00:00-04:00","2022-07-28T00:00:00-04:00","2022-07-29T00:00:00-04:00","2022-08-01T00:00:00-04:00","2022-08-02T00:00:00-04:00","2022-08-03T00:00:00-04:00","2022-08-04T00:00:00-04:00","2022-08-05T00:00:00-04:00","2022-08-08T00:00:00-04:00","2022-08-09T00:00:00-04:00","2022-08-10T00:00:00-04:00","2022-08-11T00:00:00-04:00","2022-08-12T00:00:00-04:00","2022-08-15T00:00:00-04:00","2022-08-16T00:00:00-04:00","2022-08-17T00:00:00-04:00","2022-08-18T00:00:00-04:00","2022-08-19T00:00:00-04:00","2022-08-22T00:00:00-04:00","2022-08-23T00:00:00-04:00","2022-08-24T00:00:00-04:00","2022-08-25T00:00:00-04:00","2022-08-26T00:00:00-04:00","2022-08-29T00:00:00-04:00","2022-08-30T00:00:00-04:00","2022-08-31T00:00:00-04:00","2022-09-01T00:00:00-04:00","2022-09-02T00:00:00-04:00","2022-09-06T00:00:00-04:00","2022-09-07T00:00:00-04:00","2022-09-08T00:00:00-04:00","2022-09-09T00:00:00-04:00","2022-09-12T00:00:00-04:00","2022-09-13T00:00:00-04:00","2022-09-14T00:00:00-04:00","2022-09-15T00:00:00-04:00","2022-09-16T00:00:00-04:00","2022-09-19T00:00:00-04:00","2022-09-20T00:00:00-04:00","2022-09-21T00:00:00-04:00","2022-09-22T00:00:00-04:00","2022-09-23T00:00:00-04:00","2022-09-26T00:00:00-04:00","2022-09-27T00:00:00-04:00","2022-09-28T00:00:00-04:00","2022-09-29T00:00:00-04:00","2022-09-30T00:00:00-04:00","2022-10-03T00:00:00-04:00","2022-10-04T00:00:00-04:00","2022-10-05T00:00:00-04:00","2022-10-06T00:00:00-04:00","2022-10-07T00:00:00-04:00","2022-10-10T00:00:00-04:00","2022-10-11T00:00:00-04:00","2022-10-12T00:00:00-04:00","2022-10-13T00:00:00-04:00","2022-10-14T00:00:00-04:00","2022-10-17T00:00:00-04:00","2022-10-18T00:00:00-04:00","2022-10-19T00:00:00-04:00","2022-10-20T00:00:00-04:00","2022-10-21T00:00:00-04:00","2022-10-24T00:00:00-04:00","2022-10-25T00:00:00-04:00","2022-10-26T00:00:00-04:00","2022-10-27T00:00:00-04:00","2022-10-28T00:00:00-04:00","2022-10-31T00:00:00-04:00","2022-11-01T00:00:00-04:00","2022-11-02T00:00:00-04:00","2022-11-03T00:00:00-04:00","2022-11-04T00:00:00-04:00","2022-11-07T00:00:00-05:00","2022-11-08T00:00:00-05:00","2022-11-09T00:00:00-05:00","2022-11-10T00:00:00-05:00","2022-11-11T00:00:00-05:00","2022-11-14T00:00:00-05:00","2022-11-15T00:00:00-05:00","2022-11-16T00:00:00-05:00","2022-11-17T00:00:00-05:00","2022-11-18T00:00:00-05:00","2022-11-21T00:00:00-05:00","2022-11-22T00:00:00-05:00","2022-11-23T00:00:00-05:00","2022-11-25T00:00:00-05:00","2022-11-28T00:00:00-05:00","2022-11-29T00:00:00-05:00","2022-11-30T00:00:00-05:00","2022-12-01T00:00:00-05:00","2022-12-02T00:00:00-05:00","2022-12-05T00:00:00-05:00","2022-12-06T00:00:00-05:00","2022-12-07T00:00:00-05:00","2022-12-08T00:00:00-05:00","2022-12-09T00:00:00-05:00","2022-12-12T00:00:00-05:00","2022-12-13T00:00:00-05:00","2022-12-14T00:00:00-05:00","2022-12-15T00:00:00-05:00","2022-12-16T00:00:00-05:00","2022-12-19T00:00:00-05:00","2022-12-20T00:00:00-05:00","2022-12-21T00:00:00-05:00","2022-12-22T00:00:00-05:00","2022-12-23T00:00:00-05:00","2022-12-27T00:00:00-05:00","2022-12-28T00:00:00-05:00","2022-12-29T00:00:00-05:00","2022-12-30T00:00:00-05:00","2023-01-03T00:00:00-05:00","2023-01-04T00:00:00-05:00","2023-01-05T00:00:00-05:00","2023-01-06T00:00:00-05:00","2023-01-09T00:00:00-05:00","2023-01-10T00:00:00-05:00","2023-01-11T00:00:00-05:00","2023-01-12T00:00:00-05:00","2023-01-13T00:00:00-05:00","2023-01-17T00:00:00-05:00","2023-01-18T00:00:00-05:00","2023-01-19T00:00:00-05:00","2023-01-20T00:00:00-05:00","2023-01-23T00:00:00-05:00","2023-01-24T00:00:00-05:00","2023-01-25T00:00:00-05:00","2023-01-26T00:00:00-05:00","2023-01-27T00:00:00-05:00","2023-01-30T00:00:00-05:00","2023-01-31T00:00:00-05:00","2023-02-01T00:00:00-05:00","2023-02-02T00:00:00-05:00","2023-02-03T00:00:00-05:00","2023-02-06T00:00:00-05:00","2023-02-07T00:00:00-05:00","2023-02-08T00:00:00-05:00","2023-02-09T00:00:00-05:00","2023-02-10T00:00:00-05:00","2023-02-13T00:00:00-05:00","2023-02-14T00:00:00-05:00","2023-02-15T00:00:00-05:00","2023-02-16T00:00:00-05:00","2023-02-17T00:00:00-05:00","2023-02-21T00:00:00-05:00","2023-02-22T00:00:00-05:00","2023-02-23T00:00:00-05:00","2023-02-24T00:00:00-05:00","2023-02-27T00:00:00-05:00","2023-02-28T00:00:00-05:00","2023-03-01T00:00:00-05:00","2023-03-02T00:00:00-05:00","2023-03-03T00:00:00-05:00","2023-03-06T00:00:00-05:00","2023-03-07T00:00:00-05:00","2023-03-08T00:00:00-05:00","2023-03-09T00:00:00-05:00","2023-03-10T00:00:00-05:00","2023-03-13T00:00:00-04:00","2023-03-14T00:00:00-04:00","2023-03-15T00:00:00-04:00","2023-03-16T00:00:00-04:00","2023-03-17T00:00:00-04:00","2023-03-20T00:00:00-04:00","2023-03-21T00:00:00-04:00","2023-03-22T00:00:00-04:00","2023-03-23T00:00:00-04:00","2023-03-24T00:00:00-04:00","2023-03-27T00:00:00-04:00","2023-03-28T00:00:00-04:00","2023-03-29T00:00:00-04:00","2023-03-30T00:00:00-04:00","2023-03-31T00:00:00-04:00","2023-04-03T00:00:00-04:00","2023-04-04T00:00:00-04:00","2023-04-05T00:00:00-04:00","2023-04-06T00:00:00-04:00","2023-04-10T00:00:00-04:00","2023-04-11T00:00:00-04:00","2023-04-12T00:00:00-04:00","2023-04-13T00:00:00-04:00","2023-04-14T00:00:00-04:00","2023-04-17T00:00:00-04:00","2023-04-18T00:00:00-04:00","2023-04-19T00:00:00-04:00","2023-04-20T00:00:00-04:00","2023-04-21T00:00:00-04:00","2023-04-24T00:00:00-04:00","2023-04-25T00:00:00-04:00","2023-04-26T00:00:00-04:00","2023-04-27T00:00:00-04:00","2023-04-28T00:00:00-04:00","2023-05-01T00:00:00-04:00","2023-05-02T00:00:00-04:00","2023-05-03T00:00:00-04:00","2023-05-04T00:00:00-04:00","2023-05-05T00:00:00-04:00","2023-05-08T00:00:00-04:00","2023-05-09T00:00:00-04:00","2023-05-10T00:00:00-04:00","2023-05-11T00:00:00-04:00","2023-05-12T00:00:00-04:00","2023-05-15T00:00:00-04:00","2023-05-16T00:00:00-04:00","2023-05-17T00:00:00-04:00","2023-05-18T00:00:00-04:00","2023-05-19T00:00:00-04:00","2023-05-22T00:00:00-04:00","2023-05-23T00:00:00-04:00","2023-05-24T00:00:00-04:00","2023-05-25T00:00:00-04:00","2023-05-26T00:00:00-04:00","2023-05-30T00:00:00-04:00","2023-05-31T00:00:00-04:00","2023-06-01T00:00:00-04:00","2023-06-02T00:00:00-04:00","2023-06-05T00:00:00-04:00","2023-06-06T00:00:00-04:00","2023-06-07T00:00:00-04:00","2023-06-08T00:00:00-04:00","2023-06-09T00:00:00-04:00","2023-06-12T00:00:00-04:00","2023-06-13T00:00:00-04:00","2023-06-14T00:00:00-04:00","2023-06-15T00:00:00-04:00","2023-06-16T00:00:00-04:00","2023-06-20T00:00:00-04:00","2023-06-21T00:00:00-04:00","2023-06-22T00:00:00-04:00","2023-06-23T00:00:00-04:00","2023-06-26T00:00:00-04:00","2023-06-27T00:00:00-04:00","2023-06-28T00:00:00-04:00","2023-06-29T00:00:00-04:00","2023-06-30T00:00:00-04:00","2023-07-03T00:00:00-04:00","2023-07-05T00:00:00-04:00","2023-07-06T00:00:00-04:00","2023-07-07T00:00:00-04:00","2023-07-10T00:00:00-04:00","2023-07-11T00:00:00-04:00","2023-07-12T00:00:00-04:00","2023-07-13T00:00:00-04:00","2023-07-14T00:00:00-04:00","2023-07-17T00:00:00-04:00","2023-07-18T00:00:00-04:00","2023-07-19T00:00:00-04:00","2023-07-20T00:00:00-04:00","2023-07-21T00:00:00-04:00","2023-07-24T00:00:00-04:00","2023-07-25T00:00:00-04:00","2023-07-26T00:00:00-04:00","2023-07-27T00:00:00-04:00","2023-07-28T00:00:00-04:00","2023-07-31T00:00:00-04:00","2023-08-01T00:00:00-04:00","2023-08-02T00:00:00-04:00","2023-08-03T00:00:00-04:00","2023-08-04T00:00:00-04:00","2023-08-07T00:00:00-04:00","2023-08-08T00:00:00-04:00","2023-08-09T00:00:00-04:00","2023-08-10T00:00:00-04:00","2023-08-11T00:00:00-04:00","2023-08-14T00:00:00-04:00","2023-08-15T00:00:00-04:00","2023-08-16T00:00:00-04:00","2023-08-17T00:00:00-04:00","2023-08-18T00:00:00-04:00","2023-08-21T00:00:00-04:00","2023-08-22T00:00:00-04:00","2023-08-23T00:00:00-04:00","2023-08-24T00:00:00-04:00","2023-08-25T00:00:00-04:00","2023-08-28T00:00:00-04:00","2023-08-29T00:00:00-04:00","2023-08-30T00:00:00-04:00","2023-08-31T00:00:00-04:00","2023-09-01T00:00:00-04:00","2023-09-05T00:00:00-04:00","2023-09-06T00:00:00-04:00","2023-09-07T00:00:00-04:00","2023-09-08T00:00:00-04:00","2023-09-11T00:00:00-04:00","2023-09-12T00:00:00-04:00","2023-09-13T00:00:00-04:00","2023-09-14T00:00:00-04:00","2023-09-15T00:00:00-04:00","2023-09-18T00:00:00-04:00","2023-09-19T00:00:00-04:00","2023-09-20T00:00:00-04:00","2023-09-21T00:00:00-04:00","2023-09-22T00:00:00-04:00","2023-09-25T00:00:00-04:00","2023-09-26T00:00:00-04:00","2023-09-27T00:00:00-04:00","2023-09-28T00:00:00-04:00","2023-09-29T00:00:00-04:00","2023-10-02T00:00:00-04:00","2023-10-03T00:00:00-04:00","2023-10-04T00:00:00-04:00","2023-10-05T00:00:00-04:00","2023-10-06T00:00:00-04:00","2023-10-09T00:00:00-04:00","2023-10-10T00:00:00-04:00","2023-10-11T00:00:00-04:00","2023-10-12T00:00:00-04:00","2023-10-13T00:00:00-04:00","2023-10-16T00:00:00-04:00","2023-10-17T00:00:00-04:00","2023-10-18T00:00:00-04:00","2023-10-19T00:00:00-04:00","2023-10-20T00:00:00-04:00","2023-10-23T00:00:00-04:00","2023-10-24T00:00:00-04:00","2023-10-25T00:00:00-04:00","2023-10-26T00:00:00-04:00","2023-10-27T00:00:00-04:00","2023-10-30T00:00:00-04:00","2023-10-31T00:00:00-04:00","2023-11-01T00:00:00-04:00","2023-11-02T00:00:00-04:00","2023-11-03T00:00:00-04:00","2023-11-06T00:00:00-05:00","2023-11-07T00:00:00-05:00","2023-11-08T00:00:00-05:00","2023-11-09T00:00:00-05:00","2023-11-10T00:00:00-05:00","2023-11-13T00:00:00-05:00","2023-11-14T00:00:00-05:00","2023-11-15T00:00:00-05:00","2023-11-16T00:00:00-05:00","2023-11-17T00:00:00-05:00","2023-11-20T00:00:00-05:00","2023-11-21T00:00:00-05:00","2023-11-22T00:00:00-05:00","2023-11-24T00:00:00-05:00","2023-11-27T00:00:00-05:00","2023-11-28T00:00:00-05:00","2023-11-29T00:00:00-05:00","2023-11-30T00:00:00-05:00","2023-12-01T00:00:00-05:00","2023-12-04T00:00:00-05:00","2023-12-05T00:00:00-05:00","2023-12-06T00:00:00-05:00","2023-12-07T00:00:00-05:00","2023-12-08T00:00:00-05:00","2023-12-11T00:00:00-05:00","2023-12-12T00:00:00-05:00","2023-12-13T00:00:00-05:00","2023-12-14T00:00:00-05:00","2023-12-15T00:00:00-05:00","2023-12-18T00:00:00-05:00","2023-12-19T00:00:00-05:00","2023-12-20T00:00:00-05:00","2023-12-21T00:00:00-05:00","2023-12-22T00:00:00-05:00","2023-12-26T00:00:00-05:00","2023-12-27T00:00:00-05:00","2023-12-28T00:00:00-05:00","2023-12-29T00:00:00-05:00","2024-01-02T00:00:00-05:00","2024-01-03T00:00:00-05:00","2024-01-04T00:00:00-05:00","2024-01-05T00:00:00-05:00","2024-01-08T00:00:00-05:00","2024-01-09T00:00:00-05:00","2024-01-10T00:00:00-05:00","2024-01-11T00:00:00-05:00","2024-01-12T00:00:00-05:00","2024-01-16T00:00:00-05:00","2024-01-17T00:00:00-05:00","2024-01-18T00:00:00-05:00","2024-01-19T00:00:00-05:00","2024-01-22T00:00:00-05:00","2024-01-23T00:00:00-05:00","2024-01-24T00:00:00-05:00","2024-01-25T00:00:00-05:00","2024-01-26T00:00:00-05:00","2024-01-29T00:00:00-05:00","2024-01-30T00:00:00-05:00","2024-01-31T00:00:00-05:00","2024-02-01T00:00:00-05:00","2024-02-02T00:00:00-05:00","2024-02-05T00:00:00-05:00","2024-02-06T00:00:00-05:00","2024-02-07T00:00:00-05:00","2024-02-08T00:00:00-05:00","2024-02-09T00:00:00-05:00","2024-02-12T00:00:00-05:00","2024-02-13T00:00:00-05:00","2024-02-14T00:00:00-05:00","2024-02-15T00:00:00-05:00","2024-02-16T00:00:00-05:00","2024-02-20T00:00:00-05:00","2024-02-21T00:00:00-05:00","2024-02-22T00:00:00-05:00","2024-02-23T00:00:00-05:00","2024-02-26T00:00:00-05:00","2024-02-27T00:00:00-05:00","2024-02-28T00:00:00-05:00","2024-02-29T00:00:00-05:00","2024-03-01T00:00:00-05:00","2024-03-04T00:00:00-05:00","2024-03-05T00:00:00-05:00","2024-03-06T00:00:00-05:00","2024-03-07T00:00:00-05:00","2024-03-08T00:00:00-05:00","2024-03-11T00:00:00-04:00","2024-03-12T00:00:00-04:00","2024-03-13T00:00:00-04:00","2024-03-14T00:00:00-04:00","2024-03-15T00:00:00-04:00","2024-03-18T00:00:00-04:00","2024-03-19T00:00:00-04:00","2024-03-20T00:00:00-04:00","2024-03-21T00:00:00-04:00","2024-03-22T00:00:00-04:00","2024-03-25T00:00:00-04:00","2024-03-26T00:00:00-04:00","2024-03-27T00:00:00-04:00","2024-03-28T00:00:00-04:00","2024-04-01T00:00:00-04:00","2024-04-02T00:00:00-04:00","2024-04-03T00:00:00-04:00","2024-04-04T00:00:00-04:00","2024-04-05T00:00:00-04:00","2024-04-08T00:00:00-04:00","2024-04-09T00:00:00-04:00","2024-04-10T00:00:00-04:00","2024-04-11T00:00:00-04:00","2024-04-12T00:00:00-04:00","2024-04-15T00:00:00-04:00","2024-04-16T00:00:00-04:00","2024-04-17T00:00:00-04:00","2024-04-18T00:00:00-04:00","2024-04-19T00:00:00-04:00","2024-04-22T00:00:00-04:00","2024-04-23T00:00:00-04:00","2024-04-24T00:00:00-04:00","2024-04-25T00:00:00-04:00","2024-04-26T00:00:00-04:00","2024-04-29T00:00:00-04:00","2024-04-30T00:00:00-04:00","2024-05-01T00:00:00-04:00","2024-05-02T00:00:00-04:00","2024-05-03T00:00:00-04:00","2024-05-06T00:00:00-04:00","2024-05-07T00:00:00-04:00","2024-05-08T00:00:00-04:00","2024-05-09T00:00:00-04:00","2024-05-10T00:00:00-04:00","2024-05-13T00:00:00-04:00","2024-05-14T00:00:00-04:00","2024-05-15T00:00:00-04:00","2024-05-16T00:00:00-04:00","2024-05-17T00:00:00-04:00","2024-05-20T00:00:00-04:00","2024-05-21T00:00:00-04:00","2024-05-22T00:00:00-04:00","2024-05-23T00:00:00-04:00","2024-05-24T00:00:00-04:00","2024-05-28T00:00:00-04:00","2024-05-29T00:00:00-04:00","2024-05-30T00:00:00-04:00","2024-05-31T00:00:00-04:00","2024-06-03T00:00:00-04:00","2024-06-04T00:00:00-04:00","2024-06-05T00:00:00-04:00","2024-06-06T00:00:00-04:00","2024-06-07T00:00:00-04:00","2024-06-10T00:00:00-04:00","2024-06-11T00:00:00-04:00","2024-06-12T00:00:00-04:00","2024-06-13T00:00:00-04:00","2024-06-14T00:00:00-04:00","2024-06-17T00:00:00-04:00","2024-06-18T00:00:00-04:00","2024-06-20T00:00:00-04:00","2024-06-21T00:00:00-04:00","2024-06-24T00:00:00-04:00","2024-06-25T00:00:00-04:00","2024-06-26T00:00:00-04:00","2024-06-27T00:00:00-04:00","2024-06-28T00:00:00-04:00","2024-07-01T00:00:00-04:00","2024-07-02T00:00:00-04:00","2024-07-03T00:00:00-04:00","2024-07-05T00:00:00-04:00","2024-07-08T00:00:00-04:00","2024-07-09T00:00:00-04:00","2024-07-10T00:00:00-04:00","2024-07-11T00:00:00-04:00","2024-07-12T00:00:00-04:00","2024-07-15T00:00:00-04:00","2024-07-16T00:00:00-04:00","2024-07-17T00:00:00-04:00","2024-07-18T00:00:00-04:00","2024-07-19T00:00:00-04:00","2024-07-22T00:00:00-04:00","2024-07-23T00:00:00-04:00","2024-07-24T00:00:00-04:00","2024-07-25T00:00:00-04:00","2024-07-26T00:00:00-04:00","2024-07-29T00:00:00-04:00","2024-07-30T00:00:00-04:00","2024-07-31T00:00:00-04:00","2024-08-01T00:00:00-04:00","2024-08-02T00:00:00-04:00","2024-08-05T00:00:00-04:00","2024-08-06T00:00:00-04:00","2024-08-07T00:00:00-04:00","2024-08-08T00:00:00-04:00","2024-08-09T00:00:00-04:00","2024-08-12T00:00:00-04:00","2024-08-13T00:00:00-04:00","2024-08-14T00:00:00-04:00","2024-08-15T00:00:00-04:00","2024-08-16T00:00:00-04:00","2024-08-19T00:00:00-04:00","2024-08-20T00:00:00-04:00","2024-08-21T00:00:00-04:00","2024-08-22T00:00:00-04:00","2024-08-23T00:00:00-04:00","2024-08-26T00:00:00-04:00","2024-08-27T00:00:00-04:00","2024-08-28T00:00:00-04:00","2024-08-29T00:00:00-04:00","2024-08-30T00:00:00-04:00","2024-09-03T00:00:00-04:00","2024-09-04T00:00:00-04:00","2024-09-05T00:00:00-04:00","2024-09-06T00:00:00-04:00","2024-09-09T00:00:00-04:00","2024-09-10T00:00:00-04:00","2024-09-11T00:00:00-04:00","2024-09-12T00:00:00-04:00","2024-09-13T00:00:00-04:00","2024-09-16T00:00:00-04:00","2024-09-17T00:00:00-04:00","2024-09-18T00:00:00-04:00","2024-09-19T00:00:00-04:00","2024-09-20T00:00:00-04:00","2024-09-23T00:00:00-04:00","2024-09-24T00:00:00-04:00","2024-09-25T00:00:00-04:00","2024-09-26T00:00:00-04:00","2024-09-27T00:00:00-04:00","2024-09-30T00:00:00-04:00","2024-10-01T00:00:00-04:00","2024-10-02T00:00:00-04:00","2024-10-03T00:00:00-04:00","2024-10-04T00:00:00-04:00","2024-10-07T00:00:00-04:00","2024-10-08T00:00:00-04:00","2024-10-09T00:00:00-04:00","2024-10-10T00:00:00-04:00","2024-10-11T00:00:00-04:00","2024-10-14T00:00:00-04:00","2024-10-15T00:00:00-04:00","2024-10-16T00:00:00-04:00","2024-10-17T00:00:00-04:00","2024-10-18T00:00:00-04:00","2024-10-21T00:00:00-04:00","2024-10-22T00:00:00-04:00","2024-10-23T00:00:00-04:00","2024-10-24T00:00:00-04:00","2024-10-25T00:00:00-04:00","2024-10-28T00:00:00-04:00","2024-10-29T00:00:00-04:00","2024-10-30T00:00:00-04:00","2024-10-31T00:00:00-04:00","2024-11-01T00:00:00-04:00","2024-11-04T00:00:00-05:00","2024-11-05T00:00:00-05:00","2024-11-06T00:00:00-05:00","2024-11-07T00:00:00-05:00","2024-11-08T00:00:00-05:00","2024-11-11T00:00:00-05:00","2024-11-12T00:00:00-05:00","2024-11-13T00:00:00-05:00","2024-11-14T00:00:00-05:00","2024-11-15T00:00:00-05:00","2024-11-18T00:00:00-05:00","2024-11-19T00:00:00-05:00","2024-11-20T00:00:00-05:00","2024-11-21T00:00:00-05:00","2024-11-22T00:00:00-05:00","2024-11-25T00:00:00-05:00","2024-11-26T00:00:00-05:00","2024-11-27T00:00:00-05:00","2024-11-29T00:00:00-05:00","2024-12-02T00:00:00-05:00","2024-12-03T00:00:00-05:00","2024-12-04T00:00:00-05:00","2024-12-05T00:00:00-05:00","2024-12-06T00:00:00-05:00","2024-12-09T00:00:00-05:00","2024-12-10T00:00:00-05:00","2024-12-11T00:00:00-05:00","2024-12-12T00:00:00-05:00","2024-12-13T00:00:00-05:00","2024-12-16T00:00:00-05:00","2024-12-17T00:00:00-05:00","2024-12-18T00:00:00-05:00","2024-12-19T00:00:00-05:00","2024-12-20T00:00:00-05:00","2024-12-23T00:00:00-05:00","2024-12-24T00:00:00-05:00","2024-12-26T00:00:00-05:00","2024-12-27T00:00:00-05:00","2024-12-30T00:00:00-05:00","2024-12-31T00:00:00-05:00","2025-01-02T00:00:00-05:00","2025-01-03T00:00:00-05:00","2025-01-06T00:00:00-05:00","2025-01-07T00:00:00-05:00","2025-01-08T00:00:00-05:00","2025-01-10T00:00:00-05:00","2025-01-13T00:00:00-05:00","2025-01-14T00:00:00-05:00","2025-01-15T00:00:00-05:00","2025-01-16T00:00:00-05:00","2025-01-17T00:00:00-05:00","2025-01-21T00:00:00-05:00","2025-01-22T00:00:00-05:00","2025-01-23T00:00:00-05:00","2025-01-24T00:00:00-05:00","2025-01-27T00:00:00-05:00","2025-01-28T00:00:00-05:00","2025-01-29T00:00:00-05:00","2025-01-30T00:00:00-05:00","2025-01-31T00:00:00-05:00","2025-02-03T00:00:00-05:00","2025-02-04T00:00:00-05:00","2025-02-05T00:00:00-05:00","2025-02-06T00:00:00-05:00","2025-02-07T00:00:00-05:00","2025-02-10T00:00:00-05:00","2025-02-11T00:00:00-05:00","2025-02-12T00:00:00-05:00","2025-02-13T00:00:00-05:00","2025-02-14T00:00:00-05:00","2025-02-18T00:00:00-05:00","2025-02-19T00:00:00-05:00","2025-02-20T00:00:00-05:00","2025-02-21T00:00:00-05:00","2025-02-24T00:00:00-05:00","2025-02-25T00:00:00-05:00","2025-02-26T00:00:00-05:00","2025-02-27T00:00:00-05:00","2025-02-28T00:00:00-05:00","2025-03-03T00:00:00-05:00","2025-03-04T00:00:00-05:00","2025-03-05T00:00:00-05:00","2025-03-06T00:00:00-05:00","2025-03-07T00:00:00-05:00","2025-03-10T00:00:00-04:00","2025-03-11T00:00:00-04:00","2025-03-12T00:00:00-04:00","2025-03-13T00:00:00-04:00","2025-03-14T00:00:00-04:00","2025-03-17T00:00:00-04:00","2025-03-18T00:00:00-04:00","2025-03-19T00:00:00-04:00","2025-03-20T00:00:00-04:00","2025-03-21T00:00:00-04:00","2025-03-24T00:00:00-04:00","2025-03-25T00:00:00-04:00","2025-03-26T00:00:00-04:00","2025-03-27T00:00:00-04:00","2025-03-28T00:00:00-04:00","2025-03-31T00:00:00-04:00","2025-04-01T00:00:00-04:00","2025-04-02T00:00:00-04:00","2025-04-03T00:00:00-04:00","2025-04-04T00:00:00-04:00","2025-04-07T00:00:00-04:00","2025-04-08T00:00:00-04:00","2025-04-09T00:00:00-04:00","2025-04-10T00:00:00-04:00","2025-04-11T00:00:00-04:00","2025-04-14T00:00:00-04:00","2025-04-15T00:00:00-04:00","2025-04-16T00:00:00-04:00","2025-04-17T00:00:00-04:00","2025-04-21T00:00:00-04:00","2025-04-22T00:00:00-04:00","2025-04-23T00:00:00-04:00","2025-04-24T00:00:00-04:00","2025-04-25T00:00:00-04:00","2025-04-28T00:00:00-04:00","2025-04-29T00:00:00-04:00","2025-04-30T00:00:00-04:00","2025-05-01T00:00:00-04:00","2025-05-02T00:00:00-04:00","2025-05-05T00:00:00-04:00","2025-05-06T00:00:00-04:00","2025-05-07T00:00:00-04:00","2025-05-08T00:00:00-04:00","2025-05-09T00:00:00-04:00","2025-05-12T00:00:00-04:00","2025-05-13T00:00:00-04:00","2025-05-14T00:00:00-04:00","2025-05-15T00:00:00-04:00","2025-05-16T00:00:00-04:00","2025-05-19T00:00:00-04:00","2025-05-20T00:00:00-04:00","2025-05-21T00:00:00-04:00","2025-05-22T00:00:00-04:00","2025-05-23T00:00:00-04:00","2025-05-27T00:00:00-04:00","2025-05-28T00:00:00-04:00","2025-05-29T00:00:00-04:00","2025-05-30T00:00:00-04:00","2025-06-02T00:00:00-04:00","2025-06-03T00:00:00-04:00","2025-06-04T00:00:00-04:00","2025-06-05T00:00:00-04:00","2025-06-06T00:00:00-04:00","2025-06-09T00:00:00-04:00","2025-06-10T00:00:00-04:00","2025-06-11T00:00:00-04:00","2025-06-12T00:00:00-04:00","2025-06-13T00:00:00-04:00","2025-06-16T00:00:00-04:00","2025-06-17T00:00:00-04:00","2025-06-18T00:00:00-04:00","2025-06-20T00:00:00-04:00","2025-06-23T00:00:00-04:00","2025-06-24T00:00:00-04:00","2025-06-25T00:00:00-04:00","2025-06-26T00:00:00-04:00","2025-06-27T00:00:00-04:00","2025-06-30T00:00:00-04:00","2025-07-01T00:00:00-04:00","2025-07-02T00:00:00-04:00","2025-07-03T00:00:00-04:00","2025-07-07T00:00:00-04:00","2025-07-08T00:00:00-04:00","2025-07-09T00:00:00-04:00","2025-07-10T00:00:00-04:00","2025-07-11T00:00:00-04:00","2025-07-14T00:00:00-04:00","2025-07-15T00:00:00-04:00","2025-07-16T00:00:00-04:00","2025-07-17T00:00:00-04:00","2025-07-18T00:00:00-04:00","2025-07-21T00:00:00-04:00","2025-07-22T00:00:00-04:00","2025-07-23T00:00:00-04:00","2025-07-24T00:00:00-04:00","2025-07-25T00:00:00-04:00","2025-07-28T00:00:00-04:00","2025-07-29T00:00:00-04:00","2025-07-30T00:00:00-04:00","2025-07-31T00:00:00-04:00","2025-08-01T00:00:00-04:00","2025-08-04T00:00:00-04:00","2025-08-05T00:00:00-04:00","2025-08-06T00:00:00-04:00","2025-08-07T00:00:00-04:00","2025-08-08T00:00:00-04:00","2025-08-11T00:00:00-04:00","2025-08-12T00:00:00-04:00","2025-08-13T00:00:00-04:00","2025-08-14T00:00:00-04:00","2025-08-15T00:00:00-04:00","2025-08-18T00:00:00-04:00","2025-08-19T00:00:00-04:00","2025-08-20T00:00:00-04:00","2025-08-21T00:00:00-04:00","2025-08-22T00:00:00-04:00","2025-08-25T00:00:00-04:00","2025-08-26T00:00:00-04:00","2025-08-27T00:00:00-04:00","2025-08-28T00:00:00-04:00","2025-08-29T00:00:00-04:00","2025-09-02T00:00:00-04:00","2025-09-03T00:00:00-04:00","2025-09-04T00:00:00-04:00","2025-09-05T00:00:00-04:00","2025-09-08T00:00:00-04:00","2025-09-09T00:00:00-04:00","2025-09-10T00:00:00-04:00","2025-09-11T00:00:00-04:00","2025-09-12T00:00:00-04:00","2025-09-15T00:00:00-04:00","2025-09-16T00:00:00-04:00","2025-09-17T00:00:00-04:00","2025-09-18T00:00:00-04:00","2025-09-19T00:00:00-04:00","2025-09-22T00:00:00-04:00","2025-09-23T00:00:00-04:00","2025-09-24T00:00:00-04:00","2025-09-25T00:00:00-04:00","2025-09-26T00:00:00-04:00","2025-09-29T00:00:00-04:00","2025-09-30T00:00:00-04:00","2025-10-01T00:00:00-04:00","2025-10-02T00:00:00-04:00","2025-10-03T00:00:00-04:00","2025-10-06T00:00:00-04:00","2025-10-07T00:00:00-04:00","2025-10-08T00:00:00-04:00","2025-10-09T00:00:00-04:00","2025-10-10T00:00:00-04:00","2025-10-13T00:00:00-04:00","2025-10-14T00:00:00-04:00","2025-10-15T00:00:00-04:00","2025-10-16T00:00:00-04:00","2025-10-17T00:00:00-04:00","2025-10-20T00:00:00-04:00","2025-10-21T00:00:00-04:00","2025-10-22T00:00:00-04:00","2025-10-23T00:00:00-04:00","2025-10-24T00:00:00-04:00","2025-10-27T00:00:00-04:00","2025-10-28T00:00:00-04:00","2025-10-29T00:00:00-04:00","2025-10-30T00:00:00-04:00","2025-10-31T00:00:00-04:00","2025-11-03T00:00:00-05:00","2025-11-04T00:00:00-05:00","2025-11-05T00:00:00-05:00","2025-11-06T00:00:00-05:00","2025-11-07T00:00:00-05:00","2025-11-10T00:00:00-05:00","2025-11-11T00:00:00-05:00","2025-11-12T00:00:00-05:00","2025-11-13T00:00:00-05:00","2025-11-14T00:00:00-05:00","2025-11-17T00:00:00-05:00","2025-11-18T00:00:00-05:00","2025-11-19T00:00:00-05:00","2025-11-20T00:00:00-05:00","2025-11-21T00:00:00-05:00","2025-11-24T00:00:00-05:00","2025-11-25T00:00:00-05:00","2025-11-26T00:00:00-05:00","2025-11-28T00:00:00-05:00","2025-12-01T00:00:00-05:00","2025-12-02T00:00:00-05:00","2025-12-03T00:00:00-05:00","2025-12-04T00:00:00-05:00","2025-12-05T00:00:00-05:00","2025-12-08T00:00:00-05:00","2025-12-09T00:00:00-05:00","2025-12-10T00:00:00-05:00","2025-12-11T00:00:00-05:00","2025-12-12T00:00:00-05:00","2025-12-15T00:00:00-05:00","2025-12-16T00:00:00-05:00","2025-12-17T00:00:00-05:00","2025-12-18T00:00:00-05:00","2025-12-19T00:00:00-05:00","2025-12-22T00:00:00-05:00","2025-12-23T00:00:00-05:00","2025-12-24T00:00:00-05:00","2025-12-26T00:00:00-05:00","2025-12-29T00:00:00-05:00","2025-12-30T00:00:00-05:00","2025-12-31T00:00:00-05:00","2026-01-02T00:00:00-05:00","2026-01-05T00:00:00-05:00","2026-01-06T00:00:00-05:00","2026-01-07T00:00:00-05:00","2026-01-08T00:00:00-05:00","2026-01-09T00:00:00-05:00","2026-01-12T00:00:00-05:00","2026-01-13T00:00:00-05:00","2026-01-14T00:00:00-05:00","2026-01-15T00:00:00-05:00","2026-01-16T00:00:00-05:00","2026-01-20T00:00:00-05:00","2026-01-21T00:00:00-05:00","2026-01-22T00:00:00-05:00","2026-01-23T00:00:00-05:00","2026-01-26T00:00:00-05:00","2026-01-27T00:00:00-05:00","2026-01-28T00:00:00-05:00","2026-01-29T00:00:00-05:00","2026-01-30T00:00:00-05:00","2026-02-02T00:00:00-05:00","2026-02-03T00:00:00-05:00","2026-02-04T00:00:00-05:00","2026-02-05T00:00:00-05:00","2026-02-06T00:00:00-05:00","2026-02-09T00:00:00-05:00","2026-02-10T00:00:00-05:00","2026-02-11T00:00:00-05:00","2026-02-12T00:00:00-05:00","2026-02-13T00:00:00-05:00","2026-02-17T00:00:00-05:00","2026-02-18T00:00:00-05:00","2026-02-19T00:00:00-05:00","2026-02-20T00:00:00-05:00","2026-02-23T00:00:00-05:00","2026-02-24T00:00:00-05:00","2026-02-25T00:00:00-05:00","2026-02-26T00:00:00-05:00","2026-02-27T00:00:00-05:00","2026-03-02T00:00:00-05:00","2026-03-03T00:00:00-05:00","2026-03-04T00:00:00-05:00","2026-03-05T00:00:00-05:00","2026-03-06T00:00:00-05:00","2026-03-09T00:00:00-04:00","2026-03-10T00:00:00-04:00","2026-03-11T00:00:00-04:00","2026-03-12T00:00:00-04:00","2026-03-13T00:00:00-04:00","2026-03-16T00:00:00-04:00","2026-03-17T00:00:00-04:00","2026-03-18T00:00:00-04:00","2026-03-19T00:00:00-04:00","2026-03-20T00:00:00-04:00","2026-03-23T00:00:00-04:00","2026-03-24T00:00:00-04:00","2026-03-25T00:00:00-04:00","2026-03-26T00:00:00-04:00","2026-03-27T00:00:00-04:00","2026-03-30T00:00:00-04:00","2026-03-31T00:00:00-04:00","2026-04-01T00:00:00-04:00","2026-04-02T00:00:00-04:00","2026-04-06T00:00:00-04:00","2026-04-07T00:00:00-04:00","2026-04-08T00:00:00-04:00","2026-04-09T00:00:00-04:00","2026-04-10T00:00:00-04:00","2026-04-13T00:00:00-04:00","2026-04-14T00:00:00-04:00","2026-04-15T00:00:00-04:00","2026-04-16T00:00:00-04:00","2026-04-17T00:00:00-04:00","2026-04-20T00:00:00-04:00","2026-04-21T00:00:00-04:00","2026-04-22T00:00:00-04:00","2026-04-23T00:00:00-04:00","2026-04-24T00:00:00-04:00","2026-04-27T00:00:00-04:00","2026-04-28T00:00:00-04:00","2026-04-29T00:00:00-04:00","2026-04-30T00:00:00-04:00","2026-05-01T00:00:00-04:00","2026-05-04T00:00:00-04:00","2026-05-05T00:00:00-04:00","2026-05-06T00:00:00-04:00","2026-05-07T00:00:00-04:00","2026-05-08T00:00:00-04:00","2026-05-11T00:00:00-04:00","2026-05-12T00:00:00-04:00","2026-05-13T00:00:00-04:00","2026-05-14T00:00:00-04:00","2026-05-15T00:00:00-04:00","2026-05-18T00:00:00-04:00","2026-05-19T00:00:00-04:00","2026-05-20T00:00:00-04:00","2026-05-21T00:00:00-04:00","2026-05-22T00:00:00-04:00","2026-05-26T00:00:00-04:00","2026-05-27T00:00:00-04:00","2026-05-28T00:00:00-04:00","2026-05-29T00:00:00-04:00","2026-06-01T00:00:00-04:00","2026-06-02T00:00:00-04:00","2026-06-03T00:00:00-04:00","2026-06-04T00:00:00-04:00","2026-06-05T00:00:00-04:00"],"y":{"dtype":"f8","bdata":"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\u002fJUQAAAAAAAUFVAAAAAYI\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"},"type":"scatter"}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scattermap":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermap"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"#C8D4E3"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30},"paper_bgcolor":"white","plot_bgcolor":"white","polar":{"angularaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""},"bgcolor":"white","radialaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"yaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"zaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"baxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"bgcolor":"white","caxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2}}},"margin":{"t":60},"title":{"text":"Amazon (AMZN) closing price — last close $253.59 on 2026-06-05"},"yaxis":{"title":{"text":"Price (US$, split-adjusted)"}},"height":440},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('9c35698f-572c-4aca-bb56-25880541127f');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };            </script>        </div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-stock-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Amazon (AMZN) daily close, last 5 years. Pulled live via yfinance at render time.
+</figcaption>
+</figure>
+</div>
+</div>
+<p>The daily chart is noise on top of signal, though. To see what actually drives the price over years rather than days, the right lens is <strong>per-share metrics</strong> — because an investor doesn’t own “Amazon,” they own a <em>share</em> of it.</p>
+<section id="revenue-per-share-vs.-earnings-per-share" class="level3">
+<h3 class="anchored" data-anchor-id="revenue-per-share-vs.-earnings-per-share">Revenue per share vs.&nbsp;earnings per share</h3>
+<p>Two KPIs matter to a shareholder: how much <strong>revenue</strong> and how much <strong>profit</strong> the business generates <em>per share they hold</em>. (The “per share” part isn’t cosmetic — share count drifts up over time as stock-based compensation dilutes existing holders, a quiet headwind to per-share growth. Amazon’s diluted share count rose ~5% over this window.)</p>
+<div id="cell-fig-pershare" class="cell" data-execution_count="8">
+<div id="fig-pershare" class="cell-output cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pershare-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script>if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.5.0.min.js" integrity="sha256-fHbNLP+GlIXN+efbQec78UkemUz3NJp7UmfGxC1tNxs=" crossorigin="anonymous"></script>                <div id="a3c7983e-992e-4b46-8989-4335d2af5733" class="plotly-graph-div" style="height:450px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("a3c7983e-992e-4b46-8989-4335d2af5733")) {                    Plotly.newPlot(                        "a3c7983e-992e-4b46-8989-4335d2af5733",                        [{"marker":{"color":"#6aa9c9"},"name":"Revenue per share","text":["$46","$50","$55","$60","$66"],"textposition":"outside","x":{"dtype":"i2","bdata":"5QfmB+cH6AfpBw=="},"y":{"dtype":"f8","bdata":"VQuSjZDORkDVlZb9TzhJQEiYEByVZUtArxfPv2vBTUBEzoOEq4xQQA=="},"type":"bar","xaxis":"x","yaxis":"y"},{"line":{"color":"#e8833a","width":3},"mode":"lines+markers+text","name":"Diluted EPS","text":["$3.24","$-0.27","$2.90","$5.53","$7.17"],"textposition":"top center","x":{"dtype":"i2","bdata":"5QfmB+cH6AfpBw=="},"y":{"dtype":"f8","bdata":"7FG4HoXrCUBI4XoUrkfRvzMzMzMzMwdAH4XrUbgeFkCuR+F6FK4cQA=="},"type":"scatter","xaxis":"x","yaxis":"y2"}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scattermap":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermap"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"#C8D4E3"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30},"paper_bgcolor":"white","plot_bgcolor":"white","polar":{"angularaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""},"bgcolor":"white","radialaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"yaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"zaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"baxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"bgcolor":"white","caxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2}}},"xaxis":{"anchor":"y","domain":[0.0,0.94],"tickvals":[2021,2022,2023,2024,2025]},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Revenue per share (US$)"}},"yaxis2":{"anchor":"x","overlaying":"y","side":"right","title":{"text":"Diluted EPS (US$)"}},"shapes":[{"line":{"color":"gray","dash":"dot","width":1},"type":"line","x0":0,"x1":1,"xref":"x domain","y0":0,"y1":0,"yref":"y2"}],"margin":{"t":60},"title":{"text":"Amazon per-share KPIs, 2021–2025"},"hovermode":"x unified","height":450},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('a3c7983e-992e-4b46-8989-4335d2af5733');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };            </script>        </div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pershare-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: Revenue per share vs.&nbsp;diluted EPS, 2021–2025 (split-adjusted). Revenue per share climbs steadily; earnings per share is far more volatile.
+</figcaption>
+</figure>
+</div>
+</div>
+<p>The contrast is the whole point. <strong>Revenue per share rose ~45%</strong> over the period (≈$46 → $66) in an almost straight line. <strong>Earnings per share went on a rollercoaster:</strong> positive in 2021, <em>negative</em> in 2022 as the retail segments lost money, then more than doubling to $7.17 by 2025 — a <strong>+121%</strong> gain versus 2021. Same company, same years: the top line was placid while the bottom line lurched.</p>
+</section>
+<section id="which-kpi-does-the-share-price-follow" class="level3">
+<h3 class="anchored" data-anchor-id="which-kpi-does-the-share-price-follow">Which KPI does the share price follow?</h3>
+<p>Overlaying year-end price on those KPIs answers the question directly.</p>
+<div id="cell-fig-kpi-price" class="cell" data-execution_count="9">
+<div id="fig-kpi-price" class="cell-output cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-kpi-price-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script>if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.5.0.min.js" integrity="sha256-fHbNLP+GlIXN+efbQec78UkemUz3NJp7UmfGxC1tNxs=" crossorigin="anonymous"></script>                <div id="e595de34-9847-4799-ba44-ab0ee0de2159" class="plotly-graph-div" style="height:460px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("e595de34-9847-4799-ba44-ab0ee0de2159")) {                    Plotly.newPlot(                        "e595de34-9847-4799-ba44-ab0ee0de2159",                        [{"hovertemplate":"metric=Revenue per share\u003cbr\u003e=%{x}\u003cbr\u003eIndexed to 100 (year-end 2021)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Revenue per share","line":{"color":"#6aa9c9","dash":"solid","width":3},"marker":{"symbol":"circle"},"mode":"lines+markers","name":"Revenue per share","orientation":"v","showlegend":true,"x":{"dtype":"i2","bdata":"5QfmB+cH6AfpBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"AAAAAAAAWUAbaX97JqVbQEIKi94BCF5Av1D0kvROYECjzbFCESRiQA=="},"yaxis":"y","type":"scatter"},{"hovertemplate":"metric=Diluted EPS\u003cbr\u003e=%{x}\u003cbr\u003eIndexed to 100 (year-end 2021)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Diluted EPS","line":{"color":"#e8833a","dash":"solid","width":3},"marker":{"symbol":"circle"},"mode":"lines+markers","name":"Diluted EPS","orientation":"v","showlegend":true,"x":{"dtype":"i2","bdata":"5QfmB+cH6AfpBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"AAAAAAAAWUCqqqqqqqogwFvzwyJlYFZAsUgZeLpVZUCX0F5Ce6lrQA=="},"yaxis":"y","type":"scatter"},{"hovertemplate":"metric=Year-end share price\u003cbr\u003e=%{x}\u003cbr\u003eIndexed to 100 (year-end 2021)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Year-end share price","line":{"color":"#2c6e9b","dash":"solid","width":3},"marker":{"symbol":"circle"},"mode":"lines+markers","name":"Year-end share price","orientation":"v","showlegend":true,"x":{"dtype":"i2","bdata":"5QfmB+cH6AfpBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"AAAAAAAAWUDydALjIjFJQKihvyqhyFZACoyLxPByYEAthBuIU05hQA=="},"yaxis":"y","type":"scatter"}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scattermap":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermap"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"#C8D4E3"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30},"paper_bgcolor":"white","plot_bgcolor":"white","polar":{"angularaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""},"bgcolor":"white","radialaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"yaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"zaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"baxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"bgcolor":"white","caxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":""},"tickvals":[2021,2022,2023,2024,2025]},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Indexed to 100 (year-end 2021)"}},"legend":{"title":{"text":"metric"},"tracegroupgap":0},"title":{"text":"Price vs. fundamentals, rebased to 100 at year-end 2021"},"shapes":[{"line":{"color":"gray","dash":"dot","width":1},"type":"line","x0":0,"x1":1,"xref":"x domain","y0":100,"y1":100,"yref":"y"}],"margin":{"t":60},"hovermode":"x unified","height":460},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('e595de34-9847-4799-ba44-ab0ee0de2159');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };            </script>        </div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-kpi-price-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8: Per-share KPIs and share price, indexed to 100 at year-end 2021. Price tracks the earnings path, not the smooth revenue line.
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="takeaway">
+<p><strong>The price follows earnings, not revenue.</strong> In 2022 the stock nearly <em>halved</em> even though revenue per share kept rising — because EPS went negative. As profit recovered through 2023–2025, the price re-rated alongside it. Revenue growth is necessary, but the market pays for <em>profit</em>.</p>
+</div>
+<p>There’s a second, subtler signal in that chart. Over the full window the share price rose <strong>+38%</strong>, while EPS rose <strong>+121%</strong>. Price went <em>up</em>, yet it rose far less than earnings did — which means the <strong>valuation multiple compressed</strong>: Amazon’s price-to-earnings ratio fell from roughly <strong>51× (end-2021)</strong> to about <strong>32× (end-2025)</strong>. The market rewarded the profit growth, but grew steadily less willing to pay a premium <em>multiple</em> for each dollar of it — the classic signature of a hyper-growth company maturing into a merely-very-good one. Combined with the segment analysis, the pattern is consistent: Amazon is re-rated on <strong>profitability and its durability</strong>, far more than on headline sales.</p>
+</section>
+</section>
+<section id="do-the-profits-actually-turn-into-cash" class="level2">
+<h2 class="anchored" data-anchor-id="do-the-profits-actually-turn-into-cash">5. Do the profits actually turn into cash?</h2>
+<p>There’s an old auditor’s saying: <strong>“Profit is an opinion; cash is a fact.”</strong> Everything above — revenue, operating income, margins — comes from <em>accrual</em> accounting, which records sales when they’re <em>earned</em> and costs when they’re <em>incurred</em>, not when money actually changes hands. That’s the right way to measure economic activity, but it opens a gap between the profit a company <em>reports</em> and the cash it <em>collects</em>. A healthy skeptic always asks: do the earnings show up as real money?</p>
+<p>There are three distinct things people worry about behind “great results on paper, but where’s the cash?” — and each has a different diagnostic:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>The worry</th>
+<th>What it actually means</th>
+<th>The tell-tale sign</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Fictional revenue</strong></td>
+<td>Booking sales that won’t convert to cash (channel-stuffing, round-tripping, bill-and-hold). Outright aggressive or fraudulent recognition.</td>
+<td>Operating cash flow runs <em>persistently below</em> net income; <strong>receivables grow faster than sales</strong>.</td>
+</tr>
+<tr class="even">
+<td><strong>Delayed payments</strong></td>
+<td>Customers paying late (bad → receivables balloon) — or the company stretching its <em>own</em> suppliers (good → it’s free financing).</td>
+<td>Rising days-sales-outstanding is the danger; rising days-payable is a <em>benefit</em>.</td>
+</tr>
+<tr class="odd">
+<td><strong>Non-cash earnings</strong></td>
+<td>Profit propped up by accounting estimates (e.g.&nbsp;low depreciation) or depressed by non-cash charges (stock comp, write-downs).</td>
+<td>Net income and cash flow drift apart for “paper” reasons like <strong>useful-life assumptions</strong>.</td>
+</tr>
+</tbody>
+</table>
+<p>The way to settle the question is to walk from net income down to <strong>free cash flow</strong> — the cash left after running <em>and</em> maintaining and expanding the business. Here is that bridge for Amazon in FY2025.</p>
+<div id="cell-fig-cashbridge" class="cell" data-execution_count="10">
+<div id="fig-cashbridge" class="cell-output cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cashbridge-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script>if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.5.0.min.js" integrity="sha256-fHbNLP+GlIXN+efbQec78UkemUz3NJp7UmfGxC1tNxs=" crossorigin="anonymous"></script>                <div id="168b73a3-3f00-41f9-b248-4dcf7771a8b1" class="plotly-graph-div" style="height:470px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("168b73a3-3f00-41f9-b248-4dcf7771a8b1")) {                    Plotly.newPlot(                        "168b73a3-3f00-41f9-b248-4dcf7771a8b1",                        [{"connector":{"line":{"color":"rgb(160,160,160)"}},"decreasing":{"marker":{"color":"#d1604a"}},"increasing":{"marker":{"color":"#2c6e9b"}},"measure":["total","relative","relative","relative","total","relative","total"],"orientation":"v","text":["$77.7B","$65.8B","$19.5B","$-23.5B","$139.5B","$-131.8B","$7.7B"],"textposition":"outside","totals":{"marker":{"color":"#3a3a3a"}},"x":["Net income","+ Depreciation & amort.","+ Stock-based comp.","Working capital & other","Operating cash flow","− Capital expenditure","Free cash flow"],"y":[77.7,65.8,19.5,-23.5,139.5,-131.8,7.7],"type":"waterfall"}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scattermap":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermap"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"#C8D4E3"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30},"paper_bgcolor":"white","plot_bgcolor":"white","polar":{"angularaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""},"bgcolor":"white","radialaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"yaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"zaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"baxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"bgcolor":"white","caxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2}}},"margin":{"t":60,"b":40},"title":{"text":"Amazon FY2025: net income → operating cash flow → free cash flow"},"yaxis":{"title":{"text":"US$ billions"}},"height":470},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('168b73a3-3f00-41f9-b248-4dcf7771a8b1');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };            </script>        </div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cashbridge-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9: From net income to free cash flow, FY2025 (US$ billions). The non-cash add-backs make operating cash flow far exceed reported profit — but capex swallows almost all of it.
+</figcaption>
+</figure>
+</div>
+</div>
+<p>Read the bridge left to right and the answer falls out:</p>
+<ul>
+<li><strong>The operating cash is real — emphatically so.</strong> Operating cash flow ($139.5B) is <em>nearly double</em> reported net income ($77.7B). That is the <em>opposite</em> of the fictional-revenue signature, where cash lags profit. Most of the gap is <strong>depreciation &amp; amortization</strong> ($65.8B): a genuine expense on the income statement, but one where no cash leaves the building this year — so it’s added back. Stock-based comp ($19.5B) works the same way (it dilutes shareholders rather than spending cash).</li>
+<li><strong>“Delayed payments” actually works in Amazon’s favour.</strong> Amazon runs on <strong>negative working capital</strong>: customers pay instantly (card on file), while Amazon pays its suppliers weeks later. So its own slow payments are a source of cash — suppliers and customers effectively finance the business. The dangerous version (Amazon’s <em>own</em> customers stalling, receivables ballooning faster than sales) simply isn’t visible in the numbers.</li>
+</ul>
+<p>So the popular “they have no cash!” worry, in the fraud sense, does not apply to Amazon. But there <em>is</em> a real catch — it’s just a different one:</p>
+<div id="cell-fig-cashtrend" class="cell" data-execution_count="11">
+<div id="fig-cashtrend" class="cell-output cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cashtrend-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script>if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.5.0.min.js" integrity="sha256-fHbNLP+GlIXN+efbQec78UkemUz3NJp7UmfGxC1tNxs=" crossorigin="anonymous"></script>                <div id="434b599b-1e62-4363-8279-82e3ec7c1dbc" class="plotly-graph-div" style="height:450px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("434b599b-1e62-4363-8279-82e3ec7c1dbc")) {                    Plotly.newPlot(                        "434b599b-1e62-4363-8279-82e3ec7c1dbc",                        [{"marker":{"color":"#2c6e9b"},"name":"Operating cash flow","x":{"dtype":"i2","bdata":"5gfnB+gH6Qc="},"y":{"dtype":"f8","bdata":"ZmZmZmZmR0CamZmZmTlVQJqZmZmZ+VxAAAAAAABwYUA="},"type":"bar"},{"marker":{"color":"#e8833a"},"name":"Capex (reinvested)","x":{"dtype":"i2","bdata":"5gfnB+gH6Qc="},"y":{"dtype":"f8","bdata":"zczMzMzMT0CamZmZmVlKQAAAAAAAwFRAmpmZmZl5YEA="},"type":"bar"},{"line":{"color":"#d1604a","width":3},"mode":"lines+markers+text","name":"Free cash flow","text":["$-16.9B","$32.2B","$32.9B","$7.7B"],"textposition":"top center","x":{"dtype":"i2","bdata":"5gfnB+gH6Qc="},"y":{"dtype":"f8","bdata":"ZmZmZmbmMMCamZmZmRlAQDMzMzMzc0BAzczMzMzMHkA="},"type":"scatter"}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scattermap":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermap"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"#C8D4E3"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30},"paper_bgcolor":"white","plot_bgcolor":"white","polar":{"angularaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""},"bgcolor":"white","radialaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"yaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"zaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"baxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"bgcolor":"white","caxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2}}},"shapes":[{"line":{"color":"black","width":1},"type":"line","x0":0,"x1":1,"xref":"x domain","y0":0,"y1":0,"yref":"y"}],"margin":{"t":60},"title":{"text":"Amazon: operating cash flow vs. capex vs. free cash flow"},"yaxis":{"title":{"text":"US$ billions"}},"barmode":"group","hovermode":"x unified","height":450,"xaxis":{"tickvals":[2022,2023,2024,2025]}},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('434b599b-1e62-4363-8279-82e3ec7c1dbc');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };            </script>        </div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cashtrend-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10: Operating cash flow vs.&nbsp;capex vs.&nbsp;free cash flow, 2022–2025 (US$ billions). The AI build-out has eaten almost all the free cash flow.
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="takeaway">
+<p><strong>The cash is real, but almost none of it is <em>free</em>.</strong> In 2025 Amazon turned $139.5B of operating cash flow into just <strong>$7.7B of free cash flow</strong> — because it plowed <strong>$131.8B into capex</strong>, overwhelmingly AI data centres and chips. So the honest version of the concern isn’t “the profits are fake.” It’s that the profits are real, but the company is reinvesting nearly all of its cash, so there’s little left over — and the whole thesis now rests on those AI investments earning a return.</p>
+</div>
+<section id="the-accounting-subtlety-worth-knowing-about" class="level3">
+<h3 class="anchored" data-anchor-id="the-accounting-subtlety-worth-knowing-about">The accounting subtlety worth knowing about</h3>
+<p>This is where <strong>depreciation and amortization timing</strong> becomes an earnings-quality issue, and it’s the part most people miss. When Amazon spends $132B on servers, the <em>cash</em> leaves immediately (it hits free cash flow right away), but the <em>income statement</em> only feels it gradually — spread out as depreciation over the asset’s “useful life,” typically 5–6 years. The mechanical consequence: in a year of heavy investment, <strong>reported operating income looks far healthier than free cash flow</strong>, because most of this year’s spending hasn’t yet shown up as depreciation. As today’s capex ages, that depreciation load climbs and becomes a growing drag on <em>future</em> operating income.</p>
+<p>And “useful life” is an <em>estimate</em> — a management judgement that directly moves reported profit:</p>
+<ul>
+<li>In <strong>2024</strong>, Amazon <em>extended</em> the assumed life of servers from 5 to 6 years, which <strong>lowered</strong> annual depreciation and <strong>boosted</strong> reported income.</li>
+<li>In <strong>2025</strong>, it <em>reversed course</em> (6 → 5 years), citing the faster pace of AI hardware obsolescence — <strong>reducing</strong> 2025 operating income by roughly <strong>$0.7B</strong>.</li>
+<li>Over the same period <strong>Meta went the other way</strong>, extending server life to ~5.5 years and cutting its depreciation expense by ~$2.9B.</li>
+</ul>
+<p>Same physical hardware, opposite accounting calls — and each one changes reported profit by billions. None of this is fraud; it’s the legitimate latitude in accounting estimates. But it’s exactly why a careful analyst treats reported earnings as a <em>starting point</em> and always reconciles them to cash.</p>
+<div class="takeaway">
+<p><strong>Verdict on the “no real cash” worry:</strong> for Amazon it’s largely a myth in the fraud sense — operating cash flow exceeds profit, and its working-capital float generates cash rather than hiding a hole. The legitimate concerns are (1) <strong>capital intensity</strong> — free cash flow is thin because nearly everything is being reinvested in AI, and (2) <strong>depreciation timing</strong> — today’s strong operating income partly reflects spending that hasn’t hit the income statement yet. The question isn’t “is the cash real?” It’s “<strong>will the AI capex earn its keep?</strong>”</p>
+</div>
+<hr>
+</section>
+<section id="data-sources" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="data-sources">Data &amp; sources</h3>
+<ul>
+<li><strong>Segment revenue &amp; operating income (2021–2025):</strong> Amazon.com, Inc.&nbsp;Form 10-K (FY2025) and prior annual filings, via SEC EDGAR.</li>
+<li><strong>Consolidated cost lines &amp; cash-flow statement (FY2025):</strong> Amazon FY2025 Form 10-K.</li>
+<li><strong>Q1 2026 results:</strong> Amazon Q1 2026 earnings release (reported Apr 29, 2026).</li>
+<li><strong>Stock prices:</strong> Yahoo Finance via the <code>yfinance</code> Python package, pulled at render time.</li>
+</ul>
+<p><em>All figures are as reported by Amazon. This article is for educational and illustrative purposes and is not investment advice.</em></p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/adamczyk\.ai");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© 2026 Michał Adamczyk</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

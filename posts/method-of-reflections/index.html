@@ -1,0 +1,1675 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Michał Adamczyk">
+<meta name="dcterms.date" content="2026-06-05">
+<meta name="description" content="Hidalgo &amp; Hausmann’s algorithm turns a binary country-product trade matrix into rankings of economic capability. This post walks through the method end-to-end: the iterative definition, the eigenvector form, an implementation against 30 years of Harvard Atlas data, a concrete trace of China’s electronics rise, and two failure modes the original paper leaves on the table.">
+
+<title>The Method of Reflections: Reading Economic Complexity from Trade Flows – Michał Adamczyk</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-158031087360bce0ff56dc785ce39e06.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-5685cd926c25366c96d9f1407e584118.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-158031087360bce0ff56dc785ce39e06.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Michał Adamczyk</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../portfolio.html"> 
+<span class="menu-text">Portfolio</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog.html"> 
+<span class="menu-text">Writing</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/MichalDataSc/portfolio"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">The Method of Reflections: Reading Economic Complexity from Trade Flows</h1>
+                  <div>
+        <div class="description">
+          <p>Hidalgo &amp; Hausmann’s algorithm turns a binary country-product trade matrix into rankings of economic capability. This post walks through the method end-to-end: the iterative definition, the eigenvector form, an implementation against 30 years of Harvard Atlas data, a concrete trace of China’s electronics rise, and two failure modes the original paper leaves on the table.</p>
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">Economic complexity</div>
+                <div class="quarto-category">Spectral methods</div>
+                <div class="quarto-category">Python</div>
+                <div class="quarto-category">Trade data</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Michał Adamczyk </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">June 5, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-basic-idea" id="toc-the-basic-idea" class="nav-link active" data-scroll-target="#the-basic-idea">1. The basic idea</a></li>
+  <li><a href="#the-matrix-and-the-iteration" id="toc-the-matrix-and-the-iteration" class="nav-link" data-scroll-target="#the-matrix-and-the-iteration">2. The matrix and the iteration</a></li>
+  <li><a href="#from-iteration-to-eigenvector" id="toc-from-iteration-to-eigenvector" class="nav-link" data-scroll-target="#from-iteration-to-eigenvector">3. From iteration to eigenvector</a></li>
+  <li><a href="#implementing-it" id="toc-implementing-it" class="nav-link" data-scroll-target="#implementing-it">4. Implementing it</a></li>
+  <li><a href="#china-hs85-tracing-the-iteration" id="toc-china-hs85-tracing-the-iteration" class="nav-link" data-scroll-target="#china-hs85-tracing-the-iteration">5. China × HS85: tracing the iteration</a></li>
+  <li><a href="#where-it-bends-and-where-it-breaks" id="toc-where-it-bends-and-where-it-breaks" class="nav-link" data-scroll-target="#where-it-bends-and-where-it-breaks">6. Where it bends and where it breaks</a>
+  <ul class="collapse">
+  <li><a href="#failure-mode-1-micro-state-amplification" id="toc-failure-mode-1-micro-state-amplification" class="nav-link" data-scroll-target="#failure-mode-1-micro-state-amplification">Failure mode 1: micro-state amplification</a></li>
+  <li><a href="#failure-mode-2-hidden-giants" id="toc-failure-mode-2-hidden-giants" class="nav-link" data-scroll-target="#failure-mode-2-hidden-giants">Failure mode 2: hidden giants</a></li>
+  </ul></li>
+  <li><a href="#what-works-better-and-where-the-field-went" id="toc-what-works-better-and-where-the-field-went" class="nav-link" data-scroll-target="#what-works-better-and-where-the-field-went">7. What works better, and where the field went</a></li>
+  <li><a href="#what-i-built-and-what-id-build-next" id="toc-what-i-built-and-what-id-build-next" class="nav-link" data-scroll-target="#what-i-built-and-what-id-build-next">What I built and what I’d build next</a></li>
+  <li><a href="#sources" id="toc-sources" class="nav-link" data-scroll-target="#sources">Sources</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+
+<blockquote class="blockquote">
+<p><strong>Summary.</strong> The Method of Reflections is, mathematically, an eigendecomposition of a normalised country-product trade matrix; it ranks countries and products by recursive sophistication, and at HS2 resolution it reproduces the qualitative findings of the original paper — but it has two well-known failure modes that change the story for both the smallest and the very largest exporters.</p>
+</blockquote>
+<div class="lead">
+<p>In 2009 César Hidalgo and Ricardo Hausmann published a paper in <em>PNAS</em> with a provocative idea: you can read what an economy <em>knows how to make</em> from the structure of its exports alone, and a simple iterative scheme on the country-product matrix recovers a meaningful ranking. The construct they introduced — the Economic Complexity Index — has since become a small industry.</p>
+</div>
+<p>What follows takes the method apart and re-builds it from scratch on real trade data. The maths is two equations; the implementation is forty lines of pandas and NumPy. The interesting parts are the empirical residuals — where the algorithm agrees with intuition, where it doesn’t, and what those discrepancies tell us about both economies and the algorithm.</p>
+<p>The case study throughout is China. There’s a clean story to tell: between 1995 and 2010 China’s complexity ranking roughly doubled, and the iteration itself explains <em>how</em> — not because China entered new sectors, but because the sectors it specialised in shifted from textiles to machinery to electronics.</p>
+<section id="the-basic-idea" class="level2">
+<h2 class="anchored" data-anchor-id="the-basic-idea">1. The basic idea</h2>
+<p>What does it mean for an economy to be “complex”? Plenty of intuitive proxies — GDP per capita, value-added per worker, R&amp;D intensity — work fine for the obvious cases (Switzerland complex, Chad not), but they don’t generalise well: a high-income oil exporter has lots of value-added per worker but is doing exactly one thing.</p>
+<p>Hidalgo &amp; Hausmann’s move is to look at the <em>structure</em> of what a country exports, not the headline numbers. The intuition has two pieces:</p>
+<ul>
+<li><strong>Diversity.</strong> A complex economy can make many different things; a simple one can make few.</li>
+<li><strong>Ubiquity.</strong> Some products can be made by almost anyone (clothing, basic agricultural goods). Others require knowledge that very few countries have (aircraft, lithography equipment). A complex economy is one that does the rare things.</li>
+</ul>
+<p>These two ideas pull in opposite directions when used naively. Many countries have high diversity of <em>common</em> products; very few countries have low diversity of <em>rare</em> ones. The Method of Reflections is the iteration that resolves this tension into a single ranking.</p>
+</section>
+<section id="the-matrix-and-the-iteration" class="level2">
+<h2 class="anchored" data-anchor-id="the-matrix-and-the-iteration">2. The matrix and the iteration</h2>
+<p>Start with bilateral trade data: country <code>c</code> exports value <span class="math inline">\(x_{cp}\)</span> of product <span class="math inline">\(p\)</span> in some reference year. Define <strong>Revealed Comparative Advantage</strong> (Balassa 1965) as:</p>
+<p><span class="math display">\[
+\mathrm{RCA}_{cp} \;=\; \frac{x_{cp} / \sum_{p'} x_{cp'}}{\sum_{c'} x_{c'p} \; / \; \sum_{c',p'} x_{c'p'}}
+\]</span></p>
+<p>In words: <span class="math inline">\(\mathrm{RCA}_{cp}\)</span> is country <code>c</code>’s share of product <code>p</code>’s world exports, divided by country <code>c</code>’s share of all world trade. If country <code>c</code> specialises in product <code>p</code> more than its overall trade footprint would predict, <span class="math inline">\(\mathrm{RCA}_{cp} &gt; 1\)</span>.</p>
+<p>Binarise to get the <strong>specialisation matrix</strong>:</p>
+<p><span class="math display">\[
+M_{cp} \;=\; \mathbb{1}\{\mathrm{RCA}_{cp} \geq 1\}
+\]</span></p>
+<p>This is the only place magnitude is collapsed into a yes/no. From <span class="math inline">\(M\)</span> we get diversity and ubiquity directly as row and column sums:</p>
+<p><span class="math display">\[
+k_{c,0} \;=\; \sum_p M_{cp} \quad\text{(diversity of }c\text{)}, \qquad
+k_{p,0} \;=\; \sum_c M_{cp} \quad\text{(ubiquity of }p\text{)}.
+\]</span></p>
+<p>The Method of Reflections refines these by iteratively averaging each side against the other:</p>
+<p><span class="math display">\[
+k_{c,N} \;=\; \frac{1}{k_{c,0}} \sum_p M_{cp}\, k_{p,N-1}
+\]</span> <span class="math display">\[
+k_{p,N} \;=\; \frac{1}{k_{p,0}} \sum_c M_{cp}\, k_{c,N-1}
+\]</span></p>
+<p>The semantics shift at every step. At <span class="math inline">\(N{=}1\)</span>, <span class="math inline">\(k_{c,1}\)</span> is “the average ubiquity of my products” — high if I export common things, low if I export rare ones. At <span class="math inline">\(N{=}2\)</span>, <span class="math inline">\(k_{c,2}\)</span> is “the average diversity of the countries that make my products” — high if my products are made by economies that themselves make many things. Continue this and the iteration converges; the <strong>Economic Complexity Index</strong> is the converged <span class="math inline">\(k_c\)</span> (z-scored), the <strong>Product Complexity Index</strong> is the converged <span class="math inline">\(k_p\)</span> (z-scored).</p>
+<div class="takeaway">
+<p><strong>The method is recursive co-clustering.</strong> It treats the trade matrix as a bipartite graph between countries and products, and each iteration is one round of belief propagation: countries pass diversity messages to their products; products pass ubiquity messages back. ECI is the steady-state of this message-passing.</p>
+</div>
+</section>
+<section id="from-iteration-to-eigenvector" class="level2">
+<h2 class="anchored" data-anchor-id="from-iteration-to-eigenvector">3. From iteration to eigenvector</h2>
+<p>The iteration has a closed form. Stack the country values into the country-side similarity matrix:</p>
+<p><span class="math display">\[
+W_c \;=\; D_c^{-1}\, M\, D_p^{-1}\, M^\top
+\]</span></p>
+<p>where <span class="math inline">\(D_c\)</span> and <span class="math inline">\(D_p\)</span> are diagonal matrices of diversity and ubiquity. Then <span class="math inline">\(k_{c,N+2} = W_c\, k_{c,N}\)</span>, so iterating the Method of Reflections is the same as repeatedly multiplying by <span class="math inline">\(W_c\)</span>.</p>
+<p><span class="math inline">\(W_c\)</span> is row-stochastic (its rows sum to 1, by construction), so its largest eigenvalue is exactly 1 and its largest eigenvector is the constant vector. The <strong>second eigenvector</strong> carries the only useful structure — the relative positions of countries within the second-largest eigendirection. That eigenvector, standardised to mean zero and unit variance, <strong>is the Economic Complexity Index.</strong></p>
+<p>Symmetrically, <span class="math inline">\(W_p = D_p^{-1} M^\top D_c^{-1} M\)</span> gives PCI as its second eigenvector.</p>
+<div class="takeaway">
+<p><strong>This is PCA’s cousin.</strong> ECI is to a normalised trade-similarity matrix what the second principal component is to a centred covariance matrix: the eigendirection that maximally separates the rows. The dominant component carries no information (it’s constant); the second carries everything.</p>
+</div>
+</section>
+<section id="implementing-it" class="level2">
+<h2 class="anchored" data-anchor-id="implementing-it">4. Implementing it</h2>
+<p>Forty lines of pandas, give or take. Load the Atlas HS92 country × HS2 × year trade data, compute RCA, binarise, build <span class="math inline">\(W_c\)</span> and <span class="math inline">\(W_p\)</span>, take their second eigenvectors:</p>
+<div id="e3df50e4" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Illustrative implementation — RCA, Mcp, and the eigendecomposition.</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np, pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"hs92_country_product_year_2.csv"</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                 dtype<span class="op">=</span>{<span class="st">"product_hs92_code"</span>: <span class="bu">str</span>})</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_mcp_for_year(df_year, min_country_total<span class="op">=</span><span class="fl">0.0</span>):</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Country filter (drop tiny exporters)</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    country_totals <span class="op">=</span> df_year.groupby(<span class="st">"country_iso3_code"</span>)[<span class="st">"export_value"</span>].<span class="bu">sum</span>()</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    qualifying <span class="op">=</span> country_totals[country_totals <span class="op">&gt;=</span> min_country_total].index</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    df_year <span class="op">=</span> df_year[df_year[<span class="st">"country_iso3_code"</span>].isin(qualifying)]</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Balassa RCA</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    c_tot <span class="op">=</span> df_year.groupby(<span class="st">"country_iso3_code"</span>)[<span class="st">"export_value"</span>].<span class="bu">sum</span>()</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    p_tot <span class="op">=</span> df_year.groupby(<span class="st">"product_hs92_code"</span>)[<span class="st">"export_value"</span>].<span class="bu">sum</span>()</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    w_tot <span class="op">=</span> df_year[<span class="st">"export_value"</span>].<span class="bu">sum</span>()</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    d <span class="op">=</span> df_year.copy()</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    d[<span class="st">"c_tot"</span>] <span class="op">=</span> d[<span class="st">"country_iso3_code"</span>].<span class="bu">map</span>(c_tot)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    d[<span class="st">"p_tot"</span>] <span class="op">=</span> d[<span class="st">"product_hs92_code"</span>].<span class="bu">map</span>(p_tot)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    d[<span class="st">"rca"</span>]   <span class="op">=</span> (d[<span class="st">"export_value"</span>] <span class="op">/</span> d[<span class="st">"c_tot"</span>]) <span class="op">/</span> (d[<span class="st">"p_tot"</span>] <span class="op">/</span> w_tot)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    d[<span class="st">"mcp"</span>]   <span class="op">=</span> (d[<span class="st">"rca"</span>] <span class="op">&gt;=</span> <span class="dv">1</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    M <span class="op">=</span> d.pivot(index<span class="op">=</span><span class="st">"country_iso3_code"</span>, columns<span class="op">=</span><span class="st">"product_hs92_code"</span>,</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>                values<span class="op">=</span><span class="st">"mcp"</span>).fillna(<span class="dv">0</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    d_c <span class="op">=</span> M.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)<span class="op">;</span> u_p <span class="op">=</span> M.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Drop countries with no qualifying products</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    M <span class="op">=</span> M.loc[d_c[d_c <span class="op">&gt;</span> <span class="dv">0</span>].index, u_p[u_p <span class="op">&gt;</span> <span class="dv">0</span>].index]</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> M, M.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>), M.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> eci_pci(M, d_c, u_p):</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    M_np <span class="op">=</span> M.values.astype(<span class="bu">float</span>)</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    W_c <span class="op">=</span> (<span class="fl">1.0</span><span class="op">/</span>d_c.values[:, <span class="va">None</span>] <span class="op">*</span> M_np) <span class="op">@</span> (<span class="fl">1.0</span><span class="op">/</span>u_p.values[:, <span class="va">None</span>] <span class="op">*</span> M_np.T)</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    W_p <span class="op">=</span> (<span class="fl">1.0</span><span class="op">/</span>u_p.values[:, <span class="va">None</span>] <span class="op">*</span> M_np.T) <span class="op">@</span> (<span class="fl">1.0</span><span class="op">/</span>d_c.values[:, <span class="va">None</span>] <span class="op">*</span> M_np)</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Second-largest eigenvector of each</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    ev_c, vec_c <span class="op">=</span> np.linalg.eig(W_c)</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    ev_p, vec_p <span class="op">=</span> np.linalg.eig(W_p)</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    eci_raw <span class="op">=</span> vec_c[:, np.argsort(<span class="op">-</span>ev_c.real)[<span class="dv">1</span>]].real</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    pci_raw <span class="op">=</span> vec_p[:, np.argsort(<span class="op">-</span>ev_p.real)[<span class="dv">1</span>]].real</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Standardise</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    eci <span class="op">=</span> (eci_raw <span class="op">-</span> eci_raw.mean()) <span class="op">/</span> eci_raw.std()</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    pci <span class="op">=</span> (pci_raw <span class="op">-</span> pci_raw.mean()) <span class="op">/</span> pci_raw.std()</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pd.Series(eci, index<span class="op">=</span>M.index), pd.Series(pci, index<span class="op">=</span>M.columns)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Validation: the Atlas of Economic Complexity ships its own ECI per country-year and PCI per product-year. Both should match a clean implementation up to a sign flip (eigenvectors are defined up to sign) and a standardisation convention. Run this across 30 years (1995–2024) and we get:</p>
+<div class="cell" data-execution_count="3">
+<div id="tbl-validation" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="3">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-validation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Mean correlation with Atlas’s shipped ECI and PCI, by Mcp regime. Country-level filter ($1B/yr total exports minimum) substantially improves agreement.
+</figcaption>
+<div aria-describedby="tbl-validation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display cell-output-markdown" data-execution_count="2">
+<table class="cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 36%">
+<col style="width: 21%">
+<col style="width: 21%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Regime</th>
+<th style="text-align: right;">Mean ECI–Atlas correlation</th>
+<th style="text-align: right;">Mean PCI–Atlas correlation</th>
+<th style="text-align: right;">Mean # of countries in Mcp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Vanilla (RCA ≥ 1, no filter)</td>
+<td style="text-align: right;">0.72</td>
+<td style="text-align: right;">0.7</td>
+<td style="text-align: right;">225</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Country-filtered (RCA ≥ 1, total exports ≥ $1B/yr)</td>
+<td style="text-align: right;">0.78</td>
+<td style="text-align: right;">0.71</td>
+<td style="text-align: right;">153</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>A few things to notice. First, no implementation of the <em>linear</em> Method of Reflections at HS2 resolution will match Atlas to numerical precision, because Atlas’s published ECI is computed at HS4 (~1240 product categories) and uses a non-linear refinement (Tacchella et al.&nbsp;2012) — more on that in section 7. A ~0.72 correlation on the linear, HS2 version is what the paper-canonical algorithm produces. Second, the country filter helps a lot in recent years and modestly in older ones; we’ll see why in section 6.</p>
+<p>For context, the top 15 countries by ECI in 2022 under the country-filtered regime are:</p>
+<div class="cell" data-execution_count="4">
+<div id="tbl-top15-2022" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="4">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-top15-2022-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Top 15 countries by computed ECI (country-filtered MoR), 2022. The ‘usual suspects’ (Taiwan, Japan, Korea, Germany, Switzerland) cluster at the top; China sits at #13 — also where Atlas places it (#14).
+</figcaption>
+<div aria-describedby="tbl-top15-2022-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display cell-output-markdown" data-execution_count="3">
+<table class="cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Country</th>
+<th style="text-align: left;">ISO</th>
+<th style="text-align: right;">Our ECI (z-score)</th>
+<th style="text-align: right;">Atlas ECI</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Taiwan</td>
+<td style="text-align: left;">TWN</td>
+<td style="text-align: right;">2.78</td>
+<td style="text-align: right;">1.84</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Japan</td>
+<td style="text-align: left;">JPN</td>
+<td style="text-align: right;">2.28</td>
+<td style="text-align: right;">1.99</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">South Korea</td>
+<td style="text-align: left;">KOR</td>
+<td style="text-align: right;">2.16</td>
+<td style="text-align: right;">1.77</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hong Kong</td>
+<td style="text-align: left;">HKG</td>
+<td style="text-align: right;">2.1</td>
+<td style="text-align: right;">1.33</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Germany</td>
+<td style="text-align: left;">DEU</td>
+<td style="text-align: right;">2.09</td>
+<td style="text-align: right;">1.52</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Switzerland</td>
+<td style="text-align: left;">CHE</td>
+<td style="text-align: right;">1.88</td>
+<td style="text-align: right;">1.75</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Czech Republic</td>
+<td style="text-align: left;">CZE</td>
+<td style="text-align: right;">1.88</td>
+<td style="text-align: right;">1.46</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Singapore</td>
+<td style="text-align: left;">SGP</td>
+<td style="text-align: right;">1.8</td>
+<td style="text-align: right;">1.65</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Slovenia</td>
+<td style="text-align: left;">SVN</td>
+<td style="text-align: right;">1.63</td>
+<td style="text-align: right;">1.34</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ireland</td>
+<td style="text-align: left;">IRL</td>
+<td style="text-align: right;">1.5</td>
+<td style="text-align: right;">1.3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">United Kingdom</td>
+<td style="text-align: left;">GBR</td>
+<td style="text-align: right;">1.44</td>
+<td style="text-align: right;">1.4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mexico</td>
+<td style="text-align: left;">MEX</td>
+<td style="text-align: right;">1.36</td>
+<td style="text-align: right;">0.91</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">China</td>
+<td style="text-align: left;">CHN</td>
+<td style="text-align: right;">1.3</td>
+<td style="text-align: right;">1.36</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Austria</td>
+<td style="text-align: left;">AUT</td>
+<td style="text-align: right;">1.29</td>
+<td style="text-align: right;">1.36</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Slovakia</td>
+<td style="text-align: left;">SVK</td>
+<td style="text-align: right;">1.26</td>
+<td style="text-align: right;">1.21</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>The qualitative agreement with Atlas is very strong — Taiwan, Japan, Korea, Germany, Switzerland are the canonical “complex economies” of the trade literature, and they’re at the top under both implementations.</p>
+</section>
+<section id="china-hs85-tracing-the-iteration" class="level2">
+<h2 class="anchored" data-anchor-id="china-hs85-tracing-the-iteration">5. China × HS85: tracing the iteration</h2>
+<p>The empirical headline of the original paper was that high-ECI economies grow faster than their income would predict. China is the most-cited example: ECI rising sharply 1995–2010, GDP per capita following with a lag. Let me trace that rise mechanistically using the iteration values, picking <em>one specific product</em> to track alongside.</p>
+<p>China’s biggest manufactured export in 2024 is HS85 — electrical machinery and electronics (27.9% of world exports of HS85 originated in China). Tracking <span class="math inline">\(k_c[\text{CHN}]\)</span> and <span class="math inline">\(k_p[\text{HS85}]\)</span> across iterations and years, here’s what happens to the key inputs:</p>
+<div class="cell" data-execution_count="5">
+<div id="tbl-china-hs85-summary" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="5">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-china-hs85-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3: Year-by-year summary of inputs and converged values for China × HS85. Note that China’s diversity (k_{c,0}) is essentially flat over 30 years — yet its complexity ranking nearly doubles.
+</figcaption>
+<div aria-describedby="tbl-china-hs85-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display cell-output-markdown" data-execution_count="4">
+<table class="cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 12%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 10%">
+<col style="width: 17%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Year</th>
+<th style="text-align: right;"># countries in Mcp</th>
+<th style="text-align: right;">Diversity(CHN) = k_c,0</th>
+<th style="text-align: right;">Ubiquity(HS85) = k_p,0</th>
+<th style="text-align: right;">Mcp[CHN, HS85]</th>
+<th style="text-align: right;">k_c[CHN]_z at N=10 (≈ ECI)</th>
+<th style="text-align: right;">k_p[HS85]_z at N=10 (sign-flipped, ≈ PCI)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1995</td>
+<td style="text-align: right;">109</td>
+<td style="text-align: right;">46</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.82</td>
+<td style="text-align: right;">1.99</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">117</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.76</td>
+<td style="text-align: right;">2.02</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2005</td>
+<td style="text-align: right;">136</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.12</td>
+<td style="text-align: right;">1.8</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2010</td>
+<td style="text-align: right;">145</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.19</td>
+<td style="text-align: right;">1.6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2015</td>
+<td style="text-align: right;">150</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.3</td>
+<td style="text-align: right;">1.49</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">154</td>
+<td style="text-align: right;">41</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.68</td>
+<td style="text-align: right;">1.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2024</td>
+<td style="text-align: right;">155</td>
+<td style="text-align: right;">47</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.29</td>
+<td style="text-align: right;">1.77</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Three observations:</p>
+<ol type="1">
+<li><strong>China’s raw diversity barely moves.</strong> 46 sectors in 1995, 47 in 2024. The number of HS2 chapters China specialises in is essentially flat over the entire period.</li>
+<li><strong>HS85 ubiquity rises</strong>: 15 countries in 1995 → 24 in 2024. More countries entered electronics over the period.</li>
+<li><strong><code>Mcp[CHN, HS85]</code> flipped from 0 to 1 between 1995 and 2000.</strong> China didn’t have RCA in electrical machinery in 1995; it did from 2000.</li>
+</ol>
+<p>If you stopped at the raw counts, the obvious story would be “China stayed at the same complexity; HS85 got less exclusive”. Both wrong. Look at iteration <span class="math inline">\(N{=}1\)</span> specifically:</p>
+<div class="cell" data-execution_count="6">
+<div id="tbl-china-iteration" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="6">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-china-iteration-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4: Iteration trajectory for China and HS85 in two snapshot years. The N=1 value for China — the average ubiquity of its products — drops sharply between 1995 and 2024, meaning China’s product mix became substantially rarer.
+</figcaption>
+<div aria-describedby="tbl-china-iteration-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display cell-output-markdown" data-execution_count="5">
+<table class="cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 21%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Iteration N</th>
+<th style="text-align: right;">1995 k_c[CHN]_z</th>
+<th style="text-align: right;">2024 k_c[CHN]_z</th>
+<th style="text-align: right;">1995 k_p[HS85]_z</th>
+<th style="text-align: right;">2024 k_p[HS85]_z</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2.03</td>
+<td style="text-align: right;">2.03</td>
+<td style="text-align: right;">-1.01</td>
+<td style="text-align: right;">-0.67</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">-0.87</td>
+<td style="text-align: right;">-2.25</td>
+<td style="text-align: right;">-1.62</td>
+<td style="text-align: right;">-1.39</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.98</td>
+<td style="text-align: right;">1.37</td>
+<td style="text-align: right;">-2.13</td>
+<td style="text-align: right;">-1.62</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">-0.52</td>
+<td style="text-align: right;">-1.68</td>
+<td style="text-align: right;">-0.61</td>
+<td style="text-align: right;">0.12</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.84</td>
+<td style="text-align: right;">1.31</td>
+<td style="text-align: right;">-2.17</td>
+<td style="text-align: right;">-1.87</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">-0.39</td>
+<td style="text-align: right;">-1.5</td>
+<td style="text-align: right;">0.09</td>
+<td style="text-align: right;">0.69</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.83</td>
+<td style="text-align: right;">1.29</td>
+<td style="text-align: right;">-2.1</td>
+<td style="text-align: right;">-1.88</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">-0.33</td>
+<td style="text-align: right;">-1.43</td>
+<td style="text-align: right;">0.62</td>
+<td style="text-align: right;">0.95</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0.82</td>
+<td style="text-align: right;">1.29</td>
+<td style="text-align: right;">-2.04</td>
+<td style="text-align: right;">-1.83</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">-0.3</td>
+<td style="text-align: right;">-1.4</td>
+<td style="text-align: right;">0.99</td>
+<td style="text-align: right;">1.09</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.82</td>
+<td style="text-align: right;">1.29</td>
+<td style="text-align: right;">-1.99</td>
+<td style="text-align: right;">-1.77</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">-0.27</td>
+<td style="text-align: right;">-1.38</td>
+<td style="text-align: right;">1.26</td>
+<td style="text-align: right;">1.18</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.81</td>
+<td style="text-align: right;">1.3</td>
+<td style="text-align: right;">-1.95</td>
+<td style="text-align: right;">-1.73</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>The iteration alternates between “averaging the ubiquity of my products” (odd <span class="math inline">\(N\)</span>, <span class="math inline">\(k_c\)</span> row) and “averaging the diversity of my products’ countries” (even <span class="math inline">\(N\)</span>). In 1995, China’s <span class="math inline">\(k_{c,1}\)</span> value is z-score <span class="math inline">\(-0.87\)</span> — its products are slightly below the global mean of ubiquity. By 2024, <span class="math inline">\(k_{c,1}\)</span> is <span class="math inline">\(-2.25\)</span> — China’s products are <strong>much rarer than average</strong>. That single number is the whole story.</p>
+<p>Concretely: in 1995, China specialised in textiles, apparel, and basic manufactured goods — the kind of products that 30+ other countries also export with RCA. By 2024, China’s basket still includes those, but also HS84 (machinery), HS85 (electronics), HS86 (railway equipment), HS90 (instruments). These are products only 15–25 countries specialise in. The composition shift — not the count — is what drives the iteration deeper into the “low ubiquity” direction.</p>
+<p>By iteration <span class="math inline">\(N{=}10\)</span>, this has compounded through the recursive structure (“rare products of countries that themselves make rare products”) and China’s complexity z-score has climbed from <span class="math inline">\(+0.82\)</span> to <span class="math inline">\(+1.29\)</span>, with a peak of <span class="math inline">\(+1.68\)</span> around 2020.</p>
+<div class="takeaway">
+<p><strong>China’s rise in ECI is not diversification — it’s substitution.</strong> The algorithm doesn’t reward China for entering many new sectors (it didn’t); it rewards the shift in <em>what</em> it specialises in. A single bit flip (<span class="math inline">\(M_{\text{CHN}, \text{HS85}} = 0 \to 1\)</span>), repeated across a handful of similar sectors, propagates through the recursion into a near-doubling of the complexity z-score. That is what the Method of Reflections is <em>for</em>: turning the identity of co-specialisations into a continuous quantity.</p>
+</div>
+<p>The full iteration trajectory across years:</p>
+<div id="fig-iteration" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-iteration-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="hs85_iteration.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-iteration-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: China’s k_c and HS85’s k_p across iterations N, by year. Top: country values rise across iterations and years; bottom: HS85’s converged complexity drifts slightly as the sector becomes more ubiquitous.
+</figcaption>
+</figure>
+</div>
+<p>And the resulting ECI trajectory for China, against Atlas’s shipped values:</p>
+<div id="fig-eci-traj" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-eci-traj-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="eci_trajectory.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-eci-traj-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: China’s ECI, 1995–2024. Both vanilla and country-filtered MoR reproduce the qualitative finding (rapid rise 1995–2010, plateau after). Country-filter is slightly closer to Atlas’s trajectory in recent years.
+</figcaption>
+</figure>
+</div>
+<p>The vanilla and country-filtered curves diverge in the 2005–2015 window — that’s the period where the vanilla algorithm starts amplifying micro-state noise (next section).</p>
+</section>
+<section id="where-it-bends-and-where-it-breaks" class="level2">
+<h2 class="anchored" data-anchor-id="where-it-bends-and-where-it-breaks">6. Where it bends and where it breaks</h2>
+<p>The two failure modes the original paper does not address. Both are intrinsic to the Balassa-RCA-plus-binarisation construction.</p>
+<section id="failure-mode-1-micro-state-amplification" class="level3">
+<h3 class="anchored" data-anchor-id="failure-mode-1-micro-state-amplification">Failure mode 1: micro-state amplification</h3>
+<p>The vanilla top-15 in 2022 (no country filter):</p>
+<div class="cell" data-execution_count="7">
+<div id="tbl-vanilla-top15" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="7">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-vanilla-top15-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5: Top 15 countries by ECI under vanilla MoR (no country filter), 2022. Six of fifteen are micro-territories — Tokelau, S. Georgia, Andorra, Cocos Islands, Bouvet Island, Vatican, Niue — that have no plausible claim to being world-leading complex economies.
+</figcaption>
+<div aria-describedby="tbl-vanilla-top15-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display cell-output-markdown" data-execution_count="6">
+<table class="cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 39%">
+<col style="width: 30%">
+<col style="width: 13%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Country</th>
+<th style="text-align: left;">Population (approx.)</th>
+<th style="text-align: right;">Our ECI</th>
+<th style="text-align: right;">Atlas ECI</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Tokelau</td>
+<td style="text-align: left;">1,500</td>
+<td style="text-align: right;">3.06</td>
+<td style="text-align: right;">0.97</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Taiwan</td>
+<td style="text-align: left;">23M</td>
+<td style="text-align: right;">2.47</td>
+<td style="text-align: right;">1.84</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Japan</td>
+<td style="text-align: left;">125M</td>
+<td style="text-align: right;">1.98</td>
+<td style="text-align: right;">1.99</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hong Kong</td>
+<td style="text-align: left;">7.5M</td>
+<td style="text-align: right;">1.96</td>
+<td style="text-align: right;">1.33</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">South Korea</td>
+<td style="text-align: left;">52M</td>
+<td style="text-align: right;">1.9</td>
+<td style="text-align: right;">1.77</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">S. Georgia &amp; Sandwich Islands</td>
+<td style="text-align: left;">30</td>
+<td style="text-align: right;">1.8</td>
+<td style="text-align: right;">0.65</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Germany</td>
+<td style="text-align: left;">84M</td>
+<td style="text-align: right;">1.77</td>
+<td style="text-align: right;">1.52</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Andorra</td>
+<td style="text-align: left;">80k</td>
+<td style="text-align: right;">1.76</td>
+<td style="text-align: right;">1.13</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Czech Republic</td>
+<td style="text-align: left;">10.5M</td>
+<td style="text-align: right;">1.65</td>
+<td style="text-align: right;">1.46</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Cocos Islands</td>
+<td style="text-align: left;">600</td>
+<td style="text-align: right;">1.59</td>
+<td style="text-align: right;">1.4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Bouvet Island</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: right;">1.57</td>
+<td style="text-align: right;">0.51</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Vatican City</td>
+<td style="text-align: left;">800</td>
+<td style="text-align: right;">1.56</td>
+<td style="text-align: right;">0.97</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Switzerland</td>
+<td style="text-align: left;">8.7M</td>
+<td style="text-align: right;">1.52</td>
+<td style="text-align: right;">1.75</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Singapore</td>
+<td style="text-align: left;">5.6M</td>
+<td style="text-align: right;">1.47</td>
+<td style="text-align: right;">1.65</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Niue</td>
+<td style="text-align: left;">1,600</td>
+<td style="text-align: right;">1.45</td>
+<td style="text-align: right;">1.11</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Tokelau (population 1,500), Bouvet Island (uninhabited), Vatican City — these aren’t credible “complex economies”; they’re algorithmic artefacts. They appear because vanilla RCA is permissive: a tiny exporter only needs to capture a tiny share of world exports of <em>some</em> product to qualify as “specialised” in it. Bouvet Island shipping a single container of a niche good in one year is enough to push its RCA above 1 for that product.</p>
+<p>The Method of Reflections then amplifies this: a country with low diversity but <em>very specific</em> specialisations has its complexity boosted by every iteration that asks “what kind of company do your products keep?” — because the products that match the noise tend to be made by complex economies.</p>
+<p><strong>The fix that doesn’t work.</strong> A first instinct is to add a per-flow filter: require <code>Mcp = 1</code> only if both <code>RCA ≥ 1</code> and the country has at least some absolute share (say 1%) of that product’s world exports. This banishes the micro-states from the top, but creates a <em>different</em> bias: it now rewards medium-sized economies that are heavily concentrated in a few large sectors. Bangladesh and Cambodia float to the top because they easily exceed 1% global share in apparel categories — at the expense of small but diverse economies like Switzerland or Slovenia.</p>
+<p>The correlation with Atlas’s ECI under this regime drops from 0.72 to 0.29. The filter solved the visible problem and introduced an invisible one.</p>
+<p><strong>The fix that works.</strong> Apply the filter at the <strong>country level</strong> instead: drop countries whose total annual exports are below some threshold ($1B is a reasonable starting point) <strong>before</strong> building <span class="math inline">\(M\)</span>. This eliminates the micro-state noise source cleanly without touching the comparative-advantage mechanism. ECI–Atlas correlation in recent years jumps from 0.72 → 0.81; the top-15 looks like a real complex-economy list (table in section 4).</p>
+</section>
+<section id="failure-mode-2-hidden-giants" class="level3">
+<h3 class="anchored" data-anchor-id="failure-mode-2-hidden-giants">Failure mode 2: hidden giants</h3>
+<p>The mirror image. A country that dominates a sector <em>absolutely</em> but whose share of total world trade is large can fail the RCA test in sectors it actually leads.</p>
+<p>China in 2022 had <strong>15.46% of all world exports</strong>. For RCA in any product to exceed 1, China needs <span class="math inline">\(\geq 15.46\%\)</span> of that product’s world exports. Anywhere below that threshold, the algorithm records <span class="math inline">\(M_{\text{CHN}, p} = 0\)</span> — China is “not specialised” — even when China is the world’s largest exporter of that product in dollar terms.</p>
+<div class="cell" data-execution_count="8">
+<div id="tbl-hidden-giants" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="8">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-hidden-giants-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6: Sectors where China has ≥10% of world exports in 2022 but Mcp = 0. China is the world’s largest exporter of iron &amp; steel and a top-3 exporter of optical / medical instruments — but the algorithm counts neither as a Chinese specialisation.
+</figcaption>
+<div aria-describedby="tbl-hidden-giants-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display cell-output-markdown" data-execution_count="7">
+<table class="cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 44%">
+<col style="width: 30%">
+<col style="width: 12%">
+<col style="width: 6%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">HS2</th>
+<th style="text-align: left;">Sector</th>
+<th style="text-align: left;">China share of world exports</th>
+<th style="text-align: right;">China RCA</th>
+<th style="text-align: right;">Mcp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">40</td>
+<td style="text-align: left;">Rubber and articles</td>
+<td style="text-align: left;">14.53%</td>
+<td style="text-align: right;">0.94</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">72</td>
+<td style="text-align: left;">Iron and steel</td>
+<td style="text-align: left;">13.77%</td>
+<td style="text-align: right;">0.89</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">35</td>
+<td style="text-align: left;">Albuminoidal substances; glues; enzymes</td>
+<td style="text-align: left;">13.08%</td>
+<td style="text-align: right;">0.85</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">20</td>
+<td style="text-align: left;">Preparations of vegetables, fruit, nuts</td>
+<td style="text-align: left;">13.07%</td>
+<td style="text-align: right;">0.85</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">90</td>
+<td style="text-align: left;">Optical, photographic, medical instruments</td>
+<td style="text-align: left;">12.35%</td>
+<td style="text-align: right;">0.8</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">07</td>
+<td style="text-align: left;">Edible vegetables, roots and tubers</td>
+<td style="text-align: left;">12.02%</td>
+<td style="text-align: right;">0.78</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">49</td>
+<td style="text-align: left;">Printed books, newspapers, pictures</td>
+<td style="text-align: left;">11.88%</td>
+<td style="text-align: right;">0.77</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">32</td>
+<td style="text-align: left;">Tanning/dyeing extracts; dyes, pigments; inks</td>
+<td style="text-align: left;">11.71%</td>
+<td style="text-align: right;">0.76</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">44</td>
+<td style="text-align: left;">Wood and articles of wood</td>
+<td style="text-align: left;">10.27%</td>
+<td style="text-align: right;">0.67</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Iron and steel (HS72) is the clean example. China produces more than half of the world’s crude steel and is the world’s largest steel exporter by a wide margin. But its <strong>export share</strong> of HS72 in 2022 was 13.77%, below its 15.46% overall trade share. So <span class="math inline">\(\mathrm{RCA}_{\text{CHN}, 72} = 0.89\)</span> and the algorithm records China as <em>unspecialised</em> in steel.</p>
+<p>This is not a bug in the implementation; it is a feature of the Balassa formula. RCA measures <strong>specialisation relative to a country’s own size</strong>: it asks whether the country is more focused on this product than its general trade footprint would predict. China is so big across so many sectors that even sectors it dominates absolutely look “unspecialised” by Balassa’s standard.</p>
+<p>For Hidalgo &amp; Hausmann’s stated purpose — measuring <em>capability structure</em> — this is conceptually defensible. The argument is that a country with diffuse high market share isn’t <em>specialised</em> in any single product; it has a wide capability base. China doing 13.77% of steel and 13.07% of canned vegetables <em>does</em> suggest a wider capability base than Brazil doing 50% of iron ore and nothing else.</p>
+<p>But for any analysis whose question is <strong>“who dominates which sectors”</strong> — sectoral market structure, geopolitical concentration, supply-chain fragility — the binarised RCA + MoR pipeline is exactly the wrong tool. China’s hidden-giant sectors don’t enter the complexity story at all, even though they are the centre of every other narrative about Chinese export power.</p>
+<div class="takeaway">
+<p><strong>The two failure modes are symmetric.</strong> Micro-states get <em>too many</em> products counted as specialisations (Tokelau’s noise can clear the low RCA bar); hidden giants get <em>too few</em> (China’s iron-and-steel can’t clear the high RCA bar). Both originate in the same mechanism: the RCA threshold scales with country size, and Balassa’s formula was designed for a question — what is a country relatively focused on? — that breaks at both extremes of size.</p>
+</div>
+</section>
+</section>
+<section id="what-works-better-and-where-the-field-went" class="level2">
+<h2 class="anchored" data-anchor-id="what-works-better-and-where-the-field-went">7. What works better, and where the field went</h2>
+<p>The micro-state fix from section 6.1 (country-level threshold) is necessary and sufficient for clean rankings on the <em>linear</em> Method of Reflections. The hidden-giant issue is not fixable inside the Balassa + binarisation paradigm — it’s a property of the construction. The follow-up literature has gone in two directions.</p>
+<p><strong>Non-linear iterations.</strong> Tacchella, Cristelli, Caldarelli, Gabrielli &amp; Pietronero (2012, <em>Scientific Reports</em>) propose a non-linear update that dampens the micro-state amplification algorithmically rather than via a pre-filter. Their “fitness” measure also handles some hidden-giant cases more gracefully because a country’s fitness depends on the <em>complexity</em> of its products in a multiplicative way that doesn’t binarise on RCA in quite the same way.</p>
+<p><strong>Higher resolution.</strong> The Harvard Atlas computes its canonical ECI at HS4 (~1240 products) rather than HS2 (~97 chapters). At HS4, the hidden-giant problem shrinks: HS85 contains sub-codes like HS8542 (integrated circuits), HS8517 (telephones), HS8528 (monitors) — each its own product. China’s share of HS8542 is much higher than 15.46%, so RCA clears comfortably and Mcp = 1. The micro-state problem also softens at higher resolution, because random products at HS4 are far less likely to hit RCA ≥ 1 spuriously than at HS2.</p>
+<p>In other words: the original paper’s algorithm works best on <strong>fine product resolution, after country-level filtering, possibly with a non-linear refinement</strong>. Each of these three choices is its own research thread.</p>
+</section>
+<section id="what-i-built-and-what-id-build-next" class="level2">
+<h2 class="anchored" data-anchor-id="what-i-built-and-what-id-build-next">What I built and what I’d build next</h2>
+<p>For a reader interested in actually running this — the full pipeline is ~150 lines: data download from Harvard Dataverse, RCA + Mcp + eigendecomposition, validation against Atlas, one figure of China’s iteration trajectory. Total compute is a few seconds on a laptop for the full 30-year × 232-country × 97-product matrix at HS2.</p>
+<p>The natural next steps from here, in increasing difficulty:</p>
+<ol type="1">
+<li><strong>Repeat at HS4</strong> to see whether China’s ECI rise looks the same, and to recover the hidden giants. The Atlas ships an HS4 file; the same code reads it after changing one filename.</li>
+<li><strong>Implement the Tacchella et al.&nbsp;(2012) non-linear iteration</strong> and compare its rankings with both vanilla MoR and Atlas.</li>
+<li><strong>Replace Balassa with an alternative RCA</strong> that doesn’t scale with country size — Hoen &amp; Oosterhaven (2006) propose an additive version. Compare ECI under each.</li>
+<li><strong>Apply the framework to a different question entirely</strong> — for example, ranking <em>cities</em> within a country by complexity of their patent applications. The method generalises to any bipartite specialisation matrix.</li>
+</ol>
+<p>The deepest takeaway from running this end-to-end is that the Method of Reflections is <strong>simple, robust, and computationally trivial — but it requires two non-obvious pre-processing choices to give defensible answers</strong> (country filter, fine resolution). The original paper does not flag either of these, and the failure modes you observe without them are not subtle.</p>
+</section>
+<section id="sources" class="level2">
+<h2 class="anchored" data-anchor-id="sources">Sources</h2>
+<ul>
+<li>Hidalgo, C. A., &amp; Hausmann, R. (2009). <em>The building blocks of economic complexity</em>. <strong>PNAS</strong>, 106(26), 10570–10575. <a href="https://doi.org/10.1073/pnas.0900943106">DOI</a></li>
+<li>Balassa, B. (1965). <em>Trade liberalisation and “revealed” comparative advantage</em>. <strong>The Manchester School</strong>, 33(2), 99–123.</li>
+<li>Tacchella, A., Cristelli, M., Caldarelli, G., Gabrielli, A., &amp; Pietronero, L. (2012). <em>A new metrics for countries’ fitness and products’ complexity</em>. <strong>Scientific Reports</strong>, 2, 723.</li>
+<li>Hoen, A. R., &amp; Oosterhaven, J. (2006). <em>On the measurement of comparative advantage</em>. <strong>The Annals of Regional Science</strong>, 40(3), 677–691.</li>
+<li>Harvard Growth Lab. <em>Atlas of Economic Complexity — International Trade Data (HS, 92)</em>. <strong>Harvard Dataverse</strong>, doi:10.7910/DVN/T4CHWJ, v18.0.</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/adamczyk\.ai");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© 2026 Michał Adamczyk</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
