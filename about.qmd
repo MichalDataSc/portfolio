@@ -7,10 +7,10 @@ about:
   links:
     - icon: github
       text: GitHub
-      href: https://github.com/        # TODO
+      href: https://github.com/MichalDataSc/portfolio
     - icon: envelope
       text: Email
-      href: mailto:michal.adamczyk@rtbhouse.com
+      href: mailto:michal.t.adamczyk@gmail.com
 toc: false
 ---
 
@@ -84,4 +84,4 @@ Outside work I'm a long-distance runner and triathlete: ultramarathons, a 3:19
 marathon, and Ironman races. Useful training for the kind of problem that
 doesn't resolve in an afternoon.
 
-**Open to consulting and advisory engagements** — [get in touch](mailto:michal.adamczyk@rtbhouse.com).
+**Open to consulting and advisory engagements** — [get in touch](mailto:michal.t.adamczyk@gmail.com).

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Portfolio — Option 1 · Feature rows</title>
+<link rel="stylesheet" href="portfolio-shared.css">
+<style>
+  .list{padding:24px 0 90px;display:flex;flex-direction:column;gap:clamp(36px,6vw,72px)}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,60px);align-items:center}
+  .row.rev .chartpanel{order:2}
+  .row .txt{max-width:30rem}
+  @media(max-width:760px){ .row{grid-template-columns:1fr;gap:20px} .row.rev .chartpanel{order:0} }
+</style>
+</head>
+<body>
+  <div class="frame">
+    <div class="head">
+      <div class="eyebrow">// selected engagements</div>
+      <h1>Project portfolio</h1>
+      <p>From boardroom strategy at BCG to production machine learning — each engagement, and the kind of problem it solved, told as a live chart.</p>
+    </div>
+    <div class="list" id="list"></div>
+  </div>
+  <div class="badge">Option 1 · Feature rows</div>
+  <script src="portfolio-charts.js"></script>
+  <script>
+    const root=document.getElementById('list');
+    PC.PROJECTS.forEach((p,i)=>{
+      const row=document.createElement('div'); row.className='row'+(i%2?' rev':'');
+      const txt=document.createElement('div'); txt.className='txt';
+      txt.innerHTML=`<span class="tag">${p.tag}</span><h3 class="ptitle">${p.title}</h3><p class="blurb">${p.blurb}</p>`;
+      row.appendChild(PC.panel(p.type,p.cap));
+      row.appendChild(txt);
+      root.appendChild(row);
+    });
+  </script>
+</body>
+</html>

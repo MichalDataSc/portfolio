@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Chart lab — 2 propositions per chart</title>
+<link rel="stylesheet" href="portfolio-shared.css">
+<style>
+  .lab{padding:20px 0 90px;display:flex;flex-direction:column;gap:34px}
+  .sec h3{font-family:"Space Grotesk";font-weight:600;font-size:1.2rem;margin-bottom:4px}
+  .sec .note{color:var(--muted);font-size:.92rem;margin-bottom:14px}
+  .pair{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .opt .olab{font-family:"JetBrains Mono",monospace;font-size:.72rem;letter-spacing:.05em;color:var(--accent);text-transform:uppercase;margin-bottom:7px}
+  @media(max-width:720px){ .pair{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+  <div class="frame">
+    <div class="head">
+      <div class="eyebrow">// chart lab</div>
+      <h1>Two propositions per chart</h1>
+      <p>Pick one option for each of the three projects — Process optimization, Bid auction, and Marketing measurement.</p>
+    </div>
+    <div class="lab" id="lab"></div>
+  </div>
+  <div class="badge">Chart lab</div>
+  <script src="chart-lab.js"></script>
+  <script>
+    const SECTIONS = [
+      { h: 'Process optimization (brewery)', note: 'A minimalist production line — objects travelling through, optimizing throughput.',
+        opts: [['A — parallel conveyor lanes', 'prodA', 'throughput ↑ as flow optimizes'], ['B — single line, bottleneck clears', 'prodB', 'ferment bottleneck → optimized']] },
+      { h: 'Live bid auction (RTB)', note: 'An open auction — a few bids drawn, then the winner picked.',
+        opts: [['A — bid cards roll → winner', 'auctionA', 'numbers roll, winner highlighted'], ['B — bid bars race (2nd-price)', 'auctionB', 'bars grow, tallest wins @ 2nd price']] },
+      { h: 'Marketing measurement (replaces diff-in-diff)', note: 'Two takes more clearly tied to "measure & optimize marketing spend".',
+        opts: [['A — channel spend optimization', 'mktgA', 'even split → ROI-weighted, ROI ↑'], ['B — incrementality test', 'mktgB', 'exposed vs holdout → +lift, p<0.05']] },
+    ];
+    const lab = document.getElementById('lab');
+    SECTIONS.forEach(sec => {
+      const wrap = document.createElement('div'); wrap.className = 'sec';
+      wrap.innerHTML = `<h3>${sec.h}</h3><div class="note">${sec.note}</div>`;
+      const pair = document.createElement('div'); pair.className = 'pair';
+      sec.opts.forEach(([olab, type, cap]) => {
+        const opt = document.createElement('div'); opt.className = 'opt';
+        opt.innerHTML = `<div class="olab">${olab}</div>`;
+        opt.appendChild(LAB.panel(type, cap));
+        pair.appendChild(opt);
+      });
+      wrap.appendChild(pair);
+      lab.appendChild(wrap);
+    });
+  </script>
+</body>
+</html>

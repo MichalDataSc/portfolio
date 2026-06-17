@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Portfolio — Option 2 · Chart-card grid</title>
+<link rel="stylesheet" href="portfolio-shared.css">
+<style>
+  .grid{padding:24px 0 90px;display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:22px}
+  .card{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--hair);border-radius:16px;overflow:hidden;
+        transition:transform .14s ease,box-shadow .14s ease}
+  .card:hover{transform:translateY(-4px);box-shadow:0 20px 50px -24px rgba(56,189,248,.3)}
+  /* the chart panel sits flush inside the card */
+  .card .chartpanel{border:0;border-radius:0;border-bottom:1px solid var(--hair);box-shadow:none;background:rgba(7,11,22,.35)}
+  .card .cardtext{padding:18px 20px 22px}
+</style>
+</head>
+<body>
+  <div class="frame">
+    <div class="head">
+      <div class="eyebrow">// selected engagements</div>
+      <h1>Project portfolio</h1>
+      <p>Scannable case cards — each with a live chart of the problem it solved, across financial services, manufacturing, AdTech, retail and FMCG.</p>
+    </div>
+    <div class="grid" id="grid"></div>
+  </div>
+  <div class="badge">Option 2 · Chart-card grid</div>
+  <script src="portfolio-charts.js"></script>
+  <script>
+    const grid=document.getElementById('grid');
+    PC.PROJECTS.forEach(p=>{
+      const card=document.createElement('div'); card.className='card';
+      card.appendChild(PC.panel(p.type,p.cap));
+      const t=document.createElement('div'); t.className='cardtext';
+      t.innerHTML=`<span class="tag">${p.tag}</span><h3 class="ptitle">${p.title}</h3><p class="blurb">${p.blurb}</p>`;
+      card.appendChild(t);
+      grid.appendChild(card);
+    });
+  </script>
+</body>
+</html>

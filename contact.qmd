@@ -1,0 +1,30 @@
+---
+title: "Get in touch"
+subtitle: "Have a problem that needs advanced analytics, AI, or a strategy-minded data scientist? Send me a note."
+toc: false
+---
+
+Tell me a bit about what you're working on — the problem, the timeline, and how I
+can help. I read everything and reply personally.
+
+```{=html}
+<form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+  <!-- TODO: replace with your free access key from https://web3forms.com (enter your email, paste the key here) -->
+  <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
+  <input type="hidden" name="subject" value="New enquiry from adamczyk.ai">
+  <input type="hidden" name="from_name" value="adamczyk.ai contact form">
+
+  <input type="text" name="name" placeholder="Your name" required>
+  <input type="email" name="email" placeholder="Your email" required>
+  <input type="text" name="company" placeholder="Company / organisation (optional)">
+  <textarea name="message" rows="6" placeholder="What can I help with?" required></textarea>
+
+  <!-- honeypot spam trap -->
+  <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+
+  <button type="submit">Send message</button>
+</form>
+```
+
+Prefer email? Reach me directly at
+[michal.t.adamczyk@gmail.com](mailto:michal.t.adamczyk@gmail.com).

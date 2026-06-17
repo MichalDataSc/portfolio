@@ -18,6 +18,8 @@ website:
         text: Writing
       - href: about.qmd
         text: About
+      - href: contact.qmd
+        text: Contact
     right:
       - icon: github
         href: https://github.com/MichalDataSc/portfolio
@@ -26,13 +28,12 @@ website:
 
 format:
   html:
-    theme:
-      light: cosmo
-      dark: darkly
+    theme: darkly
     css: styles.css
     toc: true
     fig-responsive: true
     smooth-scroll: true
+    include-after-body: _includes/background.html
 
 execute:
   freeze: auto                # cache cell outputs; only re-run when the .qmd changes
