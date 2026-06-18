@@ -67,7 +67,15 @@ p, li { color: #d6deef; }
 }
 
 /* tighter reading column */
-#quarto-content main { max-width: 52rem; }
+#quarto-content main { max-width: 56rem; }
+
+/* roomier vertical rhythm so sections aren't cramped */
+.quarto-title-block { margin-bottom: 2.25rem; }
+.quarto-title .subtitle { margin-top: 0.5rem; line-height: 1.55; color: var(--muted); }
+#quarto-content h2 { margin-top: 2.75rem; margin-bottom: 1rem; }
+#quarto-content h3 { margin-top: 1.75rem; }
+#quarto-content p { margin-bottom: 1.15rem; }
+.page-columns { padding-top: 0.75rem; }
 
 /* ---- Buttons ---- */
 .btn-primary {
@@ -167,32 +175,36 @@ pre, code { background: rgba(12, 19, 38, 0.6) !important; }
 /* ============================================================
    Portfolio — chart-card grid (animated charts per project)
    ============================================================ */
+.pf-intro { max-width: 46rem; margin: 0 auto 0.5rem; font-size: 1.08rem; line-height: 1.7; color: #d6deef; }
 .pf-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
-  gap: 22px;
-  margin: 1.75rem 0 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 32px;
+  max-width: 1180px;
+  margin: 3rem auto 3.5rem;
 }
 .pf-card {
   display: flex; flex-direction: column;
   background: var(--panel);
   border: 1px solid var(--hairline);
-  border-radius: 16px;
+  border-radius: 18px;
   overflow: hidden;
   transition: transform 0.14s ease, box-shadow 0.14s ease;
 }
-.pf-card:hover { transform: translateY(-4px); box-shadow: 0 20px 50px -24px rgba(56, 189, 248, 0.3); }
-.pf-card .pf-text { padding: 16px 20px 22px; }
-.pf-card .pf-tag {
+.pf-card:hover { transform: translateY(-4px); box-shadow: 0 22px 54px -24px rgba(56, 189, 248, 0.32); }
+.pf-card .pf-text { padding: 26px 30px 32px; }
+.pf-card .pf-industry {
   display: inline-block; font-family: "JetBrains Mono", monospace;
-  font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase;
-  color: var(--site-accent); font-weight: 600; margin-bottom: 6px;
+  font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--site-accent); font-weight: 600; margin-bottom: 14px;
 }
-.pf-card .pf-title {
-  font-family: "Space Grotesk", sans-serif; font-weight: 600;
-  font-size: 1.18rem; line-height: 1.15; color: var(--ink); margin: 0 0 10px;
+.pf-card .pf-impact {
+  font-family: "Space Grotesk", sans-serif; font-weight: 700;
+  font-size: 1.9rem; line-height: 1.1; letter-spacing: -0.01em; margin: 0 0 16px;
+  background: linear-gradient(100deg, var(--site-accent), var(--accent2));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
 }
-.pf-card .pf-blurb { color: var(--muted); font-size: 0.95rem; line-height: 1.6; margin: 0; }
+.pf-card .pf-desc { color: var(--muted); font-size: 0.97rem; line-height: 1.65; margin: 0; }
 
 /* chart panel inside each card */
 .chartpanel { background: rgba(7, 11, 22, 0.35); border-bottom: 1px solid var(--hairline); padding: 14px 16px 10px; }
