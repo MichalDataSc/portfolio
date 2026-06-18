@@ -112,6 +112,13 @@
     "text": "Sources\n\nHidalgo, C. A., & Hausmann, R. (2009). The building blocks of economic complexity. PNAS, 106(26), 10570–10575. DOI\nBalassa, B. (1965). Trade liberalisation and “revealed” comparative advantage. The Manchester School, 33(2), 99–123.\nTacchella, A., Cristelli, M., Caldarelli, G., Gabrielli, A., & Pietronero, L. (2012). A new metrics for countries’ fitness and products’ complexity. Scientific Reports, 2, 723.\nHoen, A. R., & Oosterhaven, J. (2006). On the measurement of comparative advantage. The Annals of Regional Science, 40(3), 677–691.\nHarvard Growth Lab. Atlas of Economic Complexity — International Trade Data (HS, 92). Harvard Dataverse, doi:10.7910/DVN/T4CHWJ, v18.0."
   },
   {
+    "objectID": "contact.html",
+    "href": "contact.html",
+    "title": "Get in touch",
+    "section": "",
+    "text": "Tell me a bit about what you’re working on — the problem, the timeline, and how I can help. I read everything and reply personally.\n\n  \n  \n  \n  \n\n  \n  \n  \n  \n\n  \n  \n\n  Send message\n\nPrefer email? Reach me directly at michal.t.adamczyk@gmail.com."
+  },
+  {
     "objectID": "posts/amazon-anatomy/index.html",
     "href": "posts/amazon-anatomy/index.html",
     "title": "The Anatomy of Amazon: A Retailer That Earns Like a Cloud Company",
@@ -158,6 +165,6 @@
     "href": "portfolio.html",
     "title": "Project Portfolio",
     "section": "",
-    "text": "A decade of work sits behind these. From boardroom strategy at BCG to production machine learning, the through-line is the same: frame the business question sharply, solve it rigorously, and ship something that moves the number.\n\n\n\n\n\n\nFinancial services · Strategy (BCG) Strategy for a leading Polish bank and a major European insurer\nAs part of BCG, I worked hands-on with client data, ran research and client interviews, and built the analyses and presentations behind strategic recommendations delivered to senior stakeholders.\n\n\n\n\n\n\n\nManufacturing · Advanced analytics (BCG) Efficiency optimization for one of the world’s largest brewers\nI brought machine learning and advanced analytics into an operational optimization engagement for a global brewer — translating messy production data into measurable efficiency gains. Yes: I once optimized a brewery.\n\n\n\n\n\n\n\nAdTech · ML & experimentation Real-time bidding systems for leading AdTech companies\nI advised and built for AdTech leaders: machine-learning models that buy mobile display inventory in real time, paired with disciplined A/B testing and reinforcement-learning approaches. The brief was always the same — solutions that move profit, measurably.\n\n\n\n\n\n\n\nRetail · Causal inference Marketing measurement & optimization for a top global retailer\nI designed a framework to measure marketing-campaign effectiveness and optimize spend across channels — grounded in causal inference and proper experimentation rather than last-click guesswork, so the client could trust where the next dollar should go.\n\n\n\n\n\n\n\nFMCG / Product · Analytics Forecasting, audits & decision support across product and FMCG teams\nDemand forecasting, data audits and quality assurance, A/B-test design, and data-driven recommendations delivered straight to product and C-level stakeholders — plus training corporate teams in applied AI.\n\n\n\n\nHave a problem that needs this mix of strategy and data science? Get in touch or read more about me."
+    "text": "A decade of work sits behind these. From boardroom strategy at BCG to production machine learning, the through-line is the same: frame the business question sharply, solve it rigorously, and ship something that moves the number.\n\n\n\n\nHave a problem that needs this mix of strategy and data science? Get in touch or email michal.t.adamczyk@gmail.com."
   }
 ]
