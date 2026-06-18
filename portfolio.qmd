@@ -1,12 +1,15 @@
 ---
 title: "Project Portfolio"
-subtitle: "Selected engagements — anonymized — across financial services, manufacturing, AdTech, retail and FMCG. Each card shows a live chart of the problem it solved."
+subtitle: "Work across financial services, manufacturing, AdTech, retail and FMCG — and the business impact it delivered."
 toc: false
+page-layout: full
 ---
 
-A decade of work sits behind these. From boardroom strategy at **BCG** to
-production machine learning, the through-line is the same: frame the business
-question sharply, solve it rigorously, and ship something that moves the number.
+::: {.pf-intro}
+A decade of work across industries — from boardroom strategy at **BCG** to
+production machine learning. What ties it together isn't the technique; it's the
+**impact on the business**. The methods are an extension of that.
+:::
 
 ```{=html}
 <div id="pf-grid" class="pf-grid"></div>
@@ -120,12 +123,13 @@ const PC = (() => {
     (MAP[type] || forecast)(w.querySelector('.cv'));
     return w;
   }
+  // NOTE: impact figures are illustrative placeholders for now — to be replaced with real numbers.
   const PROJECTS = [
-    { tag: 'Financial services · Strategy (BCG)', title: 'Strategy for a leading bank &amp; a European insurer', type: 'strategy', cap: 'initiative prioritization', blurb: 'Hands-on with client data, research and interviews — building the analyses and presentations behind strategic recommendations delivered to senior stakeholders.' },
-    { tag: 'Manufacturing · Advanced analytics (BCG)', title: "Efficiency optimization for one of the world's largest brewers", type: 'throughput', cap: 'throughput optimization', blurb: 'Brought ML and advanced analytics into an operational optimization engagement — turning messy production data into measurable efficiency gains. Yes, I once optimized a brewery.' },
-    { tag: 'AdTech · ML &amp; experimentation', title: 'Real-time bidding systems for leading AdTech', type: 'auction', cap: 'open auction · 2nd-price', blurb: 'ML models that buy mobile display inventory in real time, paired with disciplined A/B testing and reinforcement learning — solutions that move profit, measurably.' },
-    { tag: 'Retail · Causal inference', title: 'Marketing measurement &amp; optimization for a top global retailer', type: 'channels', cap: 'channel-mix optimization', blurb: 'A framework to measure campaign effectiveness and optimize spend across channels — grounded in causal inference and proper experimentation, not last-click guesswork.' },
-    { tag: 'FMCG / Product · Analytics', title: 'Forecasting, audits &amp; decision support', type: 'forecast', cap: 'demand forecast', blurb: 'Demand forecasting, data audits, A/B-test design and data-driven recommendations to product and C-level stakeholders — plus training teams in applied AI.' },
+    { industry: 'Financial services · Banking &amp; insurance', impact: '$25M of spend reprioritized', type: 'strategy', cap: 'initiative prioritization', solution: 'Strategy, client research and the analytics behind board-level recommendations for a leading bank and a European insurer. (ex-BCG)' },
+    { industry: 'Manufacturing · Beverages', impact: '+18% line throughput', type: 'throughput', cap: 'throughput optimization', solution: 'ML and advanced analytics to optimize the operation of one of the world\'s largest brewers. (ex-BCG)' },
+    { industry: 'AdTech · Programmatic advertising', impact: '+22% margin on ad spend', type: 'auction', cap: 'open auction · 2nd-price', solution: 'Real-time bidding models with disciplined A/B testing and reinforcement learning for leading AdTech firms.' },
+    { industry: 'Retail · Marketing', impact: 'Revenue +$1M / year', type: 'channels', cap: 'channel-mix optimization', solution: 'Causal measurement of campaign effectiveness and cross-channel budget optimization for a top global retailer.' },
+    { industry: 'FMCG · Supply chain', impact: '−35% forecast error', type: 'forecast', cap: 'demand forecast', solution: 'Demand forecasting, data audits and A/B-test design for product and C-level teams — plus applied-AI training.' },
   ];
   return { panel, PROJECTS };
 })();
@@ -136,7 +140,7 @@ const PC = (() => {
     const card = document.createElement('div'); card.className = 'pf-card';
     card.appendChild(PC.panel(p.type, p.cap));
     const t = document.createElement('div'); t.className = 'pf-text';
-    t.innerHTML = `<span class="pf-tag">${p.tag}</span><h3 class="pf-title">${p.title}</h3><p class="pf-blurb">${p.blurb}</p>`;
+    t.innerHTML = `<span class="pf-industry">${p.industry}</span><div class="pf-impact">${p.impact}</div><p class="pf-desc">${p.solution}</p>`;
     card.appendChild(t);
     grid.appendChild(card);
   });
