@@ -9,8 +9,7 @@ can help. I read everything and reply personally.
 
 ```{=html}
 <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
-  <!-- TODO: replace with your free access key from https://web3forms.com (enter your email, paste the key here) -->
-  <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
+  <input type="hidden" name="access_key" value="be7b71c6-cd54-414e-a715-2e4552cc872c">
   <input type="hidden" name="subject" value="New enquiry from adamczyk.ai">
   <input type="hidden" name="from_name" value="adamczyk.ai contact form">
 
