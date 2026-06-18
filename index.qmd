@@ -113,79 +113,87 @@ include-in-header:
   </div>
 
   <div class="panel">
-    <div class="cap"><b>fig. forecast — demand</b><span class="tag">90% interval</span></div>
-    <svg viewBox="0 0 460 290" id="chart" aria-hidden="true">
-      <g id="grid"></g>
-      <line class="axis" x1="48" y1="20" x2="48" y2="250"/>
-      <line class="axis" x1="48" y1="250" x2="446" y2="250"/>
-      <polygon id="fan" fill="#38bdf8" opacity="0"></polygon>
-      <line id="now" x1="252" y1="20" x2="252" y2="250" stroke="rgba(199,210,254,.5)" stroke-width="1" stroke-dasharray="3 4" opacity="0"/>
-      <path id="hist" fill="none" stroke="#38bdf8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
-      <path id="s1" class="samp" fill="none" stroke="rgba(199,210,254,.45)" stroke-width="1.2"/>
-      <path id="s2" class="samp" fill="none" stroke="rgba(199,210,254,.45)" stroke-width="1.2"/>
-      <path id="s3" class="samp" fill="none" stroke="rgba(199,210,254,.45)" stroke-width="1.2"/>
-      <path id="fc" fill="none" stroke="#c7d2fe" stroke-width="2.4" stroke-dasharray="6 6" stroke-linecap="round"/>
-      <circle id="nowdot" r="4.5" fill="#9fe3ff"/>
-    </svg>
-    <div class="legend">
-      <i><span class="sw"></span>history</i>
-      <i><span class="sw dash"></span>forecast</i>
-      <i><span class="sw band"></span>90% interval</i>
-    </div>
+    <div class="cap"><b>fig. data → decision → profit</b></div>
+    <div class="cv" id="herochart" aria-hidden="true"></div>
   </div>
 </section>
 
 <script>
 (() => {
-const X0=48,X1=446,Y0=250,Y1=24,XM=252;
-const grid=document.getElementById('grid');
-for(let i=1;i<5;i++){const yy=Y0-(Y0-Y1)*i/5;grid.insertAdjacentHTML('beforeend',
-  `<line class="gridln" x1="48" y1="${yy}" x2="446" y2="${yy}"/>`);}
-const W=33, H=31, P=(X1-X0)/(W+H);
-const SYr=(Y0-Y1), midY=(Y0+Y1)/2;
-const amp=1.0, freq=0.20, phase=Math.random()*6.28;
-const base=s=>amp*Math.sin(s*freq+phase);
-const yOf=v=>Math.max(Y1+3,Math.min(Y0-3, midY - v*(SYr/5.2)));
-const dstr=pts=>pts.map((p,k)=>(k?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
-let vals=[], prevAr=0;
-function ensure(n){while(vals.length<n){const i=vals.length;prevAr=prevAr*0.7+(Math.random()-.5)*0.9;vals.push(base(i)+prevAr);}}
-const histEl=document.getElementById('hist'), fcEl=document.getElementById('fc'),
-      fanEl=document.getElementById('fan'), nowEl=document.getElementById('now'),
-      dot=document.getElementById('nowdot');
-const sampEls=['s1','s2','s3'].map(id=>document.getElementById(id));
-[histEl,fcEl,...sampEls].forEach(e=>{e.style.strokeDasharray='none';e.style.strokeDashoffset='0';});
-nowEl.setAttribute('opacity','1');
-let t=W+1, lastStep=-1, samples=[];
-const xOf=s=>X0+(s-(t-W))*P;
-function makeSamples(t0,v0){
-  return [0,1,2].map(()=>{const arr=[];let ar=0;
-    for(let k=0;k<=H;k++){ar=ar*0.6+(Math.random()-.5)*0.8;
-      arr.push([t0+k, v0+(base(t0+k)-base(t0))+ar*Math.max(0.15,k/H)]);}return arr;});
-}
-const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-function frame(){
-  t+=0.012;
-  ensure(Math.floor(t)+H+3);
-  const f=Math.floor(t), frac=t-f;
-  const hp=[]; const s0=Math.ceil(t-W);
-  for(let s=s0;s<=f;s++) hp.push([xOf(s), yOf(vals[s])]);
-  const curV=vals[f]+(vals[f+1]-vals[f])*frac;
-  hp.push([XM, yOf(curV)]);
-  histEl.setAttribute('d',dstr(hp));
-  const fp=[[XM,yOf(curV)]];
-  for(let k=1;k<=H;k++) fp.push([xOf(t+k), yOf(curV+(base(t+k)-base(t)))]);
-  fcEl.setAttribute('d',dstr(fp));
-  const up=[],lo=[];
-  for(let k=0;k<=H;k++){const sp=6+58*Math.sqrt(k/H),vy=fp[k][1];
-    up.push([fp[k][0],Math.max(Y1+2,vy-sp)]); lo.push([fp[k][0],Math.min(Y0-2,vy+sp)]);}
-  fanEl.setAttribute('points',up.concat(lo.reverse()).map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' '));
-  fanEl.setAttribute('opacity','0.16');
-  if(f!==lastStep){lastStep=f; samples=makeSamples(t,curV);}
-  sampEls.forEach((el,i)=>el.setAttribute('d',dstr((samples[i]||[]).map(pt=>[xOf(pt[0]),yOf(pt[1])]))));
-  dot.setAttribute('cx',XM); dot.setAttribute('cy',yOf(curV));
-  if(!reduce) requestAnimationFrame(frame);
-}
-frame();
+  const NS='http://www.w3.org/2000/svg';
+  const eln=(t,a)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;};
+  const host=document.getElementById('herochart'); if(!host) return;
+  const s=eln('svg',{viewBox:'0 0 460 290',width:'100%'}); host.appendChild(s);
+  const defs=eln('defs',{}); s.appendChild(defs);
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const steps=['data','model','decision','profit'], hx=[70,160,250,340], hy=28;
+  s.appendChild(eln('line',{x1:hx[0],y1:hy,x2:hx[3],y2:hy,stroke:'rgba(159,176,207,.2)','stroke-width':1.5}));
+  const stepEls=steps.map((lab,i)=>{
+    const dot=eln('circle',{cx:hx[i],cy:hy,r:5,fill:'rgba(159,176,207,.3)'}); s.appendChild(dot);
+    const t=eln('text',{x:hx[i],y:hy-12,'text-anchor':'middle',fill:'rgba(159,176,207,.45)','font-family':'JetBrains Mono, monospace','font-size':10}); t.textContent=lab; s.appendChild(t);
+    if(i<3){const ar=eln('text',{x:(hx[i]+hx[i+1])/2,y:hy+4,'text-anchor':'middle',fill:'rgba(159,176,207,.35)','font-family':'JetBrains Mono, monospace','font-size':11}); ar.textContent='→'; s.appendChild(ar);}
+    return {dot,t};
+  });
+  const setActive=idx=>stepEls.forEach((e,i)=>{const done=i<idx,act=i===idx;
+    e.dot.setAttribute('fill',act?'#9fe3ff':(done?'rgba(56,189,248,.7)':'rgba(159,176,207,.3)'));
+    e.dot.setAttribute('r',act?6.5:5);
+    e.t.setAttribute('fill',act?'#9fe3ff':(done?'rgba(56,189,248,.7)':'rgba(159,176,207,.45)'));});
+
+  const X0=52,X1=430,Y0=258,Y1=66;
+  s.appendChild(eln('rect',{x:X0-8,y:Y1-6,width:X1-X0+16,height:Y0-Y1+14,rx:10,fill:'none',stroke:'rgba(159,176,207,.1)'}));
+  const cp=eln('clipPath',{id:'heroclip'}); cp.appendChild(eln('rect',{x:X0-8,y:Y1-6,width:X1-X0+16,height:Y0-Y1+14})); defs.appendChild(cp);
+  const boundary=eln('line',{stroke:'#c7d2fe','stroke-width':2,'stroke-linecap':'round',opacity:0,'clip-path':'url(#heroclip)'}); s.appendChild(boundary);
+  const pg=eln('g',{}); s.appendChild(pg);
+  const counter=eln('text',{x:358,y:32,fill:'#9fe3ff','font-family':'Space Grotesk, sans-serif','font-size':15,'font-weight':700,opacity:0}); s.appendChild(counter);
+
+  let pts=[],theta=0,target=0,cx0=0,cy0=0,mA={x:0,y:0},total=0,k=0;
+  function gen(){
+    while(pg.firstChild)pg.removeChild(pg.firstChild); pts=[]; total=0;
+    mA={x:X0+(X1-X0)*(0.58+Math.random()*0.12),y:Y1+(Y0-Y1)*(0.22+Math.random()*0.16)};
+    const mB={x:X0+(X1-X0)*(0.3+Math.random()*0.12),y:Y1+(Y0-Y1)*(0.6+Math.random()*0.16)};
+    const blob=(m,cls,n)=>{for(let i=0;i<n;i++){
+      const x=Math.max(X0+6,Math.min(X1-6,m.x+(Math.random()+Math.random()-1)*72));
+      const y=Math.max(Y1+6,Math.min(Y0-6,m.y+(Math.random()+Math.random()-1)*52));
+      const c=eln('circle',{cx:x,cy:y,r:0,fill:'rgba(159,176,207,.45)'}); pg.appendChild(c);
+      pts.push({x,y,cls,c,val:60+Math.random()*340,ring:null});}};
+    blob(mA,1,16); blob(mB,0,16);
+    cx0=(mA.x+mB.x)/2; cy0=(mA.y+mB.y)/2;
+    target=Math.atan2(mA.y-mB.y,mA.x-mB.x)+Math.PI/2;
+    theta=target+1.2*(Math.random()<0.5?1:-1);
+  }
+  gen();
+  const T_DATA=80,T_MODEL=195,T_DEC=300,T_END=450;
+  function f(){
+    k++;
+    const phase=k<T_DATA?0:k<T_MODEL?1:k<T_DEC?2:3;
+    setActive(phase);
+    pts.forEach((p,i)=>{const a=Math.max(0,Math.min(1,(k-i*1.5)/26)); if(phase===0||k<T_DATA+40)p.c.setAttribute('r',a*4.4);});
+    const nx=-Math.sin(theta),ny=Math.cos(theta);
+    const aSide=((mA.x-cx0)*nx+(mA.y-cy0)*ny)>0?1:0;
+    if(phase>=1){theta+=(target-theta)*0.06;
+      const dx=Math.cos(theta)*480,dy=Math.sin(theta)*480;
+      boundary.setAttribute('x1',cx0-dx);boundary.setAttribute('y1',cy0-dy);boundary.setAttribute('x2',cx0+dx);boundary.setAttribute('y2',cy0+dy);
+      boundary.setAttribute('opacity',Math.min(0.9,(k-T_DATA)/30));}
+    else boundary.setAttribute('opacity',0);
+    pts.forEach(p=>{const side=((p.x-cx0)*nx+(p.y-cy0)*ny)>0?1:0,good=side===aSide;
+      if(phase===0)p.c.setAttribute('fill','rgba(159,176,207,.45)');
+      else if(phase===1)p.c.setAttribute('fill',good?'rgba(56,189,248,.6)':'rgba(159,176,207,.4)');
+      else{ if(good){p.c.setAttribute('fill','rgba(56,189,248,.95)');
+          if(!p.ring){p.ring=eln('circle',{cx:p.x,cy:p.y,r:7,fill:'none',stroke:'#9fe3ff','stroke-width':1.2,opacity:0}); pg.appendChild(p.ring);}}
+        else p.c.setAttribute('fill',phase===3?'rgba(159,176,207,.16)':'rgba(159,176,207,.3)');}});
+    if(phase===2){const pr=(k-T_MODEL)/(T_DEC-T_MODEL);
+      pts.forEach(p=>{if(p.ring){p.ring.setAttribute('opacity',Math.min(1,pr*1.6));p.ring.setAttribute('r',7+Math.sin(k*0.2)*1.3);}});}
+    if(phase===3){
+      if(total===0)total=pts.filter(p=>(((p.x-cx0)*nx+(p.y-cy0)*ny)>0?1:0)===aSide).reduce((a,p)=>a+p.val,0);
+      const pr=Math.min(1,(k-T_DEC)/70);
+      counter.setAttribute('opacity',1); counter.textContent='$'+Math.round(total*pr).toLocaleString();}
+    else counter.setAttribute('opacity',0);
+    if(k>=T_END){k=0;gen();}
+    if(!reduce) requestAnimationFrame(f);
+  }
+  if(reduce){theta=target; k=T_DEC+72; pts.forEach(p=>p.c.setAttribute('r',4.4));}
+  f();
 })();
 </script>
 ```

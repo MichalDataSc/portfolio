@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Hero chart — data → decisions & profit</title>
+<link rel="stylesheet" href="portfolio-shared.css">
+<style>
+  .stage{padding:24px 0 90px;max-width:560px}
+  .stage .desc{color:var(--muted);font-size:.95rem;margin-top:16px;line-height:1.6}
+  .stage .desc b{color:var(--ink)}
+</style>
+</head>
+<body>
+  <div class="frame">
+    <div class="head">
+      <div class="eyebrow">// hero chart</div>
+      <h1>Turning data into decisions &amp; profit</h1>
+      <p>One looping story that walks the whole pipeline, step by step.</p>
+    </div>
+    <div class="stage" id="stage"></div>
+  </div>
+  <div class="badge">Hero chart</div>
+  <script src="hero-lab.js"></script>
+  <script>
+    const stage = document.getElementById('stage');
+    stage.appendChild(HERO.panel('fig. data → decision → profit'));
+    const d = document.createElement('div'); d.className = 'desc';
+    d.innerHTML = 'The flow at the top lights up in turn: <b>data</b> (the scatter appears) → <b>model</b> (a decision boundary is fitted) → <b>decision</b> (the target class is selected and actioned) → <b>profit</b> (the captured value tallies up). New random data every loop.';
+    stage.appendChild(d);
+  </script>
+</body>
+</html>
